@@ -1,0 +1,18 @@
+table{
+  width: 50vw;
+  border-collapse:collapse;
+  margin:0 auto;
+}
+td{
+  width: 6%; 
+}
+td:nth-of-type(odd){
+  background-color: #e9eaea;
+}
+td:nth-of-type(even){
+background-color: #e6e8e8;
+}
+label {
+  padding-right: 10px;
+  font-size: 1rem;
+}

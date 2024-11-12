@@ -1,0 +1,119 @@
+/* style.css */
+
+/* ページ全体のスタイル */
+body {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  text-align: center; /* リンクを中央に配置 */
+  display: block; /* ブロック要素に変更して、中央配置を有効にする */
+  margin-top: 15px;
+  
+}
+
+/* ログインフォームのスタイル */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 47vw;
+  margin: 0 auto;
+  align-items: center; /* 中央に配置 */
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* 入力フィールドのスタイル */
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+a {
+  text-decoration: none;
+  color: #4caf50;
+  text-align: center; /* リンクを中央に配置 */
+  display: block; /* ブロック要素に変更して、中央配置を有効にする */
+  margin-top: 15px; /* 上部の余白を追加 */
+}
+#studyTimeChart {
+  display: block;
+  margin: 0 auto; /* 左右の余白を自動で設定し、要素を中央に配置 */
+}
+.btn {
+  border-radius: 5px;
+  width: 10vw;
+  background-color: #45a049;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  margin: 0 auto;
+}
+.sidebar {
+  width: 350px;
+  background-color: moccasin;
+  box-sizing: border-box;
+  border: 2px solid rgb(251, 214, 189);
+}
+.balloon1 {
+  position: relative;
+  margin: 0 auto;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 40%;
+  color: #555;
+  font-size: 16px;
+  background: #e0edff;
+
+}
+
+.balloon1:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-top: 15px solid #e0edff;
+}
+
+.balloon1 p {
+  margin: 0;
+  padding: 0;
+}
+.tric_font_size{
+  font-size: 1.5em;
+}
+.table2{
+  width: 100%;
+}
+.yuwaku{
+  width: 47vw;
+  margin: 0 auto;
+  align-items: center; /* 中央に配置 */
+  border: 1px solid #ccc;
+  padding: 20px;
+}
