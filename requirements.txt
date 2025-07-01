@@ -16,3 +16,4 @@ grpcio==1.71.0
 grpcio-status==1.71.0
 httplib2==0.22.0
 requests==2.32.3
+python-dotenv==1.1.1
