@@ -8,6 +8,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
+
 genai.configure(api_key="AIzaSyBOITJPK7wMJ66P8ur1AlMPKjh5K96F_XY")
 
 
@@ -130,7 +131,7 @@ def login():
             message = 'ユーザー名またはパスワードが間違っています。'
             conn.close()
 
-    return render_template('Login.html', message=message)
+    return render_template('login.html', message=message)
 
 
 
