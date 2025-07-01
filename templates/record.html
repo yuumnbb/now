@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>学習記録</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .flashes {
+      color: #b33;
+      background: #fdd;
+      padding: 10px;
+      border-left: 4px solid #f00;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background-color: #6c757d;
+    }
+
+    #category-form {
+      margin-top: 10px;
+      display: none;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    footer li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>学習記録</h1>
+
+    <form method="POST" action="/record">
+      <label for="study_date">学習日</label>
+      <input type="date" id="study_date" name="study_date" value="{{ today }}" required>
+
+      <label for="study_time">学習時間（分）</label>
+      <input type="number" id="study_time" name="study_time" min="1" required>
+
+      <label for="category_id">学習カテゴリ（内容）</label>
+      <select id="category_id" name="category_id" required>
+        {% for cat in categories %}
+          <option value="{{ cat.id }}">{{ cat.category_name }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="button" class="secondary" onclick="toggleCategoryForm()">＋ カテゴリ追加</button>
+
+      <div id="category-form">
+        <input type="text" id="new-category" placeholder="新しいカテゴリ名を入力">
+        <button type="button" class="secondary" onclick="addCategory()">保存</button>
+        <p id="category-error" style="color:red;"></p>
+      </div>
+
+      <label for="memo">メモ（任意）</label>
+      <textarea id="memo" name="memo" rows="4" placeholder="学習内容や気づきなどを記入してください"></textarea>
+
+      <button type="submit">記録する</button>
+    </form>
+  </div>
+
+  <footer>
+    <ul>
+      <li><a href="/mypage">マイページ</a></li>
+      <li><a href="/record">記録</a></li>
+      <li><a href="/resilience">回復</a></li>
+      <li><a href="/analysis">分析</a></li>
+      <li><a href="/logout">ログアウト</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    function toggleCategoryForm() {
+      const form = document.getElementById('category-form');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+      document.getElementById('category-error').textContent = '';
+    }
+
+    function addCategory() {
+      const name = document.getElementById('new-category').value.trim();
+      const errorEl = document.getElementById('category-error');
+      if (!name) {
+        errorEl.textContent = "カテゴリ名を入力してください。";
+        return;
+      }
+
+      fetch('/record', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'add_category', name })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          const select = document.getElementById('category_id');
+          const option = document.createElement('option');
+          option.value = data.id;
+          option.textContent = name;
+          select.appendChild(option);
+          select.value = data.id;
+          document.getElementById('new-category').value = '';
+          toggleCategoryForm();
+        } else {
+          errorEl.textContent = data.message;
+        }
+      })
+      .catch(err => {
+        errorEl.textContent = "通信エラーが発生しました。";
+      });
+    }
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回復プログラムの履歴</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <script>
+    function likeRecovery(recordId) {
+      fetch('/like_recovery/' + recordId, {
+        method: 'POST'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById("likes-" + recordId).innerText = data.likes;
+          location.reload(); // 再読み込みして「いいね済」反映
+        }
+      });
+    }
+
+    function changeOrder() {
+      let order = document.getElementById("orderSelect").value;
+      window.location.href = "/resilience?order=" + order;
+    }
+
+    function toggleHistory() {
+      const historyDiv = document.getElementById("history");
+      historyDiv.style.display = historyDiv.style.display === "none" ? "block" : "none";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>回復プログラムの履歴</h1>
+
+      <!-- 自分の記録（最新1件だけ表示） -->
+      <h2>自分の記録</h2>
+      {% if my_recovery_data %}
+        <ul>
+          <div class="setting-box">
+            <strong>記録日</strong> {{ my_recovery_data[0].created_at.strftime('%Y年%m月%d日') }}<br>
+            <div class="setting-row">
+              <div class="setting-item"><strong>失敗の原因</strong><br> {{ my_recovery_data[0].reason }}<br></div>
+              <div class="setting-item"><strong>改善方法</strong><br> {{ my_recovery_data[0].improvement }}<br></div>
+            </div>
+            <strong>継続日数:</strong> {{ my_streak }} 日
+          </div>
+        </ul>
+        {% if my_recovery_data|length > 1 %}
+          <details>
+            <summary>過去の履歴を表示</summary>
+            <ul>
+              {% for record in my_recovery_data[1:] %}
+                <li>
+                  <strong>記録日</strong> {{ record.created_at.strftime('%Y年%m月%d日') }}<br>
+                  <strong>失敗の原因:</strong> {{ record.reason }}<br>
+                  <strong>改善方法:</strong> {{ record.improvement }}<br>
+                </li>
+              {% endfor %}
+            </ul>
+          </details>
+        {% endif %}
+      {% else %}
+        <p>自分の記録はまだありません。</p>
+      {% endif %}
+      
+      <h2>みんなの記録</h2>
+      <label for="orderSelect">並び順:</label>
+      <select id="orderSelect" onchange="changeOrder()">
+        <option value="popular" {% if order_by == 'popular' %}selected{% endif %}>人気順</option>
+        <option value="new" {% if order_by == 'new' %}selected{% endif %}>新しい順</option>
+        <option value="streak" {% if order_by == 'streak' %}selected{% endif %}>継続日数順</option>
+      </select>
+      
+      <ul>
+        {% for record in recovery_data %}
+          <div class="setting-box">
+              <strong>記録日</strong> {{ record.created_at.strftime('%Y年%m月%d日') }}<br>
+              <div class="setting-row">
+                <div class="setting-item"><strong>失敗の原因</strong> <br>{{ record.reason }}</div>
+                <div class="setting-item"><strong>改善方法</strong><br> {{ record.improvement }}<br></div>
+              </div>
+              <strong>継続日数:</strong> {{ record.streak }} 日<br>
+              {% if record.id in liked_ids %}
+                <button disabled>👍 いいね済</button>
+              {% else %}
+                <button onclick="likeRecovery({{ record.id }})">👍 いいね</button>
+              {% endif %}
+              <span id="likes-{{ record.id }}">{{ record.likes }}</span>
+          </div>
+        {% endfor %}
+      </ul>      
+  
+
+    <!-- ページネーション -->
+    <div class="pagination">
+      {% if page > 1 %}
+        <a href="{{ url_for('resilience', order=order_by, page=page-1) }}">« 前へ</a>
+      {% endif %}
+      <span>ページ {{ page }} / {{ total_pages }}</span>
+      {% if page < total_pages %}
+        <a href="{{ url_for('resilience', order=order_by, page=page+1) }}">次へ »</a>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <footer>
+    <ul>
+      <li><a href="/mypage">マイページ</a></li>
+      <li><a href="/record">記録</a></li>
+      <li><a href="/resilience">回復</a></li>
+      <li><a href="/analysis">分析</a></li>
+      <li><a href="/logout">ログアウト</a></li>
+    </ul>
+  </footer>
+</body>
+</html>
+
+

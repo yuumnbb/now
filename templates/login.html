@@ -2,17 +2,32 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>習慣化システム</title>
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログイン</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/style.css') }}">
 </head>
 <body>
-  <h1>ログイン</h1>
-  <form action="/login" method="post">
-    <p>{{ message }}</p>
-    <p>ユーザー名：<input type="text" name="name"></p>
-    <p>パスワード：<input type="password" name="password"></p>
-    <p><input type="submit" value="ログイン"></p>
-  </form>
-  <p><a href="/signup">新規登録</a></p>
+  <div class="container">
+    <h1>ログイン</h1>
+    <form action="/" method="post">
+      {% if message %}
+        <p class="error">{{ message }}</p>
+      {% endif %}
+      
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for msg in messages %}
+              <li>{{ msg }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      <input type="text" name="name" placeholder="ユーザー名" required>
+      <input type="password" name="password" placeholder="パスワード" required>
+      <input type="submit" value="ログイン">
+    </form>
+    <p><a href="/signup">新規登録はこちら</a></p>
+  </div>
 </body>
 </html>

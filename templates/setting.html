@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>設定画面</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <style>
+    .setting-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group small {
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>学習の設定</h1>
+
+    {% if message %}
+      <p style="color:red;">{{ message }}</p>
+    {% endif %}
+
+    <form action="/setting" method="post" class="setting-form">
+
+      <div class="form-group">
+        <label for="goal">学習目的</label>
+        <input type="text" id="goal" name="goal" value="{{ (setting.goal if setting else '') or ''}}" required >
+      </div>
+
+      <div class="form-group">
+        <label for="weekly_target">学習目標（週あたりの回数）</label>
+        <input type="number" id="weekly_target" name="weekly_target" min="1" placeholder="例：週に3回" value="{{ (setting.weekly_target if setting else '')or ''}}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="small_action">小さな行動</label>
+        <small>続けやすくするために、最小単位の行動を設定します（例：単語帳1ページ読む）</small>
+        <input type="text" id="small_action" name="small_action" value="{{ (setting.small_action if setting else '') or ''}}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="anchor">アンカー（習慣のきっかけ）</label>
+        <small>既存の行動の後に紐づけて習慣化を助けます（例：歯を磨いた後、朝食の前など）</small>
+        <input type="text" id="anchor" name="anchor" value="{{ (setting.anchor if setting else '')or ''}}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="failure_days">失敗日数の設定</label>
+        <small>何日連続で学習しなければ「失敗」と見なすか設定します（例：3日）</small>
+        <input type="number" id="failure_days" name="failure_days" value="{{ (setting.failure_days if setting else '')or ''}}" min="1" required>
+      </div>
+
+      <button type="submit">設定を保存</button>
+    </form>
+  </div>
+</body>
+</html>

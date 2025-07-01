@@ -2,22 +2,278 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>習慣化システム マイページ</title>
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/style.css') }}">
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/style2.css') }}">
-  <!-- Chart.js の CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マイページ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  <style>
+    .slider-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .slides {
+      overflow: hidden;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .slide {
+      flex-shrink: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .slide-controls {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .slide-controls button {
+      padding: 8px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #close-tutorial { background-color: #dc3545; color: white; }
+    #never-show-again { background-color: #6c757d; color: white; }
+
+    .slide-indicator {
+      color: white;
+      margin: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="visibility-hidden" id="after">
-    <h1>{{ user[1] }}さんのマイページ</h1>
-    <h2><font color="00008B">学習目的：</font></h2>
-    <h2><font color="00008B">数値的目標：</font></h2>
-    <p><a href="/record" class="btn">記録</a></p>
-
-    <a href="/" >ログアウト</a>
+  <div class="container">
+    <h1><div class="main">{{ user['username'] }}さんのマイページ</div></h1>
+  
+    {% if setting %}
+      <div class="setting-box">
+        <h3>🎯 学習目的</h3>
+        <h2><p class="setting-value">{{ setting['goal'] }}</p></h2>
+      
+        <div class="setting-row">
+          <div class="setting-item"><strong>📅週の目標</strong><br><h1>{{ setting['weekly_target'] }} 回</h1></div>
+          <div class="setting-item"><strong>📊継続日数</strong><br><h1>{{ streak_days }} 日</h1></div>
+        </div>
+      
+        <div class="setting-row">
+          <div class="setting-item"><strong>🪴小さな行動</strong><br><h2>{{ setting['small_action'] }}</h2></div>
+          <div class="setting-item"><strong>🔑アンカー</strong><br><h2>{{ setting['anchor'] }}</h2></div>
+        </div>
+      
+        <h3>⚠️ 失敗の定義</h3>
+        <h3><p class="setting-value">{{ setting['failure_days'] }} 日連続で学習できなかったら</p></h3>
+      </div>
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('setting') }}" class="btn">設定を変更する</a>
+      </div>
+    
+    {% else %}
+      <p>設定がまだ登録されていません。</p>
+    {% endif %}
+  
+    <div style="text-align:center; margin: 20px 0;">
+      <button id="show-tutorial" class="btn">アプリの使い方を見る</button>
+    </div>
+  
+    <div id="calendar" style="margin-top: 20px;"></div>
   </div>
- 
+
+  <!-- スライダー -->
+  <div id="tutorial-slider" class="slider-container">
+    <div class="slides" id="slides-container">
+      <div class="slide-wrapper" id="slides">
+        <div class="slide"><img src="{{ url_for('static', filename='img/slide1.png') }}" alt="スライド1"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='img/slide2.png') }}" alt="スライド2"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='img/slide3.png') }}" alt="スライド3"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='img/slide4.png') }}" alt="スライド4"></div>
+      </div>
+    </div>
+    <div class="slide-indicator" id="slide-indicator">1 / 3</div>
+    <div class="slide-controls">
+      <button id="prev-slide">前へ</button>
+      <button id="next-slide">次へ</button>
+      <button id="close-tutorial">✕ 閉じる</button>
+      <button id="never-show-again">次回以降表示しない</button>
+    </div>
+  </div>
+
+  <footer>
+    <ul>
+      <li><a href="/mypage">マイページ</a></li>
+      <li><a href="/record">記録</a></li>
+      <li><a href="/resilience">回復</a></li>
+      <li><a href="/analysis">分析</a></li>
+      <li><a href="/logout">ログアウト</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const slider = document.getElementById('tutorial-slider');
+      const slidesWrapper = document.getElementById('slides');
+      const slidesContainer = document.getElementById('slides-container');
+      const slideCount = slidesWrapper.children.length;
+      const indicator = document.getElementById('slide-indicator');
+      const prevBtn = document.getElementById('prev-slide');
+      const nextBtn = document.getElementById('next-slide');
+      let currentSlide = 0;
+  
+      function resizeSlides() {
+        const containerWidth = slidesContainer.offsetWidth;
+        slidesWrapper.style.width = `${containerWidth * slideCount}px`;
+        Array.from(slidesWrapper.children).forEach(slide => {
+          slide.style.width = `${containerWidth}px`;
+        });
+      }
+  
+      function showSlide(index) {
+        const offset = slidesContainer.offsetWidth * index;
+        slidesWrapper.style.transform = `translateX(-${offset}px)`;
+        indicator.textContent = `${index + 1} / ${slideCount}`;
+        prevBtn.style.display = index === 0 ? 'none' : 'inline-block';
+        nextBtn.style.display = index === slideCount - 1 ? 'none' : 'inline-block';
+      }
+  
+      if (localStorage.getItem("hideTutorial") !== "true") {
+        slider.style.display = 'flex';
+        resizeSlides();
+        showSlide(currentSlide);
+      }
+  
+      window.addEventListener('resize', () => {
+        resizeSlides();
+        showSlide(currentSlide);
+      });
+  
+      document.getElementById('show-tutorial').addEventListener('click', () => {
+        localStorage.removeItem("hideTutorial");
+        currentSlide = 0;
+        slider.style.display = 'flex';
+        resizeSlides();
+        showSlide(currentSlide);
+      });
+  
+      document.getElementById('close-tutorial').addEventListener('click', () => {
+        slider.style.display = 'none';
+      });
+  
+      document.getElementById('never-show-again').addEventListener('click', () => {
+        localStorage.setItem("hideTutorial", "true");
+        slider.style.display = 'none';
+      });
+  
+      prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      });
+  
+      nextBtn.addEventListener('click', () => {
+        if (currentSlide < slideCount - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      });
+  
+      const categoryColors = {
+        1: '#007bff', // 青
+        2: '#28a745', // 緑
+        3: '#ffc107', // 黄
+        4: '#dc3545', // 赤
+        5: '#17a2b8', // 水色
+        6: '#6f42c1', // 紫
+        7: '#fd7e14', // オレンジ
+        8: '#20c997', // ティール
+        9: '#6610f2', // インディゴ
+        10: '#e83e8c' // ピンク
+      };
+  
+      const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+        initialView: 'dayGridMonth',
+        locale: 'ja',
+        eventDidMount: function(info) {
+          const { category_name, study_time, description } = info.event.extendedProps;
+  
+          if (category_name || description) {
+            const tooltip = document.createElement('div');
+            tooltip.innerText = `${category_name || ''}\n${study_time} 分\n${description || ''}`;
+            tooltip.style.position = 'absolute';
+            tooltip.style.background = '#333';
+            tooltip.style.color = '#fff';
+            tooltip.style.padding = '4px 8px';
+            tooltip.style.borderRadius = '4px';
+            tooltip.style.fontSize = '12px';
+            tooltip.style.whiteSpace = 'pre-wrap';
+            tooltip.style.zIndex = 1000;
+            tooltip.style.display = 'none';
+            document.body.appendChild(tooltip);
+  
+            info.el.addEventListener('mouseenter', () => tooltip.style.display = 'block');
+            info.el.addEventListener('mousemove', e => {
+              tooltip.style.top = e.pageY + 10 + 'px';
+              tooltip.style.left = e.pageX + 10 + 'px';
+            });
+            info.el.addEventListener('mouseleave', () => tooltip.style.display = 'none');
+          }
+        },
+        events: [
+          {% for record in study_records %}
+            {
+              title: '{{ record.category_name or "" }}',
+              start: '{{ record.study_date }}',
+              color: '{{ category_colors.get(record.category_id, "#999999") }}',
+              extendedProps: {
+                category_name: '{{ record.category_name or "" }}',
+                study_time: '{{ record.study_time }}',
+                description: `{{ record.memo or "" }}`
+              }
+            },
+          {% endfor %}
+        ]
+      });
+  
+      calendar.render();
+    });
+  </script>
+  
+  
 </body>
 </html>
+
+
 

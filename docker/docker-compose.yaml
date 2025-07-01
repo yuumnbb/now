@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.pgsql
+    container_name: postgresql
+    ports:
+      - '25434:5432'
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 256M
+
+volumes:
+  db:
+    driver: local

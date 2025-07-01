@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学習時間の分析</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>学習時間の分析</h1>
+
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="get" action="/analysis">
+      <label for="periodSelect">表示期間:</label>
+      <select id="periodSelect" name="period" onchange="this.form.submit()">
+        <option value="week" {% if period == 'week' %}selected{% endif %}>週単位</option>
+        <option value="month" {% if period == 'month' %}selected{% endif %}>月単位</option>
+        <option value="year" {% if period == 'year' %}selected{% endif %}>年単位</option>
+      </select>
+      <input type="hidden" name="offset" value="{{ offset }}">
+    </form>
+
+    <!-- 平均 -->
+    <div id="averages">
+      <p id="weeklyAvg" {% if period != 'week' %}style="display:none;"{% endif %}>週の平均学習時間：{{ weekly_avg }} 分</p>
+      <p id="monthlyAvg" {% if period != 'month' %}style="display:none;"{% endif %}>月の平均学習時間：{{ monthly_avg }} 分</p>
+      <p id="yearlyAvg" {% if period != 'year' %}style="display:none;"{% endif %}>年の平均学習時間：{{ yearly_avg }} 分</p>
+    </div>
+
+    <p id="rangeLabel"></p>
+
+    <canvas id="studyChart"></canvas>
+
+    <div class="pagination">
+      <form method="get" action="/analysis">
+        <input type="hidden" name="period" value="{{ period }}">
+        <input type="hidden" name="offset" value="{{ offset + 1 }}">
+        <button type="submit">← 前へ</button>
+      </form>
+      <form method="get" action="/analysis">
+        <input type="hidden" name="period" value="{{ period }}">
+        <input type="hidden" name="offset" value="{{ offset - 1 }}">
+        <button type="submit">次へ →</button>
+      </form>
+    </div>
+
+    <p><a href="/mypage" class="btn">マイページに戻る</a></p>
+  </div>
+
+  <footer>
+    <ul>
+      <li><a href="/mypage">マイページ</a></li>
+      <li><a href="/record">記録</a></li>
+      <li><a href="/resilience">回復</a></li>
+      <li><a href="/analysis">分析</a></li>
+      <li><a href="/logout">ログアウト</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const weeklyData = JSON.parse('{{ weekly_data|safe }}');
+    const monthlyData = JSON.parse('{{ monthly_data|safe }}');
+    const yearlyData = JSON.parse('{{ yearly_data|safe }}');
+    const maxTime = {{ max_time }};
+
+    const ctx = document.getElementById('studyChart').getContext('2d');
+    let chart;
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return `${date.getMonth() + 1}/${date.getDate()}`;
+    }
+
+    function showRange(data) {
+      if (data.length === 0) return '';
+      const first = new Date(data[0].study_date || data[0].label);
+      const last = new Date(data[data.length - 1].study_date || data[data.length - 1].label);
+      return `表示期間：${first.getFullYear()}/${first.getMonth() + 1}/${first.getDate()} ～ ${last.getFullYear()}/${last.getMonth() + 1}/${last.getDate()}`;
+    }
+
+    function drawChart(type) {
+      let labels = [], values = [], range = '';
+
+      if (type === 'week') {
+        labels = weeklyData.map(d => formatDate(d.study_date));
+        values = weeklyData.map(d => d.study_time);
+        range = showRange(weeklyData);
+      } else if (type === 'month') {
+        labels = monthlyData.map(d => formatDate(d.study_date));
+        values = monthlyData.map(d => d.study_time);
+        range = showRange(monthlyData);
+      } else if (type === 'year') {
+        labels = yearlyData.map(d => d.label);
+        values = yearlyData.map(d => d.value);
+        range = showRange(yearlyData);
+      }
+
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '学習時間（分）',
+            data: values,
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0, 0, 255, 0.1)',
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              suggestedMax: maxTime
+            }
+          }
+        }
+      });
+
+      document.getElementById('rangeLabel').innerText = range;
+    }
+
+    window.onload = () => {
+      drawChart('{{ period }}');
+    };
+  </script>
+</body>
+</html>

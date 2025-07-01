@@ -40,3 +40,36 @@
 ## herokuにpostgresqlを追加
 - ```heroku addons:create 任意の名前:hobby-dev```
 
+## ddl再起動
+- dockerのある場所に移動
+- cd ~/Desktop/Yusuke2/docker 
+- コンテナ停止
+- docker-compose down -v
+- 再構築
+- docker-compose up --build
+
+
+## DB操作
+$ docker exec -it postgresql bash
+
+root@2bc82ca3ee4c:/# psql -U postgres -d postgres
+psql (14.0 (Debian 14.0-1.pgdg110+1))
+Type "help" for help.
+
+postgres=# SELECT id, username, goal FROM users;
+ id | username | goal 
+----+----------+------
+  1 | a        | a
+  2 | aa       | 
+  3 | aaa      | 
+(3 rows)
+
+postgres=# \q
+root@2bc82ca3ee4c:/# exit
+
+Azure
+psql
+
+
+
+

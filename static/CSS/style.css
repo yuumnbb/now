@@ -1,119 +1,292 @@
-/* style.css */
-
-/* ページ全体のスタイル */
+/* 共通スタイル */
 body {
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: 'Arial', sans-serif;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-  text-align: center; /* リンクを中央に配置 */
-  display: block; /* ブロック要素に変更して、中央配置を有効にする */
-  margin-top: 15px;
-  
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
 }
 
-/* ログインフォームのスタイル */
-form {
-  display: flex;
-  flex-direction: column;
-  width: 47vw;
-  margin: 0 auto;
-  align-items: center; /* 中央に配置 */
-  padding: 20px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-}
-
-h1 {
+h1, h2 {
   text-align: center;
+  margin: 20px 0;
+  color: #333;
 }
 
-/* 入力フィールドのスタイル */
-input[type="text"],
-input[type="password"],
-input[type="submit"] {
-  margin-bottom: 10px;
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-input[type="submit"] {
-  cursor: pointer;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-}
-
-input[type="submit"]:hover {
-  background-color: #45a049;
+p {
+  margin: 10px 0;
 }
 
 a {
+  color: #007BFF;
   text-decoration: none;
-  color: #4caf50;
-  text-align: center; /* リンクを中央に配置 */
-  display: block; /* ブロック要素に変更して、中央配置を有効にする */
-  margin-top: 15px; /* 上部の余白を追加 */
-}
-#studyTimeChart {
-  display: block;
-  margin: 0 auto; /* 左右の余白を自動で設定し、要素を中央に配置 */
-}
-.btn {
-  border-radius: 5px;
-  width: 10vw;
-  background-color: #45a049;
-  padding: 10px;
-  text-decoration: none;
-  color: white;
-  margin: 0 auto;
-}
-.sidebar {
-  width: 350px;
-  background-color: moccasin;
-  box-sizing: border-box;
-  border: 2px solid rgb(251, 214, 189);
-}
-.balloon1 {
-  position: relative;
-  margin: 0 auto;
-  padding: 7px 10px;
-  min-width: 120px;
-  max-width: 40%;
-  color: #555;
-  font-size: 16px;
-  background: #e0edff;
-
 }
 
-.balloon1:before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -15px;
-  border: 15px solid transparent;
-  border-top: 15px solid #e0edff;
+a:hover {
+  text-decoration: underline;
 }
 
-.balloon1 p {
-  margin: 0;
-  padding: 0;
-}
-.tric_font_size{
-  font-size: 1.5em;
-}
-.table2{
-  width: 100%;
-}
-.yuwaku{
-  width: 47vw;
+/* コンテナスタイル */
+.container {
+  max-width: 800px;
   margin: 0 auto;
-  align-items: center; /* 中央に配置 */
-  border: 1px solid #ccc;
   padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* フォームスタイル */
+form {
+  margin: 20px 0;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="submit"],
+form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+form input[type="submit"] {
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* ボタン */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  background: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+/* ナビゲーションバー */
+/* フッターのスタイル */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+footer li {
+  margin: 0 10px;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+footer a:hover {
+  color: #ddd;
+}
+
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  form input[type="text"],
+  form input[type="password"],
+  form input[type="submit"] {
+    font-size: 14px;
+  }
+
+  footer a {
+    font-size: 12px;
+  }
+}
+
+
+.pagination {
+  position: relative;      /* ページ内での配置 */
+  z-index: 1;              /* 他要素より前面に出す */
+  margin: 30px auto;       /* 上下に余白 */
+  padding: 10px 0;
+  text-align: center;
+  background-color: white; /* 必要なら背景追加で明瞭に */
+}
+
+.pagination a {
+  margin: 0 10px;
+  padding: 6px 12px;
+  text-decoration: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.pagination span {
+  margin: 0 10px;
+  font-weight: bold;
+  color: #333;
+}
+.record-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.record-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.record-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.record-form input[type="date"],
+.record-form input[type="number"],
+.record-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* マイページセクションボックス */
+.setting-box {
+  background: #f0f8ff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+.setting-value {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 10px 0 20px;
+  flex-wrap: wrap;
+}
+
+.setting-item {
+  flex: 1;
+  min-width: 45%;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+
+.setting-row > div {
+  width: 48%;
+  background: #f9fbff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+
+.setting-box h3 {
+  margin: 12px 0;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+/* ボタンにちょっとした遊び感 */
+button, .btn {
+  font-family: "Helvetica Neue", sans-serif;
+  border: none;
+  border-radius: 6px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+button:hover, .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* タイトル下の波線デコ */
+.main::after {
+  content: '';
+  display: block;
+  width: 500px;
+  height: 4px;
+  margin: 8px auto;
+  background: repeating-linear-gradient(45deg, #007BFF, #007BFF 10px, #6bbcff 10px, #6bbcff 20px);
+  border-radius: 2px;
+}
+
+/* 吹き出し風の情報表示（オプション） */
+.speech-box {
+  background: #fff;
+  border: 2px dashed #007BFF;
+  padding: 15px;
+  border-radius: 12px;
+  position: relative;
+  margin: 20px 0;
+}
+
+.speech-box::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #007BFF;
 }
