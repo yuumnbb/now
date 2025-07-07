@@ -162,8 +162,8 @@ def signup():
         except psycopg2.Error:
             flash('このユーザー名またはメールアドレスは既に使用されています。')
             conn.close()
-            return render_template('Signup.html', message='このユーザー名またはメールアドレスは既に使用されています。')
-    return render_template('Signup.html', message='')
+            return render_template('signup.html', message='このユーザー名またはメールアドレスは既に使用されています。')
+    return render_template('signup.html', message='')
 
 @app.route('/resilience')
 def resilience():
@@ -406,7 +406,7 @@ def mypage():
         6: "#17a2b8", 7: "#fd7e14", 8: "#20c997", 9: "#6f42c1", 10: "#e83e8c"
     }
 
-    return render_template('Mypage.html',
+    return render_template('mypage.html',
                            user=session['user'],
                            setting=setting,
                            continuity_days=continuity_days,
