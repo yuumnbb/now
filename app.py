@@ -15,7 +15,18 @@ genai.configure(api_key="AIzaSyBOITJPK7wMJ66P8ur1AlMPKjh5K96F_XY")
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
+load_dotenv()
 
+db_config = {
+    'host': os.environ.get('DB_HOST'),
+    'database': os.environ.get('DB_NAME'),
+    'user': os.environ.get('DB_USER'),
+    'password': os.environ.get('DB_PASSWORD'),
+    'port': os.environ.get('DB_PORT', 5432),  # ポートが空なら5432をデフォルトに
+    'sslmode': 'require'
+}
+
+"""
 load_dotenv()
 
 db_config = {
@@ -26,6 +37,7 @@ db_config = {
     'port': os.getenv('DB_PORT'),
     'sslmode': 'require'
 }
+"""
 
 # データベースの初期化
 def init_db():

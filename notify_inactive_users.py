@@ -2,15 +2,32 @@ import psycopg2
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 import smtplib
+from dotenv import load_dotenv
+import os
 
-# PostgreSQLの接続設定
 db_config = {
-    'host': '127.0.0.1',  # Dockerのホスト
-    'database': 'postgres',  # デフォルトのデータベース名
-    'user': 'postgres',
-    'password': 'postgres',
-    'port': 25434          # docker-composeで指定したポート
+    'host': os.environ.get('DB_HOST'),
+    'database': os.environ.get('DB_NAME'),
+    'user': os.environ.get('DB_USER'),
+    'password': os.environ.get('DB_PASSWORD'),
+    'port': os.environ.get('DB_PORT', 5432),  # ポートが空なら5432をデフォルトに
+    'sslmode': 'require'
 }
+
+# ローカルPostgreSQLの接続設定
+"""
+load_dotenv()
+
+db_config = {
+    'host': os.getenv('DB_HOST'),
+    'database': os.getenv('DB_NAME'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
+    'port': os.getenv('DB_PORT'),
+    'sslmode': 'require'
+}
+"""
+
 
 # 接続
 conn = psycopg2.connect(**db_config)
