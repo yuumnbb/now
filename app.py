@@ -15,28 +15,7 @@ genai.configure(api_key="AIzaSyBOITJPK7wMJ66P8ur1AlMPKjh5K96F_XY")
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-# PostgreSQLの接続設定
-"""
-db_config = {
-    'host': '127.0.0.1',  # Dockerのホスト
-    'database': 'postgres',  # デフォルトのデータベース名
-    'user': 'postgres',
-    'password': 'postgres',
-    'port': 25434          # docker-composeで指定したポート
-}
-"""
 
-"""
-#Azure
-db_config = {
-    'host': 'myapp-postgres12345.postgres.database.azure.com',
-    'port': 5432,
-    'dbname': 'postgres',
-    'user': 'postgres',
-    'password': 'h8e267dR',
-    'sslmode': 'require'
-}
-"""
 load_dotenv()
 
 db_config = {
