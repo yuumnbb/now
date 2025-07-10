@@ -6,6 +6,72 @@
   <title>設定画面</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
   <style>
+    .slider-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .slides {
+      overflow: hidden;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .slide {
+      flex-shrink: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .slide-controls {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .slide-controls button {
+      padding: 8px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #close-tutorial { background-color: #dc3545; color: white; }
+    #never-show-again { background-color: #6c757d; color: white; }
+
+    .slide-indicator {
+      color: white;
+      margin: 10px;
+    }
+
     .setting-form {
       max-width: 600px;
       margin: 0 auto;
@@ -64,12 +130,14 @@
 
       <div class="form-group">
         <label for="goal">学習目的</label>
+        <small>あなたの学習の目的を設定します（例：英語を話せるようになる、基本情報処理の合格）</small>
         <input type="text" id="goal" name="goal" value="{{ (setting.goal if setting else '') or ''}}" required >
       </div>
 
       <div class="form-group">
         <label for="weekly_target">学習目標（週あたりの回数）</label>
-        <input type="number" id="weekly_target" name="weekly_target" min="1" placeholder="例：週に3回" value="{{ (setting.weekly_target if setting else '')or ''}}" required>
+        <small>週何日学習したいかを設定します</small>
+        <input type="number" id="weekly_target" name="weekly_target" min="1"  value="{{ (setting.weekly_target if setting else '')or ''}}" required>
       </div>
 
       <div class="form-group">
@@ -92,6 +160,89 @@
 
       <button type="submit">設定を保存</button>
     </form>
+    <!-- スライダー -->
+  <div id="tutorial-slider" class="slider-container">
+    <div class="slides" id="slides-container">
+      <div class="slide-wrapper" id="slides">
+        <div class="slide"><img src="{{ url_for('static', filename='img/slide1.png') }}" alt="スライド1"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='img/slide2.png') }}" alt="スライド2"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='img/slide3.png') }}" alt="スライド3"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='img/slide4.png') }}" alt="スライド4"></div>
+      </div>
+    </div>
+    <div class="slide-indicator" id="slide-indicator">1 / 3</div>
+    <div class="slide-controls">
+      <button id="prev-slide">前へ</button>
+      <button id="next-slide">次へ</button>
+      <button id="close-tutorial">✕ 閉じる</button>
+      <button id="never-show-again">次回以降表示しない</button>
+    </div>
   </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const slider = document.getElementById('tutorial-slider');
+      const slidesWrapper = document.getElementById('slides');
+      const slidesContainer = document.getElementById('slides-container');
+      const slideCount = slidesWrapper.children.length;
+      const indicator = document.getElementById('slide-indicator');
+      const prevBtn = document.getElementById('prev-slide');
+      const nextBtn = document.getElementById('next-slide');
+      const closeBtn = document.getElementById('close-tutorial');
+      const neverShowBtn = document.getElementById('never-show-again');
+      let currentSlide = 0;
+
+      function resizeSlides() {
+        const containerWidth = slidesContainer.offsetWidth;
+        slidesWrapper.style.width = `${containerWidth * slideCount}px`;
+        Array.from(slidesWrapper.children).forEach(slide => {
+          slide.style.width = `${containerWidth}px`;
+        });
+      }
+
+      function showSlide(index) {
+        const offset = slidesContainer.offsetWidth * index;
+        slidesWrapper.style.transform = `translateX(-${offset}px)`;
+        indicator.textContent = `${index + 1} / ${slideCount}`;
+        prevBtn.style.display = index === 0 ? 'none' : 'inline-block';
+        nextBtn.style.display = index === slideCount - 1 ? 'none' : 'inline-block';
+      }
+
+      if (localStorage.getItem("hideTutorial") !== "true") {
+        slider.style.display = 'flex';
+        resizeSlides();
+        showSlide(currentSlide);
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentSlide < slideCount - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      });
+
+      closeBtn.addEventListener('click', () => {
+        slider.style.display = 'none';
+      });
+
+      neverShowBtn.addEventListener('click', () => {
+        localStorage.setItem("hideTutorial", "true");
+        slider.style.display = 'none';
+      });
+
+      window.addEventListener('resize', () => {
+        resizeSlides();
+        showSlide(currentSlide);
+      });
+    });
+  </script>
+
 </body>
 </html>
