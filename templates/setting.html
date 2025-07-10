@@ -127,6 +127,7 @@
     {% endif %}
 
     <form action="/setting" method="post" class="setting-form">
+      <button type="button" id="show-tutorial-button" style="margin-top: 20px;">使い方を見る</button>
 
       <div class="form-group">
         <label for="goal">学習目的</label>
@@ -180,69 +181,83 @@
   </div>
   </div>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const slider = document.getElementById('tutorial-slider');
-      const slidesWrapper = document.getElementById('slides');
-      const slidesContainer = document.getElementById('slides-container');
-      const slideCount = slidesWrapper.children.length;
-      const indicator = document.getElementById('slide-indicator');
-      const prevBtn = document.getElementById('prev-slide');
-      const nextBtn = document.getElementById('next-slide');
-      const closeBtn = document.getElementById('close-tutorial');
-      const neverShowBtn = document.getElementById('never-show-again');
-      let currentSlide = 0;
+document.addEventListener('DOMContentLoaded', function () {
+  const slider = document.getElementById('tutorial-slider');
+  const slidesWrapper = document.getElementById('slides');
+  const slidesContainer = document.getElementById('slides-container');
+  const slideCount = slidesWrapper.children.length;
+  const indicator = document.getElementById('slide-indicator');
+  const prevBtn = document.getElementById('prev-slide');
+  const nextBtn = document.getElementById('next-slide');
+  const closeBtn = document.getElementById('close-tutorial');
+  const neverBtn = document.getElementById('never-show-again');
+  const showBtn = document.getElementById('show-tutorial-button');
+  let currentSlide = 0;
 
-      function resizeSlides() {
-        const containerWidth = slidesContainer.offsetWidth;
-        slidesWrapper.style.width = `${containerWidth * slideCount}px`;
-        Array.from(slidesWrapper.children).forEach(slide => {
-          slide.style.width = `${containerWidth}px`;
-        });
-      }
-
-      function showSlide(index) {
-        const offset = slidesContainer.offsetWidth * index;
-        slidesWrapper.style.transform = `translateX(-${offset}px)`;
-        indicator.textContent = `${index + 1} / ${slideCount}`;
-        prevBtn.style.display = index === 0 ? 'none' : 'inline-block';
-        nextBtn.style.display = index === slideCount - 1 ? 'none' : 'inline-block';
-      }
-
-      if (localStorage.getItem("hideTutorial") !== "true") {
-        slider.style.display = 'flex';
-        resizeSlides();
-        showSlide(currentSlide);
-      }
-
-      prevBtn.addEventListener('click', () => {
-        if (currentSlide > 0) {
-          currentSlide--;
-          showSlide(currentSlide);
-        }
-      });
-
-      nextBtn.addEventListener('click', () => {
-        if (currentSlide < slideCount - 1) {
-          currentSlide++;
-          showSlide(currentSlide);
-        }
-      });
-
-      closeBtn.addEventListener('click', () => {
-        slider.style.display = 'none';
-      });
-
-      neverShowBtn.addEventListener('click', () => {
-        localStorage.setItem("hideTutorial", "true");
-        slider.style.display = 'none';
-      });
-
-      window.addEventListener('resize', () => {
-        resizeSlides();
-        showSlide(currentSlide);
-      });
+  function resizeSlides() {
+    const containerWidth = slidesContainer.offsetWidth;
+    slidesWrapper.style.width = `${containerWidth * slideCount}px`;
+    Array.from(slidesWrapper.children).forEach(slide => {
+      slide.style.width = `${containerWidth}px`;
     });
-  </script>
+  }
+
+  function showSlide(index) {
+    const offset = slidesContainer.offsetWidth * index;
+    slidesWrapper.style.transform = `translateX(-${offset}px)`;
+    indicator.textContent = `${index + 1} / ${slideCount}`;
+    prevBtn.style.display = index === 0 ? 'none' : 'inline-block';
+    nextBtn.style.display = index === slideCount - 1 ? 'none' : 'inline-block';
+  }
+
+  function openSlider() {
+    resizeSlides();
+    currentSlide = 0;
+    showSlide(currentSlide);
+    slider.style.display = 'flex';
+  }
+
+  // 初回表示（localStorageに保存されていなければ）
+  if (localStorage.getItem("hideTutorial") !== "true") {
+    openSlider();
+  }
+
+  // ボタンによる表示
+  showBtn.addEventListener('click', openSlider);
+
+  // 閉じるボタン
+  closeBtn.addEventListener('click', () => {
+    slider.style.display = 'none';
+  });
+
+  // 次へ／前へ
+  nextBtn.addEventListener('click', () => {
+    if (currentSlide < slideCount - 1) {
+      currentSlide++;
+      showSlide(currentSlide);
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentSlide > 0) {
+      currentSlide--;
+      showSlide(currentSlide);
+    }
+  });
+
+  // 今後表示しない
+  neverBtn.addEventListener('click', () => {
+    localStorage.setItem("hideTutorial", "true");
+    slider.style.display = 'none';
+  });
+
+  // ウィンドウサイズ変更時に再計算
+  window.addEventListener('resize', () => {
+    resizeSlides();
+    showSlide(currentSlide);
+  });
+});
+</script>
 
 </body>
 </html>
