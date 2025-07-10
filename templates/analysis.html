@@ -40,16 +40,15 @@
       <form method="get" action="/analysis">
         <input type="hidden" name="period" value="{{ period }}">
         <input type="hidden" name="offset" value="{{ offset + 1 }}">
-        <button type="submit">← 前へ</button>
+        <button type="submit"class="btn">← 前へ</button>
       </form>
+      &emsp;
       <form method="get" action="/analysis">
         <input type="hidden" name="period" value="{{ period }}">
         <input type="hidden" name="offset" value="{{ offset - 1 }}">
-        <button type="submit">次へ →</button>
+        <button type="submit"class="btn">次へ →</button>
       </form>
     </div>
-
-    <p><a href="/mypage" class="btn">マイページに戻る</a></p>
   </div>
 
   <footer>

@@ -151,6 +151,7 @@ footer a:hover {
   padding: 10px 0;
   text-align: center;
   background-color: white; /* 必要なら背景追加で明瞭に */
+  display: flex;
 }
 
 .pagination a {
@@ -262,10 +263,10 @@ button:hover, .btn:hover {
 .main::after {
   content: '';
   display: block;
-  width: 500px;
+  width: 40%;
   height: 4px;
   margin: 8px auto;
-  background: repeating-linear-gradient(45deg, #007BFF, #007BFF 10px, #6bbcff 10px, #6bbcff 20px);
+  background: #007BFF;
   border-radius: 2px;
 }
 
