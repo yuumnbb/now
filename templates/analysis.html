@@ -16,23 +16,27 @@
     {% endif %}
 
     <form method="get" action="/analysis">
-      <label for="periodSelect">表示期間:</label>
-      <select id="periodSelect" name="period" onchange="this.form.submit()">
-        <option value="week" {% if period == 'week' %}selected{% endif %}>週単位</option>
-        <option value="month" {% if period == 'month' %}selected{% endif %}>月単位</option>
-        <option value="year" {% if period == 'year' %}selected{% endif %}>年単位</option>
-      </select>
-      <input type="hidden" name="offset" value="{{ offset }}">
+      <h3>
+        <label for="periodSelect">表示期間:</label>
+        <select id="periodSelect" name="period" onchange="this.form.submit()">
+          <option value="week" {% if period == 'week' %}selected{% endif %}>週単位</option>
+          <option value="month" {% if period == 'month' %}selected{% endif %}>月単位</option>
+          <option value="year" {% if period == 'year' %}selected{% endif %}>年単位</option>
+        </select>
+        <input type="hidden" name="offset" value="{{ offset }}">
+      </h3>
     </form>
 
     <!-- 平均 -->
     <div id="averages">
-      <p id="weeklyAvg" {% if period != 'week' %}style="display:none;"{% endif %}>週の平均学習時間：{{ weekly_avg }} 分</p>
-      <p id="monthlyAvg" {% if period != 'month' %}style="display:none;"{% endif %}>月の平均学習時間：{{ monthly_avg }} 分</p>
-      <p id="yearlyAvg" {% if period != 'year' %}style="display:none;"{% endif %}>年の平均学習時間：{{ yearly_avg }} 分</p>
+      <h3>
+        <p id="weeklyAvg" {% if period != 'week' %}style="display:none;"{% endif %}>週の平均学習時間：{{ weekly_avg }} 分</p>
+        <p id="monthlyAvg" {% if period != 'month' %}style="display:none;"{% endif %}>月の平均学習時間：{{ monthly_avg }} 分</p>
+        <p id="yearlyAvg" {% if period != 'year' %}style="display:none;"{% endif %}>年の平均学習時間：{{ yearly_avg }} 分</p>
+      </h3>
     </div>
 
-    <p id="rangeLabel"></p>
+    <h3><p id="rangeLabel"></p></h3>
 
     <canvas id="studyChart"></canvas>
 

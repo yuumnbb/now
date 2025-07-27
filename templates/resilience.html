@@ -45,6 +45,19 @@
               <div class="setting-item"><strong>改善方法</strong><br> {{ my_recovery_data[0].improvement }}<br></div>
             </div>
             <strong>継続日数:</strong> {{ my_streak }} 日
+            {% if my_feedback and my_feedback.ai_feedback %}
+              <button id="toggle-feedback" style="margin-top: 10px;">AIのアドバイス</button>
+              <div id="feedback-box" style="display:none; padding: 10px; margin-top: 10px; background: #eef; border-left: 5px solid #00f;">
+                <h3>最新のAIフィードバック</h3>
+                <p>{{ my_feedback.ai_feedback | replace('\n', '<br>') | safe }}</p>
+              </div>
+              <script>
+                document.getElementById('toggle-feedback').addEventListener('click', function () {
+                  const box = document.getElementById('feedback-box');
+                  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+              }); 
+              </script>
+            {% endif %}
           </div>
         </ul>
         {% if my_recovery_data|length > 1 %}
@@ -90,6 +103,7 @@
               <span id="likes-{{ record.id }}">{{ record.likes }}</span>
           </div>
         {% endfor %}
+
       </ul>      
   
 

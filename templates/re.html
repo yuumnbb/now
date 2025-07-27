@@ -2,23 +2,131 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>回復プログラム</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-family: "Arial", sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    textarea {
+      width: 95%;
+      height: 100px;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    .message {
+      color: green;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>回復プログラム</h1>
-    <p><strong>あなたの失敗原因と改善案の例</strong><br> {{ suggested_reason | replace('\n', '<br>') | safe }}</p>
-    <p>{{ suggested_improvement | replace('\n', '<br>') | safe }}</p>
-    <p>失敗の原因と、次回失敗しないための方法を記入してください。</p>
-    <form action="/recovery" method="post">
-      <label for="reason">失敗の原因:</label>
-      <textarea id="reason" name="reason" rows="4" required></textarea><br>
-      <label for="improvement">失敗しないための方法:</label>
-      <textarea id="improvement" name="improvement" rows="4" required></textarea>
+
+    {% if suggested_result %}
+      <div style="background: #fffaf0; border-left: 6px solid #f4a300; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <h3 style="margin-top: 0; color: #b36b00;">📊 AIによる学習記録の分析</h3>
+        <div style="line-height: 1.8; font-size: 16px; color: #333;">
+          {{
+            suggested_result
+            | regex_replace('\\*\\*(.*?)\\*\\*', '\\1', ignorecase=False)  
+            | regex_replace('(.+?):', '<strong style="font-size: 17px;">\\1:</strong><br>', ignorecase=False)
+            | replace('\n', '<br>')
+            | safe
+          }}
+        </div>
+      </div>
+    {% endif %}
+
+
+    {% if message %}
+      <p class="message">{{ message }}</p>
+    {% endif %}
+
+    <form id="recovery-form">
+      <h3 style="margin-top: 0; color: #b36b00;">分析を参考にして自分なりの失敗の原因と対策を考えてみよう</h3>
+      <label for="reason">失敗の原因</label>
+      <textarea id="reason" name="reason" required>{{ reason }}</textarea>
+
+      <label for="improvement">失敗しないための方法</label>
+      <textarea id="improvement" name="improvement" required>{{ improvement }}</textarea>
+      <label>
+        <input type="checkbox" id="is_shared" name="is_shared">
+        レジリエンス画面でみんなに共有する
+      </label><br>
       <button type="submit">保存</button>
     </form>
+    <div id="advice-box" style="display:none; margin-top: 30px;">
+      <div style="background: #f0f8ff; border-left: 6px solid #007acc; padding: 20px; border-radius: 8px;">
+        <h3 style="margin-top: 0; color: #0057a0;">💡 AIからのアドバイス</h3>
+        <p id="advice-text" style="line-height: 1.8; font-size: 16px; color: #333;"></p>
+        <form action="{{ url_for('mypage') }}" style="margin-top: 20px;">
+          <button type="submit" style="padding: 10px 20px; background-color: #007acc; color: white; border: none; border-radius: 5px; font-size: 16px;">完了</button>
+        </form>
+      </div>
+    </div>
   </div>
+  <script>
+  document.getElementById('recovery-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const reason = document.getElementById('reason').value.trim();
+    const improvement = document.getElementById('improvement').value.trim();
+    const is_shared = document.getElementById('is_shared').checked;
+
+    fetch("/recovery", {
+      method: "POST",
+      headers: {
+       "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        reason: reason,
+        improvement: improvement,
+        is_shared: is_shared
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) {
+        alert(data.error);
+      } else {
+        document.getElementById('advice-text').innerHTML = data.advice.replace(/\n/g, "<br>");
+        document.getElementById('advice-box').style.display = 'block';
+      }
+    })
+    .catch(err => {
+      alert("通信エラーが発生しました");
+      console.error(err);
+    });
+  });
+  </script>
 </body>
 </html>

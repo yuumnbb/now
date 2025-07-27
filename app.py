@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import psycopg2
 from psycopg2.extras import DictCursor
 import json
-from datetime import datetime, date
+from datetime import datetime, timedelta,date 
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
@@ -14,6 +14,16 @@ genai.configure(api_key="AIzaSyBOITJPK7wMJ66P8ur1AlMPKjh5K96F_XY")
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+
+"""
+db_config = {
+    'host': '127.0.0.1',  # Dockerのホスト
+    'database': 'postgres',  # デフォルトのデータベース名
+    'user': 'postgres',
+    'password': 'postgres',
+    'port': 25434          # docker-composeで指定したポート
+}
+"""
 
 load_dotenv()
 
@@ -49,6 +59,7 @@ def init_db():
             username VARCHAR(255) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
             goal TEXT,
+            weekly_target INTEGER, 
             small_action TEXT,
             anchor TEXT,
             failure_days INTEGER
@@ -174,12 +185,15 @@ def resilience():
 
     # 自分の記録（全件）
     cursor.execute('''
-        SELECT id, reason, improvement, created_at, likes
+        SELECT id, reason, improvement, created_at, likes, ai_feedback
         FROM re
         WHERE user_id = %s
         ORDER BY created_at DESC
     ''', (user_id,))
     my_recovery_data = cursor.fetchall()
+
+    # 最新の1件だけ抽出してmy_feedbackとして渡す
+    my_feedback = my_recovery_data[0] if my_recovery_data else None
 
     # 自分の継続日数を算出
     cursor.execute('''
@@ -223,6 +237,7 @@ def resilience():
             SELECT re.id, re.user_id, users.username, re.reason, re.improvement, re.created_at, re.likes
             FROM re
             JOIN users ON re.user_id = users.id
+            WHERE re.is_shared = TRUE
             ORDER BY re.likes DESC, re.created_at DESC
             LIMIT %s OFFSET %s
         ''', (per_page, offset))
@@ -231,6 +246,7 @@ def resilience():
         cursor.execute('''
             SELECT re.id, re.user_id, users.username, re.reason, re.improvement, re.created_at, re.likes
             FROM re
+            WHERE re.is_shared = TRUE
             JOIN users ON re.user_id = users.id
         ''')
         all_data = [dict(row) for row in cursor.fetchall()]
@@ -243,6 +259,7 @@ def resilience():
             SELECT re.id, re.user_id, users.username, re.reason, re.improvement, re.created_at, re.likes
             FROM re
             JOIN users ON re.user_id = users.id
+            WHERE re.is_shared = TRUE
             ORDER BY re.created_at DESC
             LIMIT %s OFFSET %s
         ''', (per_page, offset))
@@ -267,7 +284,9 @@ def resilience():
                            order_by=order_by,
                            liked_ids=liked_ids,
                            page=page,
-                           total_pages=total_pages)
+                           total_pages=total_pages,
+                           my_feedback=my_feedback)
+
 
 
 @app.route('/setting', methods=['GET', 'POST'])
@@ -554,70 +573,176 @@ def analysis():
 
 
 
-USE_GEMINI_API = False  # 必要に応じて False に
-
-def generate_hint(goal):
-    if not USE_GEMINI_API:
-        return (
-            f"【サンプルデータ】\n学習目標：{goal}\nよくある失敗の原因1：集中できない環境\nよくある失敗の原因2：やる気の波",
-            "改善案1：スマホの通知をオフにする\n改善案2：時間を決めて短時間だけ取り組む"
-        )
-    try:
-        model = genai.GenerativeModel("gemini-1.5-pro-latest")
-        prompt = f"""以下はユーザーの学習目標です：
-「{goal}」
-この目標に対して、よくある失敗の原因と改善案を2つずつ、日本語で簡潔に教えてください。まずその学習目標を表示して改行、また改善案の前で改行してください。"""
-        response = model.generate_content(prompt)
-        output = response.text.strip()
-        if "改善案：" in output:
-            reason, improvement = output.split("改善案：", 1)
-        else:
-            reason, improvement = output, ""
-        return reason.strip(), improvement.strip()
-    except Exception as e:
-        print(f"Gemini API Error: {e}")
-        return "例を取得できませんでした。", ""
+USE_GEMINI_API = True  # 必要に応じて False に
 
 @app.route('/recovery', methods=['GET', 'POST'])
 def recovery():
     if 'user' not in session:
-        flash('ログインしてください。')
-        return redirect(url_for('login'))
+        return jsonify({'error': 'ログインしてください。'}), 401
 
     user = session['user']
     user_id = user['id']
     goal = user.get('goal') or "学習目標"
+    weekly_target=user.get('weekly_target')
 
     if request.method == 'POST':
-        reason = request.form.get('reason', '').strip()
-        improvement = request.form.get('improvement', '').strip()
+        if request.is_json:
+            data = request.get_json()
+            reason = data.get('reason', '').strip()
+            improvement = data.get('improvement', '').strip()
+            is_shared = bool(data.get('is_shared', False))
 
-        if not reason or not improvement:
-            flash('すべての項目を入力してください。')
-            suggested_reason, suggested_improvement = generate_hint(goal)
-            return render_template('re.html',
-                                   suggested_reason=suggested_reason,
-                                   suggested_improvement=suggested_improvement)
+            if not reason or not improvement:
+                return jsonify({'error': 'すべての項目を入力してください。'}), 400
+            
+                # AIアドバイス生成（必ずadviceが定義されるように）
+            try:
+                advice = generate_feedback_advice(reason, improvement)
+            except Exception as e:
+                print("Gemini API Error:", e)
+                advice = "AIアドバイスの生成に失敗しました。"
 
-        # 正常な入力 → 登録処理
-        conn = psycopg2.connect(**db_config)
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO re (user_id, reason, improvement, created_at)
-            VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
-        ''', (user_id, reason, improvement))
-        conn.commit()
-        conn.close()
+            conn = psycopg2.connect(**db_config)
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO re (user_id, reason, improvement,ai_feedback, is_shared, created_at)
+                VALUES (%s, %s, %s, %s,%s,CURRENT_TIMESTAMP)
+            ''', (user_id, reason, improvement, advice,is_shared))
+            conn.commit()
+            conn.close()
 
-        return redirect(url_for('mypage'))
+            return jsonify({"advice": advice})
+        else:
+            return jsonify({'error': 'Unsupported Media Type'}), 415
 
-    # GET（初回表示）
-    suggested_reason, suggested_improvement = generate_hint(goal)
-
+    suggested_result = generate_gemini_analysis(user_id, goal,weekly_target) if USE_GEMINI_API else None
     return render_template('re.html',
-                           suggested_reason=suggested_reason,
-                           suggested_improvement=suggested_improvement)
+                           suggested_result=suggested_result,
+                           reason='',
+                           improvement='')
 
+def generate_gemini_analysis(user_id, goal,weekly_target):
+    conn = psycopg2.connect(**db_config)
+    cursor = conn.cursor(cursor_factory=DictCursor)
+
+    cursor.execute('''
+        SELECT study_date, study_time
+        FROM record
+        WHERE user_id = %s
+        ORDER BY study_date
+    ''', (user_id,))
+    records = cursor.fetchall()
+
+    days = set()
+    total_time = 0
+    for date, time in records:
+        days.add(date)
+        total_time += time
+
+    actual_days = len(days)
+    avg_time = round(total_time / actual_days) if actual_days else 0
+
+    # 継続日数計算用の記録抽出
+    if records:
+        first_study_date = records[0]['study_date']
+        latest_study_date = records[-1]['study_date']
+    else:
+        first_study_date = latest_study_date = None
+
+    # 最終回復実行日を取得
+    cursor.execute('''
+        SELECT MAX(created_at::date) AS latest_recovery_date
+        FROM re
+        WHERE user_id = %s
+    ''', (user_id,))
+    result = cursor.fetchone()
+    latest_recovery_date = result['latest_recovery_date'] if result else None
+
+    # 継続日数の計算
+    if first_study_date and latest_study_date:
+        if latest_recovery_date and latest_recovery_date < latest_study_date:
+            continuity_days = (latest_study_date - latest_recovery_date).days
+        else:
+            continuity_days = (latest_study_date - first_study_date).days
+    else:
+        continuity_days = 0
+    today = datetime.today().date()
+    for i in range(0, 100):
+        d = today - timedelta(days=i)
+        if d in days:
+            streak += 1
+        else:
+            break
+
+    cursor.execute('''
+        SELECT TO_CHAR(r.study_date, 'MM/DD'), c.category_name
+        FROM record r
+        JOIN study_categories c ON r.category_id = c.id
+        WHERE r.user_id = %s
+        ORDER BY r.study_date DESC
+        LIMIT 10
+    ''', (user_id,))
+    rows = cursor.fetchall()
+    conn.close()
+
+    record_text = ', '.join([f"{date} {cat}" for date, cat in rows])
+
+    prompt = f"""
+学習記録をもとに分析してください。
+・学習目的　{goal}
+・週の目標日数　{weekly_target}日
+・実際の週の平均日数　{actual_days}日
+・学習日と学習内容　{record_text}
+・学習日の平均学習時間　{avg_time}分
+・継続日数　{continuity_days}日
+
+分析後、学習目的に対する習慣化を失敗する原因と対策の例を2件ずつ記載して。原因と対策は対応させて、学習目標に対応する専門性も意識して。
+
+条件：
+学習習慣に失敗してしまった人のデータという面を考慮して。
+自分の失敗した原因と解決案を導き出してあげる手助けです。
+Atomic Habitsとレジリエンスの観点を意識して答えて。
+AtomicHabitsはきっかけ、欲求、反応、報酬のサイクルでポイントとしては、小さく行動していくこと、回数を増やしていくこと。
+レジリエンスは・ポジティブな感情 ・内的資源や外的資源の活用 ・自尊感情及び自己効力感が重要。 
+この理論を知らない人が見るので、専門用語は伏せて答えて。
+学習時間に関して5分以上は短くない且つ1時間以上は長いので短く始めるよう促す
+"""
+    model = genai.GenerativeModel("gemini-1.5-pro-latest")
+    response = model.generate_content(prompt)
+    return response.text.strip()
+
+def generate_feedback_advice(reason, improvement):
+    if not USE_GEMINI_API:
+        return f"あなたの原因「{reason}」と対策「{improvement}」は素晴らしい気づきです！\nさらにリマインダーを設けたり、毎回終わりに振り返る習慣を加えるとより効果的です。"
+
+    prompt = f"""
+原因：
+{reason}
+
+対策：
+{improvement}
+
+こちらはユーザーが考えた原因と対策です。内容を尊重しつつ、より効果的にするためのアドバイスを簡潔に日本語で記載してください。
+アドバイスには「こうするとさらに良い」など肯定的な視点を含めてください。
+また上記に加えて、すぐ学習できる環境づくりや初期設定の見直しを促して
+"""
+    try:
+        model = genai.GenerativeModel("gemini-1.5-pro-latest")
+        response = model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        print("Gemini API Error:", e)
+        return "アドバイスの取得に失敗しました。"
+
+
+import re
+
+@app.template_filter('regex_replace')
+def regex_replace(s, find, replace, ignorecase=True, multiline=False):
+    flags = re.IGNORECASE if ignorecase else 0
+    if multiline:
+        flags |= re.MULTILINE
+    return re.sub(find, replace, s, flags=flags)
 
 
 

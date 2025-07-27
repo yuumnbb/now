@@ -127,18 +127,18 @@
     {% endif %}
 
     <form action="/setting" method="post" class="setting-form">
-      <button type="button" id="show-tutorial-button" style="margin-top: 20px;">使い方を見る</button>
+      <button type="button" id="show-tutorial-button" style="margin-bottom: 20px;">使い方を見る</button>
 
       <div class="form-group">
         <label for="goal">学習目的</label>
         <small>あなたの学習の目的を設定します（例：英語を話せるようになる、基本情報処理の合格）</small>
-        <input type="text" id="goal" name="goal" value="{{ (setting.goal if setting else '') or ''}}" required >
+        <input type="text" id="goal" name="goal" value="{{ (setting.goal if setting else '') or ''}}" required>
       </div>
 
       <div class="form-group">
         <label for="weekly_target">学習目標（週あたりの回数）</label>
         <small>週何日学習したいかを設定します</small>
-        <input type="number" id="weekly_target" name="weekly_target" min="1"  value="{{ (setting.weekly_target if setting else '')or ''}}" required>
+        <input type="number" id="weekly_target" name="weekly_target" min="1" value="{{ (setting.weekly_target if setting else '') or ''}}" required>
       </div>
 
       <div class="form-group">
@@ -150,114 +150,103 @@
       <div class="form-group">
         <label for="anchor">アンカー（習慣のきっかけ）</label>
         <small>既存の行動の後に紐づけて習慣化を助けます（例：歯を磨いた後、朝食の前など）</small>
-        <input type="text" id="anchor" name="anchor" value="{{ (setting.anchor if setting else '')or ''}}" required>
+        <input type="text" id="anchor" name="anchor" value="{{ (setting.anchor if setting else '') or ''}}" required>
       </div>
 
       <div class="form-group">
         <label for="failure_days">失敗日数の設定</label>
         <small>何日連続で学習しなければ「失敗」と見なすか設定します（例：3日）</small>
-        <input type="number" id="failure_days" name="failure_days" value="{{ (setting.failure_days if setting else '')or ''}}" min="1" required>
+        <input type="number" id="failure_days" name="failure_days" min="1" value="{{ (setting.failure_days if setting else '') or ''}}" required>
       </div>
 
       <button type="submit">設定を保存</button>
     </form>
+
     <!-- スライダー -->
-  <div id="tutorial-slider" class="slider-container">
-    <div class="slides" id="slides-container">
-      <div class="slide-wrapper" id="slides">
-        <div class="slide"><img src="{{ url_for('static', filename='img/slide1.png') }}" alt="スライド1"></div>
-        <div class="slide"><img src="{{ url_for('static', filename='img/slide2.png') }}" alt="スライド2"></div>
-        <div class="slide"><img src="{{ url_for('static', filename='img/slide3.png') }}" alt="スライド3"></div>
-        <div class="slide"><img src="{{ url_for('static', filename='img/slide4.png') }}" alt="スライド4"></div>
+    <div id="tutorial-slider" class="slider-container">
+      <div class="slides" id="slides-container">
+        <div class="slide-wrapper" id="slides">
+          <div class="slide"><img src="{{ url_for('static', filename='img/slide1.png') }}" alt="スライド1"></div>
+          <div class="slide"><img src="{{ url_for('static', filename='img/slide2.png') }}" alt="スライド2"></div>
+          <div class="slide"><img src="{{ url_for('static', filename='img/slide3.png') }}" alt="スライド3"></div>
+          <div class="slide"><img src="{{ url_for('static', filename='img/slide4.png') }}" alt="スライド4"></div>
+        </div>
+      </div>
+      <div class="slide-indicator" id="slide-indicator">1 / 4</div>
+      <div class="slide-controls">
+        <button id="prev-slide">前へ</button>
+        <button id="next-slide">次へ</button>
+        <button id="close-tutorial">✕ 閉じる</button>
+        <button id="never-show-again">次回以降表示しない</button>
       </div>
     </div>
-    <div class="slide-indicator" id="slide-indicator">1 / 3</div>
-    <div class="slide-controls">
-      <button id="prev-slide">前へ</button>
-      <button id="next-slide">次へ</button>
-      <button id="close-tutorial">✕ 閉じる</button>
-      <button id="never-show-again">次回以降表示しない</button>
-    </div>
   </div>
-  </div>
+
   <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const slider = document.getElementById('tutorial-slider');
-  const slidesWrapper = document.getElementById('slides');
-  const slidesContainer = document.getElementById('slides-container');
-  const slideCount = slidesWrapper.children.length;
-  const indicator = document.getElementById('slide-indicator');
-  const prevBtn = document.getElementById('prev-slide');
-  const nextBtn = document.getElementById('next-slide');
-  const closeBtn = document.getElementById('close-tutorial');
-  const neverBtn = document.getElementById('never-show-again');
-  const showBtn = document.getElementById('show-tutorial-button');
-  let currentSlide = 0;
+    document.addEventListener('DOMContentLoaded', function () {
+      const slider = document.getElementById('tutorial-slider');
+      const slidesWrapper = document.getElementById('slides');
+      const slidesContainer = document.getElementById('slides-container');
+      const slideCount = slidesWrapper.children.length;
+      const indicator = document.getElementById('slide-indicator');
+      const prevBtn = document.getElementById('prev-slide');
+      const nextBtn = document.getElementById('next-slide');
+      const closeBtn = document.getElementById('close-tutorial');
+      const neverBtn = document.getElementById('never-show-again');
+      const showBtn = document.getElementById('show-tutorial-button');
+      let currentSlide = 0;
 
-  function resizeSlides() {
-    const containerWidth = slidesContainer.offsetWidth;
-    slidesWrapper.style.width = `${containerWidth * slideCount}px`;
-    Array.from(slidesWrapper.children).forEach(slide => {
-      slide.style.width = `${containerWidth}px`;
+      function resizeSlides() {
+        const containerWidth = slidesContainer.offsetWidth;
+        slidesWrapper.style.width = `${containerWidth * slideCount}px`;
+        Array.from(slidesWrapper.children).forEach(slide => {
+          slide.style.width = `${containerWidth}px`;
+        });
+      }
+
+      function showSlide(index) {
+        const offset = slidesContainer.offsetWidth * index;
+        slidesWrapper.style.transform = `translateX(-${offset}px)`;
+        indicator.textContent = `${index + 1} / ${slideCount}`;
+        prevBtn.style.display = index === 0 ? 'none' : 'inline-block';
+        nextBtn.style.display = index === slideCount - 1 ? 'none' : 'inline-block';
+      }
+
+      function openSlider() {
+        slider.style.display = 'flex';
+        resizeSlides();
+        currentSlide = 0;
+        showSlide(currentSlide);
+      }
+
+      if (localStorage.getItem("hideTutorial") !== "true") {
+        openSlider();
+      }
+
+      showBtn.addEventListener('click', openSlider);
+      closeBtn.addEventListener('click', () => slider.style.display = 'none');
+      neverBtn.addEventListener('click', () => {
+        localStorage.setItem("hideTutorial", "true");
+        slider.style.display = 'none';
+      });
+      nextBtn.addEventListener('click', () => {
+        if (currentSlide < slideCount - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      });
+      prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        resizeSlides();
+        showSlide(currentSlide);
+      });
     });
-  }
-
-  function showSlide(index) {
-    const offset = slidesContainer.offsetWidth * index;
-    slidesWrapper.style.transform = `translateX(-${offset}px)`;
-    indicator.textContent = `${index + 1} / ${slideCount}`;
-    prevBtn.style.display = index === 0 ? 'none' : 'inline-block';
-    nextBtn.style.display = index === slideCount - 1 ? 'none' : 'inline-block';
-  }
-
-  function openSlider() {
-    resizeSlides();
-    currentSlide = 0;
-    showSlide(currentSlide);
-    slider.style.display = 'flex';
-  }
-
-  // 初回表示（localStorageに保存されていなければ）
-  if (localStorage.getItem("hideTutorial") !== "true") {
-    openSlider();
-  }
-
-  // ボタンによる表示
-  showBtn.addEventListener('click', openSlider);
-
-  // 閉じるボタン
-  closeBtn.addEventListener('click', () => {
-    slider.style.display = 'none';
-  });
-
-  // 次へ／前へ
-  nextBtn.addEventListener('click', () => {
-    if (currentSlide < slideCount - 1) {
-      currentSlide++;
-      showSlide(currentSlide);
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentSlide > 0) {
-      currentSlide--;
-      showSlide(currentSlide);
-    }
-  });
-
-  // 今後表示しない
-  neverBtn.addEventListener('click', () => {
-    localStorage.setItem("hideTutorial", "true");
-    slider.style.display = 'none';
-  });
-
-  // ウィンドウサイズ変更時に再計算
-  window.addEventListener('resize', () => {
-    resizeSlides();
-    showSlide(currentSlide);
-  });
-});
-</script>
-
+  </script>
 </body>
 </html>

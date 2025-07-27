@@ -58,10 +58,6 @@
       cursor: pointer;
     }
 
-    button.secondary {
-      background-color: #6c757d;
-    }
-
     #category-form {
       margin-top: 10px;
       display: none;
@@ -101,10 +97,10 @@
         {% endfor %}
       </select>
 
-      <button type="button" class="secondary" onclick="toggleCategoryForm()">＋ カテゴリ追加</button>
+      <button type="button" onclick="toggleCategoryForm()">＋ カテゴリ追加</button>
 
       <div id="category-form">
-        <input type="text" id="new-category" placeholder="新しいカテゴリ名を入力">
+        <input type="text" id="new-category" placeholder="例：英単語学習">
         <button type="button" class="secondary" onclick="addCategory()">保存</button>
         <p id="category-error" style="color:red;"></p>
       </div>
