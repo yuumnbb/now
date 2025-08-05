@@ -246,8 +246,8 @@ def resilience():
         cursor.execute('''
             SELECT re.id, re.user_id, users.username, re.reason, re.improvement, re.created_at, re.likes
             FROM re
-            WHERE re.is_shared = TRUE
             JOIN users ON re.user_id = users.id
+            WHERE re.is_shared = TRUE
         ''')
         all_data = [dict(row) for row in cursor.fetchall()]
         for row in all_data:
@@ -319,7 +319,6 @@ def setting():
             conn.commit()
             conn.close()
 
-            flash("設定を保存しました。")
             return redirect(url_for('mypage'))
 
         except Exception as e:
@@ -469,7 +468,6 @@ def record():
         ''', (user_id, study_date, int(study_time), category_id, memo))
         conn.commit()
         conn.close()
-        flash('学習記録を保存しました。')
         return redirect(url_for('mypage'))
 
     # GET: 初期表示処理

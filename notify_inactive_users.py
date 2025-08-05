@@ -5,6 +5,7 @@ import smtplib
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
 db_config = {
     'host': os.environ.get('DB_HOST'),
     'database': os.environ.get('DB_NAME'),
@@ -42,8 +43,10 @@ cursor.execute('''
         FROM record
         GROUP BY user_id
     ) r ON u.id = r.user_id
-    WHERE r.last_date IS NULL OR r.last_date < %s
-''', (datetime.now() - timedelta(days=7),))
+    WHERE
+      (r.last_date IS NULL OR r.last_date < CURRENT_DATE - u.failure_days * INTERVAL '1 day')
+      AND u.email IS NOT NULL
+''')
 
 users_to_notify = cursor.fetchall()
 conn.close()
