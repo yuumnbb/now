@@ -242,6 +242,8 @@ def resilience():
             LIMIT %s OFFSET %s
         ''', (per_page, offset))
         recovery_data = [dict(row) for row in cursor.fetchall()]
+        for row in recovery_data:
+            row['streak'] = streak_map.get(row['user_id'], 0)
     elif order_by == 'streak':
         cursor.execute('''
             SELECT re.id, re.user_id, users.username, re.reason, re.improvement, re.created_at, re.likes
@@ -722,7 +724,7 @@ def generate_feedback_advice(reason, improvement):
 
 こちらはユーザーが考えた原因と対策です。内容を尊重しつつ、より効果的にするためのアドバイスを簡潔に日本語で記載してください。
 アドバイスには「こうするとさらに良い」など肯定的な視点を含めてください。
-また上記に加えて、すぐ学習できる環境づくりや初期設定の見直しを促して
+また上記に加えて、すぐ学習できる環境づくりを促して
 """
     try:
         model = genai.GenerativeModel("gemini-1.5-pro-latest")
