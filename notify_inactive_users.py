@@ -56,9 +56,9 @@ for email, username in users_to_notify:
     if not email:
         continue  # メール未登録ならスキップ
 
-    msg = MIMEText(f"{username}さん、最近学習記録がありません。続けてみませんか？")
-    msg['Subject'] = '【学習記録アプリ】1週間記録がありません'
-    msg['From'] = 's231w015@s.iwate-pu.ac.jp'
+    msg = MIMEText(f"{username}さん、\n最近学習記録がありません。\nですが大丈夫です。みんな失敗を繰り返して成長していきます。\nもう一度アプリを開くとAIのアドバイスをもらえる回復プログラムに参加できます。\nよかったら参加してみてください")
+    msg['Subject'] = '【学習記録アプリ】再開してみましょう'
+    msg['From'] = 'yuumnbo@gmail.com'
     msg['To'] = email
 
     try:
