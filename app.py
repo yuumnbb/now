@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 import os
 
 
-genai.configure(api_key="AIzaSyBOITJPK7wMJ66P8ur1AlMPKjh5K96F_XY")
+genai.configure(api_key="AIzaSyARwdaBw94QJprFI2IcTfOClwI15a0fKZs")
 
 
 app = Flask(__name__)
@@ -707,7 +707,7 @@ AtomicHabitsはきっかけ、欲求、反応、報酬のサイクルでポイ�
 この理論を知らない人が見るので、専門用語は伏せて答えて。
 学習時間に関して5分以上は短くないので学習時間が短いという発言は禁止
 """
-    model = genai.GenerativeModel("gemini-1.5-pro-latest")
+    model = genai.GenerativeModel("gemini-2.5-flash-lite")
     response = model.generate_content(prompt)
     return response.text.strip()
 
@@ -727,7 +727,7 @@ def generate_feedback_advice(reason, improvement):
 また上記に加えて、すぐ学習できる環境づくりを促して
 """
     try:
-        model = genai.GenerativeModel("gemini-1.5-pro-latest")
+        model = genai.GenerativeModel("gemini-2.5-flash-lite")
         response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
