@@ -8,7 +8,6 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
-
 genai.configure(api_key="AIzaSyARwdaBw94QJprFI2IcTfOClwI15a0fKZs")
 
 
@@ -583,7 +582,7 @@ def recovery():
     user = session['user']
     user_id = user['id']
     goal = user.get('goal') or "学習目標"
-    weekly_target=user.get('weekly_target')
+    weekly_target = user.get('weekly_target', 3)
 
     if request.method == 'POST':
         if request.is_json:
@@ -594,34 +593,40 @@ def recovery():
 
             if not reason or not improvement:
                 return jsonify({'error': 'すべての項目を入力してください。'}), 400
-            
-                # AIアドバイス生成（必ずadviceが定義されるように）
+
             try:
                 advice = generate_feedback_advice(reason, improvement)
             except Exception as e:
-                print("Gemini API Error:", e)
+                print("Gemini API Error (advice):", e)
                 advice = "AIアドバイスの生成に失敗しました。"
 
+            try:
+                analysis = generate_gemini_analysis(user_id, goal, weekly_target)
+            except Exception as e:
+                print("Gemini API Error (analysis):", e)
+                analysis = "AIによる分析の生成に失敗しました。"
+
+            # データベースに保存
             conn = psycopg2.connect(**db_config)
             cursor = conn.cursor()
             cursor.execute('''
-                INSERT INTO re (user_id, reason, improvement,ai_feedback, is_shared, created_at)
-                VALUES (%s, %s, %s, %s,%s,CURRENT_TIMESTAMP)
-            ''', (user_id, reason, improvement, advice,is_shared))
+                INSERT INTO re (user_id, reason, improvement, ai_feedback, re_analysis, is_shared, created_at)
+                VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+            ''', (user_id, reason, improvement, advice, analysis, is_shared))
             conn.commit()
             conn.close()
 
             return jsonify({"advice": advice})
-        else:
-            return jsonify({'error': 'Unsupported Media Type'}), 415
 
-    suggested_result = generate_gemini_analysis(user_id, goal,weekly_target) if USE_GEMINI_API else None
+        return jsonify({'error': 'Unsupported Media Type'}), 415
+
+    suggested_result = generate_gemini_analysis(user_id, goal, weekly_target) if USE_GEMINI_API else None
     return render_template('re.html',
                            suggested_result=suggested_result,
                            reason='',
                            improvement='')
 
-def generate_gemini_analysis(user_id, goal,weekly_target):
+def generate_gemini_analysis(user_id, goal, weekly_target):
     conn = psycopg2.connect(**db_config)
     cursor = conn.cursor(cursor_factory=DictCursor)
 
@@ -635,21 +640,20 @@ def generate_gemini_analysis(user_id, goal,weekly_target):
 
     days = set()
     total_time = 0
-    for date, time in records:
-        days.add(date)
-        total_time += time
+    for r in records:
+        days.add(r['study_date'])
+        total_time += r['study_time']
 
     actual_days = len(days)
     avg_time = round(total_time / actual_days) if actual_days else 0
 
-    # 継続日数計算用の記録抽出
+    # 継続日数
     if records:
         first_study_date = records[0]['study_date']
         latest_study_date = records[-1]['study_date']
     else:
         first_study_date = latest_study_date = None
 
-    # 最終回復実行日を取得
     cursor.execute('''
         SELECT MAX(created_at::date) AS latest_recovery_date
         FROM re
@@ -658,7 +662,6 @@ def generate_gemini_analysis(user_id, goal,weekly_target):
     result = cursor.fetchone()
     latest_recovery_date = result['latest_recovery_date'] if result else None
 
-    # 継続日数の計算
     if first_study_date and latest_study_date:
         if latest_recovery_date and latest_recovery_date < latest_study_date:
             continuity_days = (latest_study_date - latest_recovery_date).days
@@ -666,16 +669,10 @@ def generate_gemini_analysis(user_id, goal,weekly_target):
             continuity_days = (latest_study_date - first_study_date).days
     else:
         continuity_days = 0
-    today = datetime.today().date()
-    for i in range(0, 100):
-        d = today - timedelta(days=i)
-        if d in days:
-            streak += 1
-        else:
-            break
 
+    # 直近10件の学習内容
     cursor.execute('''
-        SELECT TO_CHAR(r.study_date, 'MM/DD'), c.category_name
+        SELECT TO_CHAR(r.study_date, 'MM/DD') AS date, c.category_name
         FROM record r
         JOIN study_categories c ON r.category_id = c.id
         WHERE r.user_id = %s
@@ -685,7 +682,7 @@ def generate_gemini_analysis(user_id, goal,weekly_target):
     rows = cursor.fetchall()
     conn.close()
 
-    record_text = ', '.join([f"{date} {cat}" for date, cat in rows])
+    record_text = ', '.join([f"{row['date']} {row['category_name']}" for row in rows])
 
     prompt = f"""
 学習記録をもとに分析してください。
@@ -705,7 +702,7 @@ Atomic Habitsとレジリエンスの観点を意識して答えて。
 AtomicHabitsはきっかけ、欲求、反応、報酬のサイクルでポイントとしては、小さく行動していくこと、回数を増やしていくこと。
 レジリエンスは・ポジティブな感情 ・内的資源や外的資源の活用 ・自尊感情及び自己効力感が重要。 
 この理論を知らない人が見るので、専門用語は伏せて答えて。
-学習時間に関して5分以上は短くないので学習時間が短いという発言は禁止
+学習時間に関して5分以上は短くないので「学習時間が短い」という表現は禁止。
 """
     model = genai.GenerativeModel("gemini-2.5-flash-lite")
     response = model.generate_content(prompt)
@@ -724,15 +721,12 @@ def generate_feedback_advice(reason, improvement):
 
 こちらはユーザーが考えた原因と対策です。内容を尊重しつつ、より効果的にするためのアドバイスを簡潔に日本語で記載してください。
 アドバイスには「こうするとさらに良い」など肯定的な視点を含めてください。
-また上記に加えて、すぐ学習できる環境づくりを促して
+また上記に加えて、すぐ学習できる環境づくり（教材の準備、場所の確保など）も促してください。
 """
-    try:
-        model = genai.GenerativeModel("gemini-2.5-flash-lite")
-        response = model.generate_content(prompt)
-        return response.text.strip()
-    except Exception as e:
-        print("Gemini API Error:", e)
-        return "アドバイスの取得に失敗しました。"
+    model = genai.GenerativeModel("gemini-2.5-flash-lite")
+    response = model.generate_content(prompt)
+    return response.text.strip()
+
 
 
 import re
