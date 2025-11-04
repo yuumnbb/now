@@ -327,17 +327,19 @@ def setting():
         small_action = request.form['small_action']
         anchor = request.form['anchor']
         failure_days = request.form['failure_days']
-        reminder_time = request.form.get('reminder_time') or '18:00'  # デフォルト18時
+        reminder_time = request.form.get('reminder_time') or '18:00'
 
-        # 🔹 time型なら文字列化
-        if isinstance(reminder_time, datetime.time):
-            reminder_time = reminder_time.strftime("%H:%M")
+        # reminder_time が time クラスのインスタンスかどうかをチェック
+        # 修正: datetime.time ではなく、インポートした time クラスを使用
+        if isinstance(reminder_time, time):
+            reminder_time_str = reminder_time.strftime("%H:%M")
         else:
-            reminder_time = str(reminder_time)
+            reminder_time_str = str(reminder_time)
 
         try:
             conn = psycopg2.connect(**db_config)
             cursor = conn.cursor()
+            # reminder_time を TIME 型にキャストして保存
             cursor.execute('''
                 UPDATE users
                 SET goal = %s,
@@ -345,13 +347,13 @@ def setting():
                     small_action = %s,
                     anchor = %s,
                     failure_days = %s,
-                    reminder_time = %s
+                    reminder_time = %s::TIME
                 WHERE id = %s
-            ''', (goal, weekly_target, small_action, anchor, failure_days, reminder_time, user_id))
+            ''', (goal, weekly_target, small_action, anchor, failure_days, reminder_time_str, user_id))
             conn.commit()
             conn.close()
 
-            # 🔹 セッション更新時にも確実に文字列化
+            # セッション更新時にも確実に文字列化
             session_user = session.get('user', {})
             session_user.update({
                 'goal': goal,
@@ -359,12 +361,12 @@ def setting():
                 'small_action': small_action,
                 'anchor': anchor,
                 'failure_days': failure_days,
-                'reminder_time': str(reminder_time)
+                'reminder_time': reminder_time_str
             })
 
             # time型が混じらないように
             session['user'] = {
-                k: (v.strftime("%H:%M") if isinstance(v, datetime.time) else v)
+                k: (v.strftime("%H:%M") if isinstance(v, time) else v)
                 for k, v in session_user.items()
             }
 
@@ -388,8 +390,8 @@ def setting():
         setting = cursor.fetchone()
         conn.close()
 
-        # 🔹 reminder_time が datetime.time 型なら文字列に変換
-        if setting and isinstance(setting['reminder_time'], datetime.time):
+        # 🔹 reminder_time が datetime.time 型なら文字列に変換 (dbから取得したtimeクラス)
+        if setting and isinstance(setting['reminder_time'], time):
             setting['reminder_time'] = setting['reminder_time'].strftime("%H:%M")
 
     except Exception as e:
@@ -397,8 +399,6 @@ def setting():
         setting = None
 
     return render_template('setting.html', setting=setting, message='')
-
-
 
 
 # マイページ
