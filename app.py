@@ -15,6 +15,19 @@ LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET")
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
+@app.before_request
+def sanitize_session():
+    if 'user' in session:
+        safe_user = {}
+        for k, v in session['user'].items():
+            if isinstance(v, time):
+                safe_user[k] = v.strftime("%H:%M")
+            elif isinstance(v, datetime):
+                safe_user[k] = v.isoformat()
+            else:
+                safe_user[k] = str(v)
+        session['user'] = safe_user
+
 """
 db_config = {
     'host': '127.0.0.1',  # Dockerのホスト
