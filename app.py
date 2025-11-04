@@ -307,6 +307,10 @@ def setting():
         failure_days = request.form['failure_days']
         reminder_time = request.form.get('reminder_time') or '18:00'  # デフォルト18時
 
+        # reminder_timeを文字列化（timeオブジェクトが渡る場合の対策）
+        if isinstance(reminder_time, datetime.time):
+            reminder_time = reminder_time.strftime("%H:%M")
+
         try:
             conn = psycopg2.connect(**db_config)
             cursor = conn.cursor()
@@ -322,6 +326,21 @@ def setting():
             ''', (goal, weekly_target, small_action, anchor, failure_days, reminder_time, user_id))
             conn.commit()
             conn.close()
+
+            # セッション更新（TypeError対策で文字列化）
+            session_user = session.get('user', {})
+            session_user.update({
+                'goal': goal,
+                'weekly_target': weekly_target,
+                'small_action': small_action,
+                'anchor': anchor,
+                'failure_days': failure_days,
+                'reminder_time': reminder_time
+            })
+            session['user'] = {
+                k: (v.strftime("%H:%M") if isinstance(v, datetime.time) else v)
+                for k, v in session_user.items()
+            }
 
             flash("設定を保存しました。")
             return redirect(url_for('mypage'))
@@ -347,6 +366,7 @@ def setting():
         setting = None
 
     return render_template('setting.html', setting=setting, message='')
+
 
 
 # マイページ

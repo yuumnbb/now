@@ -159,9 +159,13 @@
         <input type="number" id="failure_days" name="failure_days" min="1" value="{{ (setting.failure_days if setting else '') or ''}}" required>
       </div>
       <div class="form-group">
-        <label for="reminder_time">学習リマインド時間</label>
-        <input type="time" id="reminder_time" name="reminder_time" value="{{ user.reminder_time }}">
+        <label for="reminder_time">リマインダー通知時間</label>
+        <small>毎日の学習通知を受け取る時間を設定してください（例：18:00）</small>
+        <input type="time" id="reminder_time" name="reminder_time"
+              value="{{ (setting.reminder_time if setting else '18:00') or '18:00' }}"
+              required>
       </div>
+
       <div class="form-group">
         <a href="https://lin.ee/G14yhz7" target="_blank">
           <button>LINEと連携する</button>
