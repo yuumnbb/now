@@ -4,10 +4,10 @@ import psycopg2
 from psycopg2.extras import DictCursor
 import json
 from datetime import datetime, timedelta,date,time
-import datetime
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+import requests
 
 genai.configure(api_key="AIzaSyARwdaBw94QJprFI2IcTfOClwI15a0fKZs")
 LINE_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
