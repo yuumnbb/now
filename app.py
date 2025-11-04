@@ -4,6 +4,7 @@ import psycopg2
 from psycopg2.extras import DictCursor
 import json
 from datetime import datetime, timedelta,date 
+import datetime
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
