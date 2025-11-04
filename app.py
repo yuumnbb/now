@@ -112,7 +112,7 @@ def login():
             # 🔹 psycopg2.DictRow → Python dict に変換しつつ time型を文字列化
             clean_user = {}
             for k, v in dict(user).items():
-                if isinstance(v, datetime.time):
+                if isinstance(v, time): # time クラスを使用
                     clean_user[k] = v.strftime("%H:%M")
                 else:
                     clean_user[k] = v
