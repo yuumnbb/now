@@ -307,9 +307,11 @@ def setting():
         failure_days = request.form['failure_days']
         reminder_time = request.form.get('reminder_time') or '18:00'  # デフォルト18時
 
-        # reminder_timeを文字列化（timeオブジェクトが渡る場合の対策）
+        # 🔹 time型なら文字列化
         if isinstance(reminder_time, datetime.time):
             reminder_time = reminder_time.strftime("%H:%M")
+        else:
+            reminder_time = str(reminder_time)
 
         try:
             conn = psycopg2.connect(**db_config)
@@ -327,7 +329,7 @@ def setting():
             conn.commit()
             conn.close()
 
-            # セッション更新（TypeError対策で文字列化）
+            # 🔹 セッション更新時にも確実に文字列化
             session_user = session.get('user', {})
             session_user.update({
                 'goal': goal,
@@ -335,8 +337,10 @@ def setting():
                 'small_action': small_action,
                 'anchor': anchor,
                 'failure_days': failure_days,
-                'reminder_time': reminder_time
+                'reminder_time': str(reminder_time)
             })
+
+            # time型が混じらないように
             session['user'] = {
                 k: (v.strftime("%H:%M") if isinstance(v, datetime.time) else v)
                 for k, v in session_user.items()
@@ -350,7 +354,7 @@ def setting():
             flash("設定の保存中にエラーが発生しました。")
             return render_template('setting.html', message='エラーが発生しました。')
 
-    # GETリクエスト時（現在設定の取得）
+    # GETリクエスト時
     try:
         conn = psycopg2.connect(**db_config)
         cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -361,11 +365,17 @@ def setting():
         ''', (user_id,))
         setting = cursor.fetchone()
         conn.close()
+
+        # 🔹 reminder_time が datetime.time 型なら文字列に変換
+        if setting and isinstance(setting['reminder_time'], datetime.time):
+            setting['reminder_time'] = setting['reminder_time'].strftime("%H:%M")
+
     except Exception as e:
         print("設定取得エラー:", e)
         setting = None
 
     return render_template('setting.html', setting=setting, message='')
+
 
 
 
