@@ -108,7 +108,15 @@ def login():
         user = cursor.fetchone()
 
         if user and check_password_hash(user['password'], password):
-            session['user'] = dict(user)
+            # 🔹 psycopg2.DictRow → Python dict に変換しつつ time型を文字列化
+            clean_user = {}
+            for k, v in dict(user).items():
+                if isinstance(v, datetime.time):
+                    clean_user[k] = v.strftime("%H:%M")
+                else:
+                    clean_user[k] = v
+            session['user'] = clean_user
+
 
             # goalが未設定なら即時 setting に遷移
             if not user.get('goal'):
