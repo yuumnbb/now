@@ -97,3 +97,5 @@ psql
 
 
 
+回復プログラムの内容確認
+SELECT id, re_analysis FROM re ORDER BY id DESC LIMIT 3;

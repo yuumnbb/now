@@ -9,7 +9,8 @@ from dotenv import load_dotenv
 import os
 
 genai.configure(api_key="AIzaSyARwdaBw94QJprFI2IcTfOClwI15a0fKZs")
-
+LINE_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
+LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET")
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -304,6 +305,7 @@ def setting():
         small_action = request.form['small_action']
         anchor = request.form['anchor']
         failure_days = request.form['failure_days']
+        reminder_time = request.form.get('reminder_time') or '18:00'  # デフォルト18時
 
         try:
             conn = psycopg2.connect(**db_config)
@@ -314,12 +316,14 @@ def setting():
                     weekly_target = %s,
                     small_action = %s,
                     anchor = %s,
-                    failure_days = %s
+                    failure_days = %s,
+                    reminder_time = %s
                 WHERE id = %s
-            ''', (goal, weekly_target, small_action, anchor, failure_days, user_id))
+            ''', (goal, weekly_target, small_action, anchor, failure_days, reminder_time, user_id))
             conn.commit()
             conn.close()
 
+            flash("設定を保存しました。")
             return redirect(url_for('mypage'))
 
         except Exception as e:
@@ -327,11 +331,15 @@ def setting():
             flash("設定の保存中にエラーが発生しました。")
             return render_template('setting.html', message='エラーが発生しました。')
 
-    # GETリクエスト時は現在の設定を表示
+    # GETリクエスト時（現在設定の取得）
     try:
         conn = psycopg2.connect(**db_config)
         cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        cursor.execute('SELECT goal, weekly_target, small_action, anchor, failure_days FROM users WHERE id = %s', (user_id,))
+        cursor.execute('''
+            SELECT goal, weekly_target, small_action, anchor, failure_days, reminder_time
+            FROM users
+            WHERE id = %s
+        ''', (user_id,))
         setting = cursor.fetchone()
         conn.close()
     except Exception as e:
@@ -766,6 +774,44 @@ def like_recovery(re_id):
     conn.close()
 
     return jsonify({'success': True, 'likes': updated_likes})
+
+@app.route("/line/webhook", methods=["POST"])
+def line_webhook():
+    body = request.get_json()
+    events = body.get("events", [])
+
+    for event in events:
+        if event["type"] == "follow":  # ← ユーザーが友達追加した時
+            line_user_id = event["source"]["userId"]
+
+            # 例：LINE表示名を取得
+            profile_url = "https://api.line.me/v2/bot/profile/" + line_user_id
+            headers = {"Authorization": f"Bearer {LINE_TOKEN}"}
+            profile = requests.get(profile_url, headers=headers).json()
+            display_name = profile.get("displayName")
+
+            # 仮にログイン中のFlaskユーザーと紐付けるなら：
+            if 'user' in session:
+                user_id = session['user']['id']
+                conn = psycopg2.connect(**db_config)
+                cursor = conn.cursor()
+                cursor.execute('UPDATE users SET line_user_id = %s WHERE id = %s', (line_user_id, user_id))
+                conn.commit()
+                conn.close()
+                print(f"✅ {display_name}（LINE）とユーザーID {user_id} を紐付けました。")
+
+            # 自動メッセージ送信
+            reply_url = "https://api.line.me/v2/bot/message/push"
+            payload = {
+                "to": line_user_id,
+                "messages": [
+                    {"type": "text", "text": f"{display_name}さん、アプリとLINEが連携されました！📲"}
+                ]
+            }
+            requests.post(reply_url, headers={"Authorization": f"Bearer {LINE_TOKEN}",
+                                              "Content-Type": "application/json"}, json=payload)
+
+    return jsonify({"status": "ok"})
 
 
 # ログアウト

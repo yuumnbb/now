@@ -53,5 +53,8 @@ CREATE TABLE IF NOT EXISTS re_likes (
 ALTER TABLE re ADD COLUMN ai_feedback TEXT;
 ALTER TABLE re ADD COLUMN is_shared BOOLEAN DEFAULT FALSE;
 ALTER TABLE re ADD COLUMN re_analysis TEXT;
+ALTER TABLE users ADD COLUMN reminder_time TIME DEFAULT '18:00';  -- 学習リマインド時間
+ALTER TABLE users ADD COLUMN last_recovery_notify DATE;            -- 最後に再開通知を送った日
+
 
 
