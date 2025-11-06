@@ -17,6 +17,8 @@ LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET")
 
 # LINEログイン認証情報 (ユーザー提供の値をデフォルトとして設定)
 LINE_CHANNEL_ID = os.getenv("LINE_LOGIN_CHANNEL_ID") 
+LINE_CHANNEL_SECRET = os.getenv("LINE_LOGIN_CHANNEL_SECRET")
+
 # コールバックURL: 認証後にLINEからリダイレクトされるURL (実行環境に合わせてデフォルトをローカルホストに設定)
 LINE_REDIRECT_URI = os.getenv("LINE_REDIRECT_URI", "http://studyhabits-gbevh2bgdygjgtag.japaneast-01.azurewebsites.net/line/callback") 
 
