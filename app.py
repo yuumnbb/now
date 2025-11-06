@@ -10,6 +10,7 @@ import os
 import requests 
 import base64 # IDトークンデコードに必要
 
+
 genai.configure(api_key="AIzaSyARwdaBw94QJprFI2IcTfOClwI15a0fKZs")
 LINE_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET")
