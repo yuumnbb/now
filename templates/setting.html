@@ -167,8 +167,8 @@
       </div>
 
       <div class="form-group">
-        <a href="https://lin.ee/G14yhz7" target="_blank">
-          <!-- 修正: type="button" を追加し、フォーム送信の動作を防止 -->
+        <a href="{{ url_for('line_start_auth') }}" target="_blank">
+          <!-- 修正済み: Flaskの認証開始エンドポイントにリンクを変更 -->
           <button type="button">LINEと連携する</button>
         </a>
       </div>
