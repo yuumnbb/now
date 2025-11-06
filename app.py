@@ -7,11 +7,17 @@ from datetime import datetime, timedelta,date,time
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
-import requests
+import requests 
+import base64 # IDトークンデコードに必要
 
 genai.configure(api_key="AIzaSyARwdaBw94QJprFI2IcTfOClwI15a0fKZs")
 LINE_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET")
+
+# LINEログイン認証情報 (ユーザー提供の値をデフォルトとして設定)
+LINE_CHANNEL_ID = os.getenv("LINE_LOGIN_CHANNEL_ID") 
+# コールバックURL: 認証後にLINEからリダイレクトされるURL (実行環境に合わせてデフォルトをローカルホストに設定)
+LINE_REDIRECT_URI = os.getenv("LINE_REDIRECT_URI", "http://studyhabits-gbevh2bgdygjgtag.japaneast-01.azurewebsites.net/line/callback") 
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -21,23 +27,15 @@ def sanitize_session():
     if 'user' in session:
         safe_user = {}
         for k, v in session['user'].items():
+            # time クラスをチェック (datetimeモジュールから直接インポートされているため 'time' を使用)
             if isinstance(v, time):
                 safe_user[k] = v.strftime("%H:%M")
+            # datetime クラスをチェック (datetimeモジュールから直接インポートされているため 'datetime' を使用)
             elif isinstance(v, datetime):
                 safe_user[k] = v.isoformat()
             else:
                 safe_user[k] = str(v)
         session['user'] = safe_user
-
-"""
-db_config = {
-    'host': '127.0.0.1',  # Dockerのホスト
-    'database': 'postgres',  # デフォルトのデータベース名
-    'user': 'postgres',
-    'password': 'postgres',
-    'port': 25434          # docker-composeで指定したポート
-}
-"""
 
 load_dotenv()
 
@@ -46,39 +44,23 @@ db_config = {
     'database': os.environ.get('DB_NAME'),
     'user': os.environ.get('DB_USER'),
     'password': os.environ.get('DB_PASSWORD'),
-    'port': os.environ.get('DB_PORT', 5432),  # ポートが空なら5432をデフォルトに
+    'port': os.environ.get('DB_PORT', 5432),
     'sslmode': 'require'
 }
-
-"""
-load_dotenv()
-
-db_config = {
-    'host': os.getenv('DB_HOST'),
-    'database': os.getenv('DB_NAME'),
-    'user': os.getenv('DB_USER'),
-    'password': os.getenv('DB_PASSWORD'),
-    'port': os.getenv('DB_PORT'),
-    'sslmode': 'require'
-}
-"""
 
 # データベースの初期化
 def init_db():
     conn = psycopg2.connect(**db_config)
     cursor = conn.cursor()
+    # users テーブル定義
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
             username VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            goal TEXT,
-            weekly_target INTEGER, 
-            small_action TEXT,
-            anchor TEXT,
-            failure_days INTEGER
+            password VARCHAR(255) NOTOREMBER_TIME TIME
         )
     ''')
+    # record, study_categories, re, re_likes のテーブル定義は省略せずに維持
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS record (
             id SERIAL PRIMARY KEY,
@@ -86,17 +68,49 @@ def init_db():
             study_date DATE NOT NULL,
             study_time INTEGER NOT NULL,
             memo TEXT,
-            next_study_date DATE,
+            category_id INTEGER, 
             FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
         )
     ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS study_categories (
+            id SERIAL PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            category_name VARCHAR(255) NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+        )
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS re (
+            id SERIAL PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            reason TEXT,
+            improvement TEXT,
+            ai_feedback TEXT,
+            re_analysis TEXT,
+            is_shared BOOLEAN,
+            created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            likes INTEGER DEFAULT 0,
+            FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+        )
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS re_likes (
+            user_id INTEGER NOT NULL,
+            re_id INTEGER NOT NULL,
+            PRIMARY KEY (user_id, re_id),
+            FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+            FOREIGN KEY (re_id) REFERENCES re (id) ON DELETE CASCADE
+        )
+    ''')
+
     conn.commit()
     conn.close()
 
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    message = None  # ログイン失敗メッセージ表示用
+    message = None
 
     if request.method == 'POST':
         username = request.form['name']
@@ -109,22 +123,18 @@ def login():
         user = cursor.fetchone()
 
         if user and check_password_hash(user['password'], password):
-            # 🔹 psycopg2.DictRow → Python dict に変換しつつ time型を文字列化
             clean_user = {}
             for k, v in dict(user).items():
-                if isinstance(v, time): # time クラスを使用
+                if isinstance(v, time):
                     clean_user[k] = v.strftime("%H:%M")
                 else:
                     clean_user[k] = v
             session['user'] = clean_user
 
-
-            # goalが未設定なら即時 setting に遷移
             if not user.get('goal'):
                 conn.close()
                 return redirect(url_for('setting'))
 
-            # 最後の記録日を取得
             cursor.execute('''
                 SELECT MAX(study_date) AS last_study_date
                 FROM record
@@ -136,14 +146,13 @@ def login():
             failure_days = user.get('failure_days') or 3
 
             if last_date:
-                last_date = datetime.combine(last_date, datetime.min.time())
-                days_since_last_record = (datetime.now() - last_date).days
+                last_date_dt = datetime.combine(last_date, time.min) 
+                days_since_last_record = (datetime.now() - last_date_dt).days
 
                 if days_since_last_record > failure_days:
                     conn.close()
                     return redirect(url_for('recovery'))
 
-            # その他の設定が未入力でも setting に誘導
             if not user.get('small_action') or not user.get('anchor'):
                 conn.close()
                 return redirect(url_for('setting'))
@@ -152,14 +161,10 @@ def login():
             return redirect(url_for('mypage'))
 
         else:
-            # 認証失敗時は flash を使わず、テンプレートに直接渡す
             message = 'ユーザー名またはパスワードが間違っています。'
             conn.close()
 
     return render_template('login.html', message=message)
-
-
-
 
 
 # 新規登録ページ
@@ -174,7 +179,6 @@ def signup():
         conn = psycopg2.connect(**db_config)
         cursor = conn.cursor()
         try:
-            # goal を指定していない場合、NULL が設定されるようにする
             cursor.execute(
                 'INSERT INTO users (username, password, email) VALUES (%s, %s, %s)',
                 (username, hashed_password, email)
@@ -205,7 +209,6 @@ def resilience():
     conn = psycopg2.connect(**db_config)
     cursor = conn.cursor(cursor_factory=DictCursor)
 
-    # 自分の記録（全件）
     cursor.execute('''
         SELECT id, reason, improvement, created_at, likes, ai_feedback
         FROM re
@@ -214,10 +217,8 @@ def resilience():
     ''', (user_id,))
     my_recovery_data = cursor.fetchall()
 
-    # 最新の1件だけ抽出してmy_feedbackとして渡す
-    my_feedback = my_recovery_data[0] if my_recovery_data else None
+    my_feedback = dict(my_recovery_data[0]) if my_recovery_data else None
 
-    # 自分の継続日数を算出
     cursor.execute('''
         SELECT MIN(study_date) FILTER (WHERE study_date >= COALESCE((
             SELECT MAX(created_at::date) FROM re WHERE user_id = %s
@@ -227,12 +228,11 @@ def resilience():
         WHERE user_id = %s
     ''', (user_id, user_id))
     result = cursor.fetchone()
-    if result['first_study'] and result['last_study']:
+    if result and result['first_study'] and result['last_study']:
         my_streak = (result['last_study'] - result['first_study']).days + 1
     else:
         my_streak = 0
 
-    # 全体の継続日数マップ作成（user_id → streak）
     cursor.execute('''
         SELECT s.user_id,
                MIN(s.study_date) FILTER (WHERE s.study_date >= COALESCE(r.latest_re, '1900-01-01')) AS first_study,
@@ -253,7 +253,6 @@ def resilience():
         else:
             streak_map[row['user_id']] = 0
 
-    # 投稿の取得
     if order_by == 'popular':
         cursor.execute('''
             SELECT re.id, re.user_id, users.username, re.reason, re.improvement, re.created_at, re.likes
@@ -291,12 +290,10 @@ def resilience():
         for row in recovery_data:
             row['streak'] = streak_map.get(row['user_id'], 0)
 
-    # ページ数取得
-    cursor.execute('SELECT COUNT(*) FROM re')
+    cursor.execute('SELECT COUNT(*) FROM re WHERE is_shared = TRUE')
     total_records = cursor.fetchone()[0]
     total_pages = (total_records + per_page - 1) // per_page
 
-    # いいね済の投稿
     cursor.execute('SELECT re_id FROM re_likes WHERE user_id = %s', (user_id,))
     liked_ids = [row['re_id'] for row in cursor.fetchall()]
     conn.close()
@@ -329,8 +326,6 @@ def setting():
         failure_days = request.form['failure_days']
         reminder_time = request.form.get('reminder_time') or '18:00'
 
-        # reminder_time が time クラスのインスタンスかどうかをチェック
-        # 修正: datetime.time ではなく、インポートした time クラスを使用
         if isinstance(reminder_time, time):
             reminder_time_str = reminder_time.strftime("%H:%M")
         else:
@@ -339,7 +334,6 @@ def setting():
         try:
             conn = psycopg2.connect(**db_config)
             cursor = conn.cursor()
-            # reminder_time を TIME 型にキャストして保存
             cursor.execute('''
                 UPDATE users
                 SET goal = %s,
@@ -353,7 +347,6 @@ def setting():
             conn.commit()
             conn.close()
 
-            # セッション更新時にも確実に文字列化
             session_user = session.get('user', {})
             session_user.update({
                 'goal': goal,
@@ -364,7 +357,6 @@ def setting():
                 'reminder_time': reminder_time_str
             })
 
-            # time型が混じらないように
             session['user'] = {
                 k: (v.strftime("%H:%M") if isinstance(v, time) else v)
                 for k, v in session_user.items()
@@ -390,7 +382,6 @@ def setting():
         setting = cursor.fetchone()
         conn.close()
 
-        # 🔹 reminder_time が datetime.time 型なら文字列に変換 (dbから取得したtimeクラス)
         if setting and isinstance(setting['reminder_time'], time):
             setting['reminder_time'] = setting['reminder_time'].strftime("%H:%M")
 
@@ -401,7 +392,109 @@ def setting():
     return render_template('setting.html', setting=setting, message='')
 
 
-# マイページ
+# 新しいエンドポイント: LINE連携開始 (ステップ1: 認証URLへリダイレクト)
+@app.route('/line/start_auth')
+def line_start_auth():
+    if 'user' not in session:
+        flash("ログインしてください。")
+        return redirect(url_for('login'))
+
+    user_id = session['user']['id']
+    
+    # ユーザーIDをセッションに一時保存し、認証完了後にこのユーザーと紐付ける
+    session['line_link_user_id'] = user_id
+    
+    # セキュリティのためのランダムなstateを生成
+    state = os.urandom(16).hex()
+    session['line_auth_state'] = state 
+    
+    # LINEログイン認証URLの生成
+    line_auth_url = f"https://access.line.me/oauth2/v2.1/authorize?" \
+                    f"response_type=code" \
+                    f"&client_id={LINE_CHANNEL_ID}" \
+                    f"&redirect_uri={LINE_REDIRECT_URI}" \
+                    f"&state={state}" \
+                    f"&scope=profile%20openid%20email" # emailスコープを追加（必要に応じて）
+    
+    # ユーザーをLINE認証ページにリダイレクト
+    return redirect(line_auth_url)
+
+# 新しいエンドポイント: LINE認証コールバック (ステップ2: LINE IDの取得とDB保存)
+@app.route('/line/callback')
+def line_callback():
+    code = request.args.get('code')
+    state = request.args.get('state')
+    
+    # 1. stateの検証
+    if state != session.pop('line_auth_state', None):
+        flash("LINE認証の状態が一致しませんでした。セキュリティエラー。")
+        return redirect(url_for('setting'))
+    
+    if not code:
+        flash("LINE認証がキャンセルされました。")
+        return redirect(url_for('setting'))
+
+    # 2. アプリ側のユーザーIDを取得
+    user_id = session.pop('line_link_user_id', None)
+    if not user_id:
+        flash("LINE連携中にログイン情報が失われました。再度ログインしてください。")
+        return redirect(url_for('login'))
+
+    try:
+        # 3. トークン取得API呼び出し
+        token_url = 'https://api.line.me/oauth2/v2.1/token'
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        payload = {
+            'grant_type': 'authorization_code',
+            'code': code,
+            'redirect_uri': LINE_REDIRECT_URI,
+            'client_id': LINE_CHANNEL_ID,
+            'client_secret': LINE_SECRET
+        }
+        token_response = requests.post(token_url, headers=headers, data=payload)
+        token_data = token_response.json()
+        
+        if 'id_token' not in token_data:
+            # トークン取得失敗
+            raise Exception(f"Failed to get ID token: {token_data.get('error', 'Unknown Error')}")
+
+        # 4. IDトークンからユーザーID（sub）を取得
+        # IDトークン（JWT）のペイロード部分をデコードしてsub（ユーザーID）を取得する
+        id_token_parts = token_data['id_token'].split('.')
+        if len(id_token_parts) < 2:
+            raise Exception("Invalid ID Token format.")
+            
+        # Base64URLデコード処理
+        payload_base64 = id_token_parts[1]
+        
+        # Base64URLを標準Base64に変換し、パディングを追加
+        payload_base64 = payload_base64 + '=' * (4 - len(payload_base64) % 4)
+        
+        # デコードしてJSONとしてパース
+        id_token_payload = json.loads(base64.urlsafe_b64decode(payload_base64).decode('utf-8'))
+
+        line_user_id = id_token_payload.get('sub') # 'sub'はLINE User ID
+        
+        if not line_user_id:
+            raise Exception("LINE User ID ('sub') not found in ID Token.")
+        
+        conn = psycopg2.connect(**db_config)
+        cursor = conn.cursor()
+        
+        # 5. DBにLINE IDを紐付け
+        cursor.execute('UPDATE users SET line_user_id = %s WHERE id = %s', (line_user_id, user_id))
+        conn.commit()
+        conn.close()
+        
+        flash("✅ LINE連携が完了しました！リマインダー通知が届きます。")
+        
+    except Exception as e:
+        print("LINE連携エラー:", e)
+        flash("LINE連携中にエラーが発生しました。設定（LINE Developers側）とコールバックURLを確認してください。")
+        
+    # 連携完了後、設定画面に戻す
+    return redirect(url_for('setting'))
+
 
 @app.route('/mypage')
 def mypage():
@@ -414,11 +507,9 @@ def mypage():
     conn = psycopg2.connect(**db_config)
     cursor = conn.cursor(cursor_factory=DictCursor)
 
-    # 設定情報の取得
     cursor.execute('SELECT goal, weekly_target, small_action, anchor, failure_days FROM users WHERE id = %s', (user_id,))
     setting = cursor.fetchone()
 
-    # 学習記録を取得
     cursor.execute('''
         SELECT study_date, study_time, memo, category_id
         FROM record
@@ -427,14 +518,12 @@ def mypage():
     ''', (user_id,))
     records = cursor.fetchall()
 
-    # 継続日数計算用の記録抽出
     if records:
         first_study_date = records[0]['study_date']
         latest_study_date = records[-1]['study_date']
     else:
         first_study_date = latest_study_date = None
 
-    # 最終回復実行日を取得
     cursor.execute('''
         SELECT MAX(created_at::date) AS latest_recovery_date
         FROM re
@@ -443,7 +532,6 @@ def mypage():
     result = cursor.fetchone()
     latest_recovery_date = result['latest_recovery_date'] if result else None
 
-    # 継続日数の計算
     if first_study_date and latest_study_date:
         if latest_recovery_date and latest_recovery_date < latest_study_date:
             continuity_days = (latest_study_date - latest_recovery_date).days
@@ -452,13 +540,11 @@ def mypage():
     else:
         continuity_days = 0
 
-    # カテゴリ名取得
     cursor.execute('''
         SELECT id, category_name FROM study_categories WHERE user_id = %s
     ''', (user_id,))
     category_map = {row['id']: row['category_name'] for row in cursor.fetchall()}
 
-    # 次回予定は使用しない（削除）
     study_records = []
     for r in records:
         study_records.append({
@@ -471,7 +557,6 @@ def mypage():
 
     conn.close()
 
-    # 色設定（例：カテゴリID 1〜10まで）
     category_colors = {
         1: "#007bff", 2: "#28a745", 3: "#ffc107", 4: "#dc3545", 5: "#6610f2",
         6: "#17a2b8", 7: "#fd7e14", 8: "#20c997", 9: "#6f42c1", 10: "#e83e8c"
@@ -484,9 +569,6 @@ def mypage():
                            study_records=study_records,
                            category_colors=category_colors)
 
-
-
-from flask import jsonify
 
 
 @app.route('/record', methods=['GET', 'POST'])
@@ -539,13 +621,6 @@ def record():
     return render_template('record.html', categories=categories, today=date.today().isoformat())
 
 
-from flask import render_template, session, redirect, url_for, flash
-import psycopg2
-from psycopg2.extras import DictCursor
-import json
-
-from flask import request
-
 @app.route('/analysis')
 def analysis():
     if 'user' not in session:
@@ -571,7 +646,6 @@ def analysis():
         return render_template('analysis.html', error="学習記録がありません。", period=period, offset=offset)
 
     import pandas as pd
-    from datetime import datetime, timedelta
     import json
 
     df = pd.DataFrame(records, columns=['study_date', 'study_time'])
@@ -612,7 +686,6 @@ def analysis():
         grouped = df.groupby('year_month')['study_time'].mean().reset_index()
         merged = pd.merge(month_df, grouped, on='year_month', how='left').fillna(0)
         
-        # ✅ ここでリネームしてから平均を算出
         merged = merged.rename(columns={'year_month': 'label', 'study_time': 'value'})
         yearly_data = merged.to_dict(orient='records')
         yearly_avg = round(merged['value'].mean(), 1)
@@ -632,7 +705,7 @@ def analysis():
 
 
 
-USE_GEMINI_API = True  # 必要に応じて False に
+USE_GEMINI_API = True
 
 @app.route('/recovery', methods=['GET', 'POST'])
 def recovery():
@@ -779,7 +852,7 @@ def generate_feedback_advice(reason, improvement):
 対策：
 {improvement}
 
-こちらはユーザーが考えた原因と対策です。内容を尊重しつつ、より効果的にするためのアドバイスを簡潔に日本語で記載してください。
+こちらはユーザーが考えた原因と対策です。内容を尊重しつつ、より効果的にするためのアドバイスを簡潔な日本語で記載してください。
 アドバイスには「こうするとさらに良い」など肯定的な視点を含めてください。
 また上記に加えて、すぐ学習できる環境づくり（教材の準備、場所の確保など）も促してください。
 """
@@ -833,31 +906,20 @@ def line_webhook():
     events = body.get("events", [])
 
     for event in events:
-        if event["type"] == "follow":  # ← ユーザーが友達追加した時
+        if event["type"] == "follow":
             line_user_id = event["source"]["userId"]
 
-            # 例：LINE表示名を取得
-            profile_url = "https://api.line.me/v2/bot/profile/" + line_user_id
-            headers = {"Authorization": f"Bearer {LINE_TOKEN}"}
-            profile = requests.get(profile_url, headers=headers).json()
-            display_name = profile.get("displayName")
+            # Webhookにはセッション情報がないため、ここではユーザーIDの紐付けはできません。
+            # 認証プロセスでLINE IDを取得した後、DBに保存する必要があります。
 
-            # 仮にログイン中のFlaskユーザーと紐付けるなら：
-            if 'user' in session:
-                user_id = session['user']['id']
-                conn = psycopg2.connect(**db_config)
-                cursor = conn.cursor()
-                cursor.execute('UPDATE users SET line_user_id = %s WHERE id = %s', (line_user_id, user_id))
-                conn.commit()
-                conn.close()
-                print(f"✅ {display_name}（LINE）とユーザーID {user_id} を紐付けました。")
+            print(f"✅ LINE Webhook 受信: ID: {line_user_id} が友達追加しました。")
 
             # 自動メッセージ送信
             reply_url = "https://api.line.me/v2/bot/message/push"
             payload = {
                 "to": line_user_id,
                 "messages": [
-                    {"type": "text", "text": f"{display_name}さん、アプリとLINEが連携されました！📲"}
+                    {"type": "text", "text": f"アプリと連携するためには、設定画面から「LINEと連携する」ボタンを押して、認証手続きを完了してください。"}
                 ]
             }
             requests.post(reply_url, headers={"Authorization": f"Bearer {LINE_TOKEN}",
@@ -873,5 +935,5 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    init_db()  # データベース初期化
+    init_db()
     app.run(debug=True)
