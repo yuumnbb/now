@@ -19,8 +19,8 @@ LINE_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET")
 
 # LINEログインの認証情報 (LINE Developersで設定した値に置き換えてください)
-LINE_CHANNEL_ID = os.getenv("LINE_LOGIN_CHANNEL_ID", "2008405423")
-LINE_LOGIN_CHANNEL_SECRET = os.getenv("LINE_LOGIN_CHANNEL_SECRET", "a606b2cf13d9b45d8909e558b8a2f6e9")
+LINE_CHANNEL_ID = os.getenv("LINE_LOGIN_CHANNEL_ID")
+LINE_LOGIN_CHANNEL_SECRET = os.getenv("LINE_LOGIN_CHANNEL_SECRET")
 # 🚨 Azure環境でのHTTPSを想定し、デフォルトをHTTPSに設定
 LINE_REDIRECT_URI = os.getenv("LINE_REDIRECT_URI", "https://studyhabits-gbevh2bgdygjgtag.japaneast-01.azurewebsites.net/line/callback")
 
