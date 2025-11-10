@@ -22,7 +22,7 @@ LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET")
 LINE_CHANNEL_ID = os.getenv("LINE_LOGIN_CHANNEL_ID")
 LINE_LOGIN_CHANNEL_SECRET = os.getenv("LINE_LOGIN_CHANNEL_SECRET")
 # 🚨 Azure環境でのHTTPSを想定し、デフォルトをHTTPSに設定
-LINE_REDIRECT_URI = os.getenv("LINE_REDIRECT_URI", "https://studyhabits-gbevh2bgdygjgtag.japaneast-01.azurewebsites.net/line/callback")
+LINE_REDIRECT_URI = os.getenv("LINE_REDIRECT_URI", "LINE_REDIRECT_URI", "http://studyhabits-gbevh2bgdygjgtag.japaneast-01.azurewebsites.net/line/callback")
 
 
 # Gemini APIの設定
