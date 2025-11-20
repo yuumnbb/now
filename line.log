@@ -1,4 +1,1392 @@
-zsh: command not found: app.py
-zsh: command not found: app.py
-zsh: command not found: app.py
-zsh: command not found: app.py
+
+
+⏰ 実行時刻: 2025-11-13 17:16:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2025-11-13 17:17:01
+⏰ 実行時刻: 2025-11-13 17:18:01
+⏰ 実行時刻: 2025-11-13 17:19:01
+⏰ 実行時刻: 2025-11-13 17:20:01
+⏰ 実行時刻: 2025-11-13 17:21:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-13 18:11:01
+⏰ 実行時刻: 2025-11-13 18:12:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+SSL SYSCALL error: Connection reset by peer
+
+⏰ 実行時刻: 2025-11-13 20:29:04
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-13 20:30:03
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:30:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:31:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:32:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:33:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:34:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:35:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Network is unreachable
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Network is unreachable
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2025-11-14 03:36:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:37:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:38:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:39:07
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-14 03:40:12
+[200] {"sentMessages":[{"id":"588070965696266742","quoteToken":"pZhgFqKgjTGDR1ZxHgJJl3JTHOLzqUz_A8ve2IGEn8RcEtFGby_f-AXrFJivB53086zH5N-p-8yfe75XXzcumMDn_ZHh0RZCQ24Za-_JGzxV30Sd6ds9HPkTwDGq3gmIswGx_ArZrdIUJy7qwginNQ"}]}
+🔁 再開リマインド送信 → ttt さん
+[200] {"sentMessages":[{"id":"588070967390240962","quoteToken":"NHBkuWzj6ct_aBwPGcreHPF8di8Do9xzz8oBCdb1BTzBD-Q6NLbSYS0kpsHKLR67sqzSlmA5nwuVjhrIRuqRN4S-dw6bbgPAfz6WiEHKYDuXuLhC34_LyDt1AFGNeJ-joBcgdJSQ9AIYRPVUTtDyTA"}]}
+🔁 再開リマインド送信 → m さん
+⏰ 実行時刻: 2025-11-17 12:10:01
+[200] {"sentMessages":[{"id":"588071116824903988","quoteToken":"_Nq3LkHg_l9AGZG00zRvnlB0eQ82Mx4l9GqBwep07SpARUTHKDOiZCHVOf0yMtti3diyKHrNaeq_SRHItr3QJ4aCBbpA5JsZDF9rE3ZCs_S8rI-7UG8SolgcRTLhW0ZkTnnq3i1JqzeCv-k4CpCbnQ"}]}
+🔁 再開リマインド送信 → ttt さん
+[200] {"sentMessages":[{"id":"588071117328744620","quoteToken":"GFwwQW_6n4CPkSwlIzmvz5czx3IPk9NtZLLDzb8x9lRkPZdt297b8v5Uzm2HZ1tHSZoAU9qF8eLjlA2vC035hPtm18a1VCl-ClVXqO-0u2MI_HIfBHzT8Zgv_sc1AavFEMaW52NTVClYfY09urXDpA"}]}
+🔁 再開リマインド送信 → m さん
+⏰ 実行時刻: 2025-11-17 12:11:01
+⏰ 実行時刻: 2025-11-17 12:12:02
+⏰ 実行時刻: 2025-11-17 12:13:01
+⏰ 実行時刻: 2025-11-17 12:14:01
+⏰ 実行時刻: 2025-11-17 12:15:00
+⏰ 実行時刻: 2025-11-17 12:16:00
+⏰ 実行時刻: 2025-11-17 12:17:00
+⏰ 実行時刻: 2025-11-17 12:18:00
+⏰ 実行時刻: 2025-11-17 12:19:03
+⏰ 実行時刻: 2025-11-17 12:20:04
+⏰ 実行時刻: 2025-11-17 12:21:01
+⏰ 実行時刻: 2025-11-17 12:22:01
+⏰ 実行時刻: 2025-11-17 12:23:01
+⏰ 実行時刻: 2025-11-17 12:24:01
+⏰ 実行時刻: 2025-11-17 12:28:16
+⏰ 実行時刻: 2025-11-17 12:29:00
+⏰ 実行時刻: 2025-11-17 12:30:01
+⏰ 実行時刻: 2025-11-17 12:31:01
+⏰ 実行時刻: 2025-11-17 12:32:01
+⏰ 実行時刻: 2025-11-17 12:33:01
+⏰ 実行時刻: 2025-11-17 12:34:00
+⏰ 実行時刻: 2025-11-17 12:35:00
+⏰ 実行時刻: 2025-11-17 12:36:00
+⏰ 実行時刻: 2025-11-17 12:37:00
+⏰ 実行時刻: 2025-11-17 12:38:01
+⏰ 実行時刻: 2025-11-17 12:39:01
+⏰ 実行時刻: 2025-11-17 12:40:01
+⏰ 実行時刻: 2025-11-17 12:41:05
+⏰ 実行時刻: 2025-11-17 12:42:05
+⏰ 実行時刻: 2025-11-17 12:43:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+⏰ 実行時刻: 2025-11-17 12:44:01
+⏰ 実行時刻: 2025-11-17 12:45:05
+⏰ 実行時刻: 2025-11-17 12:46:06
+⏰ 実行時刻: 2025-11-17 12:47:04
+⏰ 実行時刻: 2025-11-17 12:48:06
+⏰ 実行時刻: 2025-11-17 12:49:02
+⏰ 実行時刻: 2025-11-17 12:50:01
+⏰ 実行時刻: 2025-11-17 12:51:04
+⏰ 実行時刻: 2025-11-17 12:52:00
+⏰ 実行時刻: 2025-11-17 12:53:00
+⏰ 実行時刻: 2025-11-17 12:54:00
+⏰ 実行時刻: 2025-11-17 12:55:00
+⏰ 実行時刻: 2025-11-17 13:40:01
+⏰ 実行時刻: 2025-11-17 13:41:01
+⏰ 実行時刻: 2025-11-17 13:42:01
+⏰ 実行時刻: 2025-11-17 13:43:00
+⏰ 実行時刻: 2025-11-17 13:44:00
+⏰ 実行時刻: 2025-11-17 13:45:00
+⏰ 実行時刻: 2025-11-17 13:46:01
+⏰ 実行時刻: 2025-11-17 13:47:01
+⏰ 実行時刻: 2025-11-17 13:48:01
+⏰ 実行時刻: 2025-11-17 13:49:00
+⏰ 実行時刻: 2025-11-17 13:50:01
+⏰ 実行時刻: 2025-11-17 13:51:01
+⏰ 実行時刻: 2025-11-17 13:52:01
+⏰ 実行時刻: 2025-11-17 13:53:01
+⏰ 実行時刻: 2025-11-17 13:54:01
+⏰ 実行時刻: 2025-11-17 13:55:01
+⏰ 実行時刻: 2025-11-17 13:56:01
+⏰ 実行時刻: 2025-11-17 13:57:01
+⏰ 実行時刻: 2025-11-17 13:58:01
+⏰ 実行時刻: 2025-11-17 13:59:01
+⏰ 実行時刻: 2025-11-17 14:00:00
+⏰ 実行時刻: 2025-11-17 14:01:01
+⏰ 実行時刻: 2025-11-17 14:02:00
+⏰ 実行時刻: 2025-11-17 14:03:04
+⏰ 実行時刻: 2025-11-17 14:04:03
+⏰ 実行時刻: 2025-11-17 14:05:04
+⏰ 実行時刻: 2025-11-17 14:06:04
+⏰ 実行時刻: 2025-11-17 14:07:04
+⏰ 実行時刻: 2025-11-17 14:08:01
+⏰ 実行時刻: 2025-11-17 14:09:06
+⏰ 実行時刻: 2025-11-17 14:10:02
+⏰ 実行時刻: 2025-11-17 14:11:01
+⏰ 実行時刻: 2025-11-17 14:12:01
+⏰ 実行時刻: 2025-11-17 14:13:01
+⏰ 実行時刻: 2025-11-17 14:14:01
+⏰ 実行時刻: 2025-11-17 14:15:01
+⏰ 実行時刻: 2025-11-17 14:16:01
+⏰ 実行時刻: 2025-11-17 14:17:01
+⏰ 実行時刻: 2025-11-17 14:18:00
+⏰ 実行時刻: 2025-11-17 14:19:01
+⏰ 実行時刻: 2025-11-17 14:52:01
+⏰ 実行時刻: 2025-11-17 14:53:01
+⏰ 実行時刻: 2025-11-17 14:54:01
+⏰ 実行時刻: 2025-11-17 14:55:01
+⏰ 実行時刻: 2025-11-17 14:56:02
+⏰ 実行時刻: 2025-11-17 14:57:01
+⏰ 実行時刻: 2025-11-17 14:58:01
+⏰ 実行時刻: 2025-11-17 14:59:01
+⏰ 実行時刻: 2025-11-17 15:00:01
+⏰ 実行時刻: 2025-11-17 15:01:00
+⏰ 実行時刻: 2025-11-17 15:02:00
+⏰ 実行時刻: 2025-11-17 15:03:03
+⏰ 実行時刻: 2025-11-17 15:04:01
+⏰ 実行時刻: 2025-11-17 15:05:01
+⏰ 実行時刻: 2025-11-17 15:06:01
+⏰ 実行時刻: 2025-11-17 15:30:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-17 15:31:06
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 00:19:03
+⏰ 実行時刻: 2025-11-18 00:20:01
+⏰ 実行時刻: 2025-11-18 00:21:58
+⏰ 実行時刻: 2025-11-18 00:22:01
+⏰ 実行時刻: 2025-11-18 00:30:25
+⏰ 実行時刻: 2025-11-18 00:35:09
+⏰ 実行時刻: 2025-11-18 00:40:10
+⏰ 実行時刻: 2025-11-18 00:49:21
+⏰ 実行時刻: 2025-11-18 00:49:22
+⏰ 実行時刻: 2025-11-18 00:54:10
+⏰ 実行時刻: 2025-11-18 00:59:18
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 01:08:19
+⏰ 実行時刻: 2025-11-18 01:13:10
+⏰ 実行時刻: 2025-11-18 01:18:14
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 01:23:19
+⏰ 実行時刻: 2025-11-18 01:28:11
+⏰ 実行時刻: 2025-11-18 01:33:12
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 01:42:19
+⏰ 実行時刻: 2025-11-18 01:47:11
+⏰ 実行時刻: 2025-11-18 01:56:22
+⏰ 実行時刻: 2025-11-18 01:56:23
+⏰ 実行時刻: 2025-11-18 02:01:11
+⏰ 実行時刻: 2025-11-18 02:06:11
+⏰ 実行時刻: 2025-11-18 02:15:19
+⏰ 実行時刻: 2025-11-18 02:20:10
+⏰ 実行時刻: 2025-11-18 02:25:17
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 02:34:22
+⏰ 実行時刻: 2025-11-18 02:39:08
+⏰ 実行時刻: 2025-11-18 02:44:16
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 02:53:22
+⏰ 実行時刻: 2025-11-18 02:58:09
+⏰ 実行時刻: 2025-11-18 03:03:11
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 08:31:48
+⏰ 実行時刻: 2025-11-18 08:32:01
+⏰ 実行時刻: 2025-11-18 09:54:01
+⏰ 実行時刻: 2025-11-18 09:55:01
+⏰ 実行時刻: 2025-11-18 09:56:01
+⏰ 実行時刻: 2025-11-18 09:57:01
+⏰ 実行時刻: 2025-11-18 09:58:02
+⏰ 実行時刻: 2025-11-18 09:59:01
+⏰ 実行時刻: 2025-11-18 10:00:00
+⏰ 実行時刻: 2025-11-18 10:01:01
+⏰ 実行時刻: 2025-11-18 10:02:00
+⏰ 実行時刻: 2025-11-18 10:03:00
+⏰ 実行時刻: 2025-11-18 10:04:00
+⏰ 実行時刻: 2025-11-18 10:05:00
+⏰ 実行時刻: 2025-11-18 10:06:00
+⏰ 実行時刻: 2025-11-18 10:07:01
+⏰ 実行時刻: 2025-11-18 10:08:01
+⏰ 実行時刻: 2025-11-18 10:09:01
+⏰ 実行時刻: 2025-11-18 10:10:01
+⏰ 実行時刻: 2025-11-18 10:11:01
+⏰ 実行時刻: 2025-11-18 10:12:00
+⏰ 実行時刻: 2025-11-18 10:13:00
+⏰ 実行時刻: 2025-11-18 10:14:00
+⏰ 実行時刻: 2025-11-18 10:15:00
+⏰ 実行時刻: 2025-11-18 10:16:00
+⏰ 実行時刻: 2025-11-18 10:17:01
+⏰ 実行時刻: 2025-11-18 10:18:01
+⏰ 実行時刻: 2025-11-18 10:19:00
+⏰ 実行時刻: 2025-11-18 10:20:00
+⏰ 実行時刻: 2025-11-18 10:21:01
+⏰ 実行時刻: 2025-11-18 10:22:01
+⏰ 実行時刻: 2025-11-18 10:23:01
+⏰ 実行時刻: 2025-11-18 10:24:01
+⏰ 実行時刻: 2025-11-18 10:25:01
+⏰ 実行時刻: 2025-11-18 10:26:01
+⏰ 実行時刻: 2025-11-18 10:27:00
+⏰ 実行時刻: 2025-11-18 10:28:00
+⏰ 実行時刻: 2025-11-18 10:29:00
+⏰ 実行時刻: 2025-11-18 10:30:01
+⏰ 実行時刻: 2025-11-18 10:31:01
+⏰ 実行時刻: 2025-11-18 10:32:02
+⏰ 実行時刻: 2025-11-18 10:33:01
+⏰ 実行時刻: 2025-11-18 10:34:01
+⏰ 実行時刻: 2025-11-18 10:35:01
+⏰ 実行時刻: 2025-11-18 10:36:00
+⏰ 実行時刻: 2025-11-18 10:37:00
+⏰ 実行時刻: 2025-11-18 10:38:00
+⏰ 実行時刻: 2025-11-18 10:39:01
+⏰ 実行時刻: 2025-11-18 10:40:01
+⏰ 実行時刻: 2025-11-18 10:41:00
+⏰ 実行時刻: 2025-11-18 10:42:01
+⏰ 実行時刻: 2025-11-18 10:43:01
+⏰ 実行時刻: 2025-11-18 10:44:00
+⏰ 実行時刻: 2025-11-18 10:45:00
+⏰ 実行時刻: 2025-11-18 10:46:00
+⏰ 実行時刻: 2025-11-18 10:47:01
+⏰ 実行時刻: 2025-11-18 10:48:01
+⏰ 実行時刻: 2025-11-18 10:49:01
+⏰ 実行時刻: 2025-11-18 10:50:01
+⏰ 実行時刻: 2025-11-18 10:51:00
+⏰ 実行時刻: 2025-11-18 10:52:00
+⏰ 実行時刻: 2025-11-18 10:53:00
+⏰ 実行時刻: 2025-11-18 10:54:01
+⏰ 実行時刻: 2025-11-18 10:55:00
+⏰ 実行時刻: 2025-11-18 10:56:01
+⏰ 実行時刻: 2025-11-18 10:57:01
+⏰ 実行時刻: 2025-11-18 10:58:01
+⏰ 実行時刻: 2025-11-18 10:59:01
+⏰ 実行時刻: 2025-11-18 11:00:01
+⏰ 実行時刻: 2025-11-18 11:01:01
+⏰ 実行時刻: 2025-11-18 11:02:00
+⏰ 実行時刻: 2025-11-18 11:03:01
+⏰ 実行時刻: 2025-11-18 11:04:01
+⏰ 実行時刻: 2025-11-18 11:05:01
+⏰ 実行時刻: 2025-11-18 11:06:01
+⏰ 実行時刻: 2025-11-18 11:07:01
+⏰ 実行時刻: 2025-11-18 11:08:01
+⏰ 実行時刻: 2025-11-18 11:09:01
+⏰ 実行時刻: 2025-11-18 11:10:01
+⏰ 実行時刻: 2025-11-18 11:11:01
+⏰ 実行時刻: 2025-11-18 11:12:01
+⏰ 実行時刻: 2025-11-18 11:13:01
+⏰ 実行時刻: 2025-11-18 11:14:01
+⏰ 実行時刻: 2025-11-18 11:15:01
+⏰ 実行時刻: 2025-11-18 11:16:01
+⏰ 実行時刻: 2025-11-18 11:17:01
+⏰ 実行時刻: 2025-11-18 11:18:01
+⏰ 実行時刻: 2025-11-18 11:19:01
+⏰ 実行時刻: 2025-11-18 11:20:00
+⏰ 実行時刻: 2025-11-18 11:21:00
+⏰ 実行時刻: 2025-11-18 11:22:01
+⏰ 実行時刻: 2025-11-18 11:23:01
+⏰ 実行時刻: 2025-11-18 11:24:01
+⏰ 実行時刻: 2025-11-18 11:25:00
+⏰ 実行時刻: 2025-11-18 11:26:01
+⏰ 実行時刻: 2025-11-18 11:27:01
+⏰ 実行時刻: 2025-11-18 11:28:01
+⏰ 実行時刻: 2025-11-18 11:29:00
+⏰ 実行時刻: 2025-11-18 11:30:00
+⏰ 実行時刻: 2025-11-18 11:31:00
+⏰ 実行時刻: 2025-11-18 11:32:01
+⏰ 実行時刻: 2025-11-18 11:33:01
+⏰ 実行時刻: 2025-11-18 11:34:01
+⏰ 実行時刻: 2025-11-18 11:35:01
+⏰ 実行時刻: 2025-11-18 11:36:00
+⏰ 実行時刻: 2025-11-18 11:37:00
+⏰ 実行時刻: 2025-11-18 11:38:01
+⏰ 実行時刻: 2025-11-18 11:39:01
+⏰ 実行時刻: 2025-11-18 11:40:01
+⏰ 実行時刻: 2025-11-18 11:41:00
+⏰ 実行時刻: 2025-11-18 11:42:00
+⏰ 実行時刻: 2025-11-18 11:43:01
+⏰ 実行時刻: 2025-11-18 11:44:01
+⏰ 実行時刻: 2025-11-18 11:45:01
+⏰ 実行時刻: 2025-11-18 11:46:01
+⏰ 実行時刻: 2025-11-18 11:47:00
+⏰ 実行時刻: 2025-11-18 11:48:00
+⏰ 実行時刻: 2025-11-18 11:49:01
+⏰ 実行時刻: 2025-11-18 11:50:01
+⏰ 実行時刻: 2025-11-18 11:51:01
+⏰ 実行時刻: 2025-11-18 11:52:01
+⏰ 実行時刻: 2025-11-18 11:53:01
+⏰ 実行時刻: 2025-11-18 11:54:05
+⏰ 実行時刻: 2025-11-18 11:55:03
+⏰ 実行時刻: 2025-11-18 11:56:02
+⏰ 実行時刻: 2025-11-18 11:57:00
+⏰ 実行時刻: 2025-11-18 11:58:04
+⏰ 実行時刻: 2025-11-18 11:59:03
+⏰ 実行時刻: 2025-11-18 12:00:03
+⏰ 実行時刻: 2025-11-18 12:01:01
+⏰ 実行時刻: 2025-11-18 12:02:03
+⏰ 実行時刻: 2025-11-18 12:03:04
+⏰ 実行時刻: 2025-11-18 12:04:02
+⏰ 実行時刻: 2025-11-18 12:05:01
+⏰ 実行時刻: 2025-11-18 12:06:00
+⏰ 実行時刻: 2025-11-18 12:07:00
+⏰ 実行時刻: 2025-11-18 12:08:00
+⏰ 実行時刻: 2025-11-18 12:48:01
+⏰ 実行時刻: 2025-11-18 12:49:02
+⏰ 実行時刻: 2025-11-18 12:50:01
+⏰ 実行時刻: 2025-11-18 12:51:01
+⏰ 実行時刻: 2025-11-18 12:52:01
+⏰ 実行時刻: 2025-11-18 12:53:01
+⏰ 実行時刻: 2025-11-18 12:54:00
+⏰ 実行時刻: 2025-11-18 12:55:00
+⏰ 実行時刻: 2025-11-18 12:56:00
+⏰ 実行時刻: 2025-11-18 12:57:00
+⏰ 実行時刻: 2025-11-18 12:58:00
+⏰ 実行時刻: 2025-11-18 12:59:01
+⏰ 実行時刻: 2025-11-18 13:00:01
+⏰ 実行時刻: 2025-11-18 13:01:00
+⏰ 実行時刻: 2025-11-18 13:02:00
+⏰ 実行時刻: 2025-11-18 13:03:00
+⏰ 実行時刻: 2025-11-18 13:04:00
+⏰ 実行時刻: 2025-11-18 13:05:02
+⏰ 実行時刻: 2025-11-18 13:06:01
+⏰ 実行時刻: 2025-11-18 13:07:00
+⏰ 実行時刻: 2025-11-18 13:08:00
+⏰ 実行時刻: 2025-11-18 13:09:00
+⏰ 実行時刻: 2025-11-18 13:10:01
+⏰ 実行時刻: 2025-11-18 13:11:01
+⏰ 実行時刻: 2025-11-18 13:12:01
+⏰ 実行時刻: 2025-11-18 13:13:01
+⏰ 実行時刻: 2025-11-18 13:14:00
+⏰ 実行時刻: 2025-11-18 13:15:01
+⏰ 実行時刻: 2025-11-18 13:16:00
+⏰ 実行時刻: 2025-11-18 13:17:00
+⏰ 実行時刻: 2025-11-18 13:18:00
+⏰ 実行時刻: 2025-11-18 13:19:00
+⏰ 実行時刻: 2025-11-18 13:20:01
+⏰ 実行時刻: 2025-11-18 13:21:01
+⏰ 実行時刻: 2025-11-18 13:22:01
+⏰ 実行時刻: 2025-11-18 13:23:01
+⏰ 実行時刻: 2025-11-18 13:24:01
+⏰ 実行時刻: 2025-11-18 13:25:01
+⏰ 実行時刻: 2025-11-18 13:26:00
+⏰ 実行時刻: 2025-11-18 13:27:00
+⏰ 実行時刻: 2025-11-18 13:28:00
+⏰ 実行時刻: 2025-11-18 13:29:00
+⏰ 実行時刻: 2025-11-18 13:30:01
+⏰ 実行時刻: 2025-11-18 13:31:01
+⏰ 実行時刻: 2025-11-18 13:32:00
+⏰ 実行時刻: 2025-11-18 13:33:00
+⏰ 実行時刻: 2025-11-18 13:34:01
+⏰ 実行時刻: 2025-11-18 13:35:01
+⏰ 実行時刻: 2025-11-18 13:38:16
+⏰ 実行時刻: 2025-11-18 13:39:00
+⏰ 実行時刻: 2025-11-18 13:40:00
+⏰ 実行時刻: 2025-11-18 13:41:01
+⏰ 実行時刻: 2025-11-18 13:42:01
+⏰ 実行時刻: 2025-11-18 13:43:01
+⏰ 実行時刻: 2025-11-18 13:44:01
+⏰ 実行時刻: 2025-11-18 13:45:01
+⏰ 実行時刻: 2025-11-18 13:46:00
+⏰ 実行時刻: 2025-11-18 13:47:00
+⏰ 実行時刻: 2025-11-18 13:48:01
+⏰ 実行時刻: 2025-11-18 13:49:01
+⏰ 実行時刻: 2025-11-18 13:50:04
+⏰ 実行時刻: 2025-11-18 13:51:08
+⏰ 実行時刻: 2025-11-18 13:52:01
+⏰ 実行時刻: 2025-11-18 13:53:01
+⏰ 実行時刻: 2025-11-18 13:54:00
+⏰ 実行時刻: 2025-11-18 13:55:01
+⏰ 実行時刻: 2025-11-18 13:56:00
+⏰ 実行時刻: 2025-11-18 13:57:01
+⏰ 実行時刻: 2025-11-18 13:58:01
+⏰ 実行時刻: 2025-11-18 13:59:01
+⏰ 実行時刻: 2025-11-18 14:00:01
+⏰ 実行時刻: 2025-11-18 14:01:01
+⏰ 実行時刻: 2025-11-18 14:02:01
+⏰ 実行時刻: 2025-11-18 14:03:00
+⏰ 実行時刻: 2025-11-18 14:04:01
+⏰ 実行時刻: 2025-11-18 14:05:00
+⏰ 実行時刻: 2025-11-18 14:14:56
+⏰ 実行時刻: 2025-11-18 14:15:01
+⏰ 実行時刻: 2025-11-18 14:16:01
+⏰ 実行時刻: 2025-11-18 14:17:01
+⏰ 実行時刻: 2025-11-18 14:18:01
+⏰ 実行時刻: 2025-11-18 14:19:01
+⏰ 実行時刻: 2025-11-18 14:20:00
+⏰ 実行時刻: 2025-11-18 14:21:01
+⏰ 実行時刻: 2025-11-18 14:22:01
+⏰ 実行時刻: 2025-11-18 14:23:00
+⏰ 実行時刻: 2025-11-18 14:24:00
+⏰ 実行時刻: 2025-11-18 14:25:00
+⏰ 実行時刻: 2025-11-18 14:26:00
+⏰ 実行時刻: 2025-11-18 14:27:01
+⏰ 実行時刻: 2025-11-18 14:28:01
+⏰ 実行時刻: 2025-11-18 14:29:01
+⏰ 実行時刻: 2025-11-18 14:30:01
+⏰ 実行時刻: 2025-11-18 14:31:01
+⏰ 実行時刻: 2025-11-18 14:32:01
+⏰ 実行時刻: 2025-11-18 14:33:00
+⏰ 実行時刻: 2025-11-18 14:34:00
+⏰ 実行時刻: 2025-11-18 14:35:00
+⏰ 実行時刻: 2025-11-18 14:36:01
+⏰ 実行時刻: 2025-11-18 14:37:00
+⏰ 実行時刻: 2025-11-18 14:38:00
+⏰ 実行時刻: 2025-11-18 14:39:00
+⏰ 実行時刻: 2025-11-18 14:40:01
+⏰ 実行時刻: 2025-11-18 14:41:01
+⏰ 実行時刻: 2025-11-18 14:42:01
+⏰ 実行時刻: 2025-11-18 14:43:01
+⏰ 実行時刻: 2025-11-18 14:44:00
+⏰ 実行時刻: 2025-11-18 14:45:01
+⏰ 実行時刻: 2025-11-18 14:46:01
+⏰ 実行時刻: 2025-11-18 14:47:01
+⏰ 実行時刻: 2025-11-18 14:48:01
+⏰ 実行時刻: 2025-11-18 14:49:01
+⏰ 実行時刻: 2025-11-18 14:50:01
+⏰ 実行時刻: 2025-11-18 14:51:01
+⏰ 実行時刻: 2025-11-18 14:52:01
+⏰ 実行時刻: 2025-11-18 14:53:00
+⏰ 実行時刻: 2025-11-18 14:54:00
+⏰ 実行時刻: 2025-11-18 14:55:00
+⏰ 実行時刻: 2025-11-18 14:56:00
+⏰ 実行時刻: 2025-11-18 14:57:01
+⏰ 実行時刻: 2025-11-18 14:58:01
+⏰ 実行時刻: 2025-11-18 14:59:01
+⏰ 実行時刻: 2025-11-18 15:00:01
+⏰ 実行時刻: 2025-11-18 15:01:01
+⏰ 実行時刻: 2025-11-18 15:02:01
+⏰ 実行時刻: 2025-11-18 15:03:01
+⏰ 実行時刻: 2025-11-18 15:04:01
+⏰ 実行時刻: 2025-11-18 15:05:01
+⏰ 実行時刻: 2025-11-18 15:06:01
+⏰ 実行時刻: 2025-11-18 15:07:01
+⏰ 実行時刻: 2025-11-18 15:08:01
+⏰ 実行時刻: 2025-11-18 15:09:01
+⏰ 実行時刻: 2025-11-18 15:10:01
+⏰ 実行時刻: 2025-11-18 15:11:00
+⏰ 実行時刻: 2025-11-18 15:12:00
+⏰ 実行時刻: 2025-11-18 15:13:01
+⏰ 実行時刻: 2025-11-18 15:14:01
+⏰ 実行時刻: 2025-11-18 15:15:01
+⏰ 実行時刻: 2025-11-18 15:16:01
+⏰ 実行時刻: 2025-11-18 15:17:00
+⏰ 実行時刻: 2025-11-18 15:18:01
+⏰ 実行時刻: 2025-11-18 15:19:01
+⏰ 実行時刻: 2025-11-18 15:20:01
+⏰ 実行時刻: 2025-11-18 15:21:01
+⏰ 実行時刻: 2025-11-18 15:22:01
+⏰ 実行時刻: 2025-11-18 15:23:00
+⏰ 実行時刻: 2025-11-18 15:24:00
+⏰ 実行時刻: 2025-11-18 15:25:01
+[200] {"sentMessages":[{"id":"588235696884941149","quoteToken":"OfMOLtHFS4xFqFouUwb4Zj7iz3624mUryqh7VpqoXJFLdlvpHeTJaLZ5Y_x0j4NbmM_AUai_GiPpW35WjzwtjGXvoF9XFtd06vJltg0sPGQ6qrD4VolPuacU-uLM33_0ETN68i6xudBVP4j1h9ib1g"}]}
+📩 学習リマインド送信 → ttt さん (15:25:00)
+⏰ 実行時刻: 2025-11-18 15:26:01
+⏰ 実行時刻: 2025-11-18 15:27:01
+⏰ 実行時刻: 2025-11-18 15:28:00
+⏰ 実行時刻: 2025-11-18 15:29:01
+⏰ 実行時刻: 2025-11-18 15:30:01
+⏰ 実行時刻: 2025-11-18 15:31:01
+⏰ 実行時刻: 2025-11-18 15:32:01
+⏰ 実行時刻: 2025-11-18 15:33:01
+⏰ 実行時刻: 2025-11-18 15:34:01
+⏰ 実行時刻: 2025-11-18 15:35:01
+⏰ 実行時刻: 2025-11-18 15:36:01
+⏰ 実行時刻: 2025-11-18 15:37:01
+⏰ 実行時刻: 2025-11-18 15:38:02
+⏰ 実行時刻: 2025-11-18 15:39:01
+⏰ 実行時刻: 2025-11-18 15:40:01
+⏰ 実行時刻: 2025-11-18 15:41:01
+⏰ 実行時刻: 2025-11-18 15:42:01
+⏰ 実行時刻: 2025-11-18 15:43:01
+⏰ 実行時刻: 2025-11-18 15:44:01
+⏰ 実行時刻: 2025-11-18 15:45:02
+⏰ 実行時刻: 2025-11-18 15:46:01
+⏰ 実行時刻: 2025-11-18 15:47:01
+⏰ 実行時刻: 2025-11-18 15:48:05
+⏰ 実行時刻: 2025-11-18 15:49:02
+⏰ 実行時刻: 2025-11-18 15:50:01
+⏰ 実行時刻: 2025-11-18 15:51:01
+⏰ 実行時刻: 2025-11-18 15:52:01
+⏰ 実行時刻: 2025-11-18 15:53:00
+⏰ 実行時刻: 2025-11-18 15:54:00
+⏰ 実行時刻: 2025-11-18 15:55:01
+⏰ 実行時刻: 2025-11-18 15:56:01
+⏰ 実行時刻: 2025-11-18 15:57:01
+⏰ 実行時刻: 2025-11-18 15:58:02
+⏰ 実行時刻: 2025-11-18 15:59:00
+⏰ 実行時刻: 2025-11-18 16:00:02
+⏰ 実行時刻: 2025-11-18 16:01:01
+⏰ 実行時刻: 2025-11-18 16:02:01
+⏰ 実行時刻: 2025-11-18 16:03:01
+⏰ 実行時刻: 2025-11-18 16:04:01
+⏰ 実行時刻: 2025-11-18 16:05:01
+⏰ 実行時刻: 2025-11-18 16:06:01
+⏰ 実行時刻: 2025-11-18 16:07:01
+⏰ 実行時刻: 2025-11-18 16:08:01
+⏰ 実行時刻: 2025-11-18 16:09:01
+⏰ 実行時刻: 2025-11-18 16:10:00
+⏰ 実行時刻: 2025-11-18 16:11:01
+⏰ 実行時刻: 2025-11-18 16:12:03
+⏰ 実行時刻: 2025-11-18 16:13:00
+⏰ 実行時刻: 2025-11-18 16:14:00
+⏰ 実行時刻: 2025-11-18 16:15:01
+⏰ 実行時刻: 2025-11-18 16:16:01
+⏰ 実行時刻: 2025-11-18 16:17:01
+⏰ 実行時刻: 2025-11-18 16:18:01
+⏰ 実行時刻: 2025-11-18 16:19:01
+⏰ 実行時刻: 2025-11-18 16:20:01
+⏰ 実行時刻: 2025-11-18 16:23:03
+⏰ 実行時刻: 2025-11-18 16:23:04
+⏰ 実行時刻: 2025-11-18 16:24:20
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 19:21:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-18 19:22:02
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-19 03:48:46
+[200] {"sentMessages":[{"id":"588310566351667342","quoteToken":"_8s2cO9e2fAu63vZUtrWhTOUwp5PryrrFf1l6zsJrCIOIxP912ztw1UZtNYZfsUywP4vQdcrjfzR_Z8vwv2SLXxpWseuTsE7SnumC1_5bJyNSVzNwV47OlXXV12h0BwXXibDdRV3e8xZonGI2MlRMw"}]}
+🔁 再開リマインド送信 → ttt さん
+[200] {"sentMessages":[{"id":"588310566703988754","quoteToken":"Wu1PbLrxyKloHMHTvAIiucCMll1OMW756drbgu7iHgXedI6dF2EJshwWKZWy8WR4D6J0XwJaucNGuqLFcKKFHdvHOy2MEfGxlmK2Tq9dxcIIUWyPrYzK5OEtaoBmp60eygkhtzVjhSEjodcb2rkOyA"}]}
+🔁 再開リマインド送信 → m さん
+⏰ 実行時刻: 2025-11-19 03:49:01
+⏰ 実行時刻: 2025-11-19 03:50:01
+⏰ 実行時刻: 2025-11-19 06:02:01
+⏰ 実行時刻: 2025-11-19 08:03:01
+⏰ 実行時刻: 2025-11-19 08:05:14
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-19 09:01:04
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-19 09:06:59
+⏰ 実行時刻: 2025-11-19 09:07:00
+⏰ 実行時刻: 2025-11-19 09:33:04
+⏰ 実行時刻: 2025-11-19 09:34:01
+⏰ 実行時刻: 2025-11-19 09:35:01
+⏰ 実行時刻: 2025-11-19 09:36:01
+⏰ 実行時刻: 2025-11-19 09:37:01
+⏰ 実行時刻: 2025-11-19 09:38:01
+⏰ 実行時刻: 2025-11-19 09:39:01
+⏰ 実行時刻: 2025-11-19 09:40:00
+⏰ 実行時刻: 2025-11-19 09:41:01
+⏰ 実行時刻: 2025-11-19 09:42:01
+⏰ 実行時刻: 2025-11-19 09:43:01
+⏰ 実行時刻: 2025-11-19 09:44:00
+⏰ 実行時刻: 2025-11-19 09:45:00
+⏰ 実行時刻: 2025-11-19 09:46:01
+⏰ 実行時刻: 2025-11-19 09:47:00
+⏰ 実行時刻: 2025-11-19 09:48:00
+⏰ 実行時刻: 2025-11-19 09:49:00
+⏰ 実行時刻: 2025-11-19 09:50:01
+⏰ 実行時刻: 2025-11-19 09:51:01
+⏰ 実行時刻: 2025-11-19 09:52:01
+⏰ 実行時刻: 2025-11-19 09:53:00
+⏰ 実行時刻: 2025-11-19 09:54:00
+⏰ 実行時刻: 2025-11-19 09:55:00
+⏰ 実行時刻: 2025-11-19 09:56:01
+⏰ 実行時刻: 2025-11-19 09:57:01
+⏰ 実行時刻: 2025-11-19 09:58:01
+⏰ 実行時刻: 2025-11-19 09:59:00
+⏰ 実行時刻: 2025-11-19 10:00:01
+⏰ 実行時刻: 2025-11-19 10:01:01
+⏰ 実行時刻: 2025-11-19 10:02:01
+⏰ 実行時刻: 2025-11-19 10:03:01
+⏰ 実行時刻: 2025-11-19 10:04:01
+⏰ 実行時刻: 2025-11-19 10:05:02
+⏰ 実行時刻: 2025-11-19 10:06:01
+⏰ 実行時刻: 2025-11-19 10:07:01
+⏰ 実行時刻: 2025-11-19 10:08:01
+⏰ 実行時刻: 2025-11-19 10:09:01
+⏰ 実行時刻: 2025-11-19 10:10:01
+⏰ 実行時刻: 2025-11-19 10:11:01
+⏰ 実行時刻: 2025-11-19 10:12:01
+⏰ 実行時刻: 2025-11-19 10:13:01
+⏰ 実行時刻: 2025-11-19 10:14:01
+⏰ 実行時刻: 2025-11-19 10:15:00
+⏰ 実行時刻: 2025-11-19 10:16:00
+⏰ 実行時刻: 2025-11-19 10:17:01
+⏰ 実行時刻: 2025-11-19 10:18:01
+⏰ 実行時刻: 2025-11-19 10:19:01
+⏰ 実行時刻: 2025-11-19 10:20:01
+⏰ 実行時刻: 2025-11-19 10:21:01
+⏰ 実行時刻: 2025-11-19 10:22:00
+⏰ 実行時刻: 2025-11-19 10:23:01
+⏰ 実行時刻: 2025-11-19 10:24:00
+⏰ 実行時刻: 2025-11-19 10:25:00
+⏰ 実行時刻: 2025-11-19 10:26:01
+⏰ 実行時刻: 2025-11-19 10:27:01
+⏰ 実行時刻: 2025-11-19 10:28:00
+⏰ 実行時刻: 2025-11-19 10:29:01
+⏰ 実行時刻: 2025-11-19 10:30:01
+⏰ 実行時刻: 2025-11-19 10:31:01
+⏰ 実行時刻: 2025-11-19 10:32:01
+⏰ 実行時刻: 2025-11-19 10:33:01
+⏰ 実行時刻: 2025-11-19 10:34:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2025-11-19 10:35:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2025-11-19 10:37:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-19 10:36:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2025-11-19 10:38:01
+⏰ 実行時刻: 2025-11-19 10:39:00
+⏰ 実行時刻: 2025-11-19 10:40:00
+⏰ 実行時刻: 2025-11-19 10:41:01
+⏰ 実行時刻: 2025-11-19 10:42:01
+⏰ 実行時刻: 2025-11-19 10:43:01
+⏰ 実行時刻: 2025-11-19 10:44:01
+⏰ 実行時刻: 2025-11-19 10:45:01
+⏰ 実行時刻: 2025-11-19 10:46:00
+⏰ 実行時刻: 2025-11-19 10:47:00
+⏰ 実行時刻: 2025-11-19 10:48:01
+⏰ 実行時刻: 2025-11-19 10:49:01
+⏰ 実行時刻: 2025-11-19 10:50:01
+⏰ 実行時刻: 2025-11-19 10:51:01
+⏰ 実行時刻: 2025-11-19 10:52:01
+⏰ 実行時刻: 2025-11-19 10:53:01
+⏰ 実行時刻: 2025-11-19 10:54:01
+⏰ 実行時刻: 2025-11-19 10:55:01
+⏰ 実行時刻: 2025-11-19 10:56:01
+⏰ 実行時刻: 2025-11-19 11:09:01
+⏰ 実行時刻: 2025-11-19 11:10:00
+⏰ 実行時刻: 2025-11-19 11:11:00
+⏰ 実行時刻: 2025-11-19 11:12:01
+⏰ 実行時刻: 2025-11-19 11:13:01
+⏰ 実行時刻: 2025-11-19 11:14:01
+⏰ 実行時刻: 2025-11-19 11:15:01
+⏰ 実行時刻: 2025-11-19 11:16:01
+⏰ 実行時刻: 2025-11-19 11:17:01
+⏰ 実行時刻: 2025-11-19 11:18:01
+⏰ 実行時刻: 2025-11-19 11:19:01
+⏰ 実行時刻: 2025-11-19 11:20:01
+⏰ 実行時刻: 2025-11-19 11:21:00
+⏰ 実行時刻: 2025-11-19 11:22:01
+⏰ 実行時刻: 2025-11-19 11:23:01
+⏰ 実行時刻: 2025-11-19 11:24:01
+⏰ 実行時刻: 2025-11-19 11:25:01
+⏰ 実行時刻: 2025-11-19 11:26:00
+⏰ 実行時刻: 2025-11-19 11:27:01
+⏰ 実行時刻: 2025-11-19 11:28:01
+⏰ 実行時刻: 2025-11-19 11:34:59
+⏰ 実行時刻: 2025-11-19 11:35:00
+⏰ 実行時刻: 2025-11-19 11:36:00
+⏰ 実行時刻: 2025-11-19 11:37:01
+⏰ 実行時刻: 2025-11-19 11:38:02
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-19 11:45:52
+⏰ 実行時刻: 2025-11-19 11:46:00
+⏰ 実行時刻: 2025-11-19 11:47:00
+⏰ 実行時刻: 2025-11-19 11:48:01
+⏰ 実行時刻: 2025-11-19 11:49:01
+⏰ 実行時刻: 2025-11-19 11:50:01
+⏰ 実行時刻: 2025-11-19 11:54:29
+⏰ 実行時刻: 2025-11-19 11:55:01
+⏰ 実行時刻: 2025-11-19 11:56:01
+⏰ 実行時刻: 2025-11-19 11:57:01
+⏰ 実行時刻: 2025-11-19 11:58:01
+⏰ 実行時刻: 2025-11-19 11:59:01
+⏰ 実行時刻: 2025-11-19 12:00:01
+⏰ 実行時刻: 2025-11-19 12:01:01
+⏰ 実行時刻: 2025-11-19 12:02:01
+⏰ 実行時刻: 2025-11-19 12:03:01
+⏰ 実行時刻: 2025-11-19 12:04:02
+⏰ 実行時刻: 2025-11-19 12:05:02
+⏰ 実行時刻: 2025-11-19 12:06:01
+⏰ 実行時刻: 2025-11-19 12:07:01
+⏰ 実行時刻: 2025-11-19 12:08:01
+⏰ 実行時刻: 2025-11-19 12:09:01
+⏰ 実行時刻: 2025-11-19 12:10:01
+⏰ 実行時刻: 2025-11-19 12:11:01
+⏰ 実行時刻: 2025-11-19 12:12:00
+⏰ 実行時刻: 2025-11-19 12:13:01
+⏰ 実行時刻: 2025-11-19 12:14:01
+⏰ 実行時刻: 2025-11-19 12:15:01
+⏰ 実行時刻: 2025-11-19 12:16:01
+⏰ 実行時刻: 2025-11-19 12:17:01
+⏰ 実行時刻: 2025-11-19 12:18:01
+⏰ 実行時刻: 2025-11-19 12:19:01
+⏰ 実行時刻: 2025-11-19 12:20:01
+⏰ 実行時刻: 2025-11-19 12:21:01
+⏰ 実行時刻: 2025-11-19 12:22:01
+⏰ 実行時刻: 2025-11-19 12:23:01
+⏰ 実行時刻: 2025-11-19 12:24:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-19 12:25:01
+⏰ 実行時刻: 2025-11-19 12:26:01
+⏰ 実行時刻: 2025-11-19 12:27:01
+⏰ 実行時刻: 2025-11-19 12:28:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-19 12:42:02
+⏰ 実行時刻: 2025-11-19 12:57:01
+⏰ 実行時刻: 2025-11-19 12:58:01
+⏰ 実行時刻: 2025-11-19 12:59:01
+⏰ 実行時刻: 2025-11-19 13:00:01
+⏰ 実行時刻: 2025-11-19 13:01:01
+⏰ 実行時刻: 2025-11-19 13:02:02
+⏰ 実行時刻: 2025-11-19 13:03:01
+⏰ 実行時刻: 2025-11-19 13:04:01
+⏰ 実行時刻: 2025-11-19 13:05:01
+⏰ 実行時刻: 2025-11-19 13:06:01
+⏰ 実行時刻: 2025-11-19 13:07:00
+⏰ 実行時刻: 2025-11-19 13:08:01
+⏰ 実行時刻: 2025-11-19 13:09:01
+⏰ 実行時刻: 2025-11-19 13:10:01
+⏰ 実行時刻: 2025-11-19 13:11:01
+⏰ 実行時刻: 2025-11-19 13:12:01
+⏰ 実行時刻: 2025-11-19 13:13:01
+⏰ 実行時刻: 2025-11-19 13:14:00
+⏰ 実行時刻: 2025-11-19 13:15:00
+⏰ 実行時刻: 2025-11-19 13:16:01
+⏰ 実行時刻: 2025-11-19 13:17:01
+⏰ 実行時刻: 2025-11-19 13:18:00
+⏰ 実行時刻: 2025-11-19 13:19:01
+⏰ 実行時刻: 2025-11-19 13:20:01
+⏰ 実行時刻: 2025-11-19 13:21:01
+⏰ 実行時刻: 2025-11-19 13:22:01
+⏰ 実行時刻: 2025-11-19 13:23:01
+⏰ 実行時刻: 2025-11-19 13:24:00
+⏰ 実行時刻: 2025-11-19 13:25:01
+⏰ 実行時刻: 2025-11-19 13:26:00
+⏰ 実行時刻: 2025-11-19 13:27:00
+⏰ 実行時刻: 2025-11-19 13:28:01
+⏰ 実行時刻: 2025-11-19 13:29:01
+⏰ 実行時刻: 2025-11-19 13:30:01
+⏰ 実行時刻: 2025-11-19 13:32:08
+⏰ 実行時刻: 2025-11-19 13:33:00
+⏰ 実行時刻: 2025-11-19 13:34:01
+⏰ 実行時刻: 2025-11-19 13:35:01
+⏰ 実行時刻: 2025-11-19 14:18:04
+⏰ 実行時刻: 2025-11-19 14:19:00
+⏰ 実行時刻: 2025-11-19 17:12:47
+⏰ 実行時刻: 2025-11-19 17:12:47
+⏰ 実行時刻: 2025-11-19 17:13:05
+⏰ 実行時刻: 2025-11-19 17:14:01
+⏰ 実行時刻: 2025-11-19 17:15:01
+⏰ 実行時刻: 2025-11-19 17:16:03
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-19 17:23:42
+⏰ 実行時刻: 2025-11-19 17:24:01
+⏰ 実行時刻: 2025-11-19 17:25:00
+⏰ 実行時刻: 2025-11-19 17:26:01
+⏰ 実行時刻: 2025-11-19 17:27:01
+⏰ 実行時刻: 2025-11-19 17:28:01
+⏰ 実行時刻: 2025-11-19 17:29:00
+⏰ 実行時刻: 2025-11-19 17:45:01
+⏰ 実行時刻: 2025-11-19 17:46:01
+⏰ 実行時刻: 2025-11-19 17:47:01
+⏰ 実行時刻: 2025-11-19 17:48:01
+⏰ 実行時刻: 2025-11-19 17:49:00
+⏰ 実行時刻: 2025-11-19 17:50:00
+⏰ 実行時刻: 2025-11-19 17:51:01
+⏰ 実行時刻: 2025-11-19 17:52:00
+⏰ 実行時刻: 2025-11-19 17:53:01
+⏰ 実行時刻: 2025-11-19 17:54:01
+⏰ 実行時刻: 2025-11-19 17:55:01
+⏰ 実行時刻: 2025-11-19 17:56:01
+⏰ 実行時刻: 2025-11-19 17:57:00
+⏰ 実行時刻: 2025-11-19 17:58:01
+⏰ 実行時刻: 2025-11-19 17:59:01
+⏰ 実行時刻: 2025-11-19 18:00:01
+[200] {"sentMessages":[{"id":"588398093993771102","quoteToken":"NqZtJ1735i48kvV_iWnaqLPFLLwb99gDul6voFjY0sWDWKwLLwtb8TIdwc4NhLM746T0iMzU-EzsgzzSKlVRyMqNPx0gJSpsPa7fV359vybln3590yvGEXJPW4aBkjKJg3pGUH4lmwHTFEHghIQUUg"}]}
+📩 学習リマインド送信 → 本間結伎 さん (18:00:00)
+[200] {"sentMessages":[{"id":"588398094195360040","quoteToken":"SD2edYZD9rVjzi-ykKwFP-gNYRvZcN3l1KNRYh1g81esNo2cg41CnB6N97rSUQhmYJiucKv-fwFvACrK3loZmiMVCO9yPhqJLS9ri-BidHPTDdU_TsWqV0HimRImP6dt5VuWZuAECJQs9a-Mru_p9A"}]}
+📩 学習リマインド送信 → m さん (18:00:00)
+⏰ 実行時刻: 2025-11-19 18:01:01
+⏰ 実行時刻: 2025-11-19 18:21:02
+⏰ 実行時刻: 2025-11-19 18:22:01
+⏰ 実行時刻: 2025-11-19 18:23:01
+⏰ 実行時刻: 2025-11-19 18:24:00
+⏰ 実行時刻: 2025-11-19 18:25:01
+⏰ 実行時刻: 2025-11-19 18:26:02
+⏰ 実行時刻: 2025-11-19 18:27:00
+⏰ 実行時刻: 2025-11-19 18:28:01
+⏰ 実行時刻: 2025-11-19 18:29:01
+⏰ 実行時刻: 2025-11-19 18:30:00
+⏰ 実行時刻: 2025-11-19 18:31:00
+⏰ 実行時刻: 2025-11-19 18:32:01
+⏰ 実行時刻: 2025-11-19 18:33:01
+⏰ 実行時刻: 2025-11-19 18:34:01
+⏰ 実行時刻: 2025-11-19 18:35:01
+⏰ 実行時刻: 2025-11-19 18:36:01
+⏰ 実行時刻: 2025-11-19 18:37:01
+⏰ 実行時刻: 2025-11-19 18:38:01
+⏰ 実行時刻: 2025-11-19 18:39:01
+⏰ 実行時刻: 2025-11-19 18:51:01
+⏰ 実行時刻: 2025-11-19 18:52:01
+⏰ 実行時刻: 2025-11-19 18:53:00
+⏰ 実行時刻: 2025-11-19 18:54:01
+⏰ 実行時刻: 2025-11-19 18:55:01
+⏰ 実行時刻: 2025-11-19 18:56:01
+⏰ 実行時刻: 2025-11-19 18:57:01
+⏰ 実行時刻: 2025-11-19 18:58:00
+⏰ 実行時刻: 2025-11-19 18:59:01
+⏰ 実行時刻: 2025-11-19 19:00:01
+⏰ 実行時刻: 2025-11-19 19:01:00
+⏰ 実行時刻: 2025-11-19 19:02:00
+⏰ 実行時刻: 2025-11-19 19:03:01
+⏰ 実行時刻: 2025-11-19 19:04:01
+⏰ 実行時刻: 2025-11-19 19:05:01
+⏰ 実行時刻: 2025-11-19 19:06:00
+⏰ 実行時刻: 2025-11-19 19:12:52
+⏰ 実行時刻: 2025-11-19 19:13:02
+⏰ 実行時刻: 2025-11-19 19:14:02
+⏰ 実行時刻: 2025-11-19 19:15:01
+⏰ 実行時刻: 2025-11-19 19:16:01
+⏰ 実行時刻: 2025-11-19 19:17:01
+⏰ 実行時刻: 2025-11-19 19:18:01
+⏰ 実行時刻: 2025-11-19 19:19:01
+⏰ 実行時刻: 2025-11-19 19:20:01
+⏰ 実行時刻: 2025-11-19 19:21:01
+⏰ 実行時刻: 2025-11-19 19:22:00
+⏰ 実行時刻: 2025-11-19 19:23:00
+⏰ 実行時刻: 2025-11-19 19:24:01
+⏰ 実行時刻: 2025-11-19 19:25:01
+⏰ 実行時刻: 2025-11-20 00:16:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-20 07:26:00
+⏰ 実行時刻: 2025-11-20 07:27:29
+⏰ 実行時刻: 2025-11-20 07:28:01
+⏰ 実行時刻: 2025-11-20 07:29:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-20 07:30:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2025-11-20 09:14:15
+[200] {"sentMessages":[{"id":"588488290756722983","quoteToken":"WUX0Wlsn_CXG6nVRhlqpLfvpeWvGgPYhJA-roZKSg69DJTYF1tqUkDJRGt0dtGvmu5yK7Hf6lJIOOp04oqWUL6Fonn1CS_IX6qI6EZvOfGhBfASoou1ChZ7dzY_ajHrmqNZU3H9ROivqDONr1NAjLg"}]}
+🔁 再開リマインド送信 → 本間結伎 さん
+⏰ 実行時刻: 2025-11-20 09:15:12
+⏰ 実行時刻: 2025-11-20 09:16:12
+⏰ 実行時刻: 2025-11-20 09:17:00
+⏰ 実行時刻: 2025-11-20 09:18:01
+⏰ 実行時刻: 2025-11-20 09:19:03
+⏰ 実行時刻: 2025-11-20 09:20:01
+⏰ 実行時刻: 2025-11-20 09:21:02
+⏰ 実行時刻: 2025-11-20 09:22:01
+⏰ 実行時刻: 2025-11-20 09:23:01
+⏰ 実行時刻: 2025-11-20 09:24:00
+⏰ 実行時刻: 2025-11-20 09:25:00
+⏰ 実行時刻: 2025-11-20 09:26:00
+⏰ 実行時刻: 2025-11-20 09:27:01
+⏰ 実行時刻: 2025-11-20 09:28:01
+⏰ 実行時刻: 2025-11-20 09:29:01
+⏰ 実行時刻: 2025-11-20 09:30:01
+⏰ 実行時刻: 2025-11-20 09:31:01
+⏰ 実行時刻: 2025-11-20 09:32:01
+⏰ 実行時刻: 2025-11-20 09:33:01
+⏰ 実行時刻: 2025-11-20 09:34:01
+⏰ 実行時刻: 2025-11-20 09:35:01
+⏰ 実行時刻: 2025-11-20 09:36:01
+⏰ 実行時刻: 2025-11-20 09:37:01
+⏰ 実行時刻: 2025-11-20 09:38:00
+⏰ 実行時刻: 2025-11-20 09:39:01
+⏰ 実行時刻: 2025-11-20 09:40:01
+⏰ 実行時刻: 2025-11-20 09:41:01
+⏰ 実行時刻: 2025-11-20 09:42:01
+⏰ 実行時刻: 2025-11-20 09:43:00
+⏰ 実行時刻: 2025-11-20 09:44:01
+⏰ 実行時刻: 2025-11-20 09:45:01
+⏰ 実行時刻: 2025-11-20 09:46:01
+⏰ 実行時刻: 2025-11-20 09:47:00
+⏰ 実行時刻: 2025-11-20 09:48:00
+⏰ 実行時刻: 2025-11-20 09:49:01
+⏰ 実行時刻: 2025-11-20 09:50:01
+⏰ 実行時刻: 2025-11-20 09:51:01
+⏰ 実行時刻: 2025-11-20 09:52:02
+⏰ 実行時刻: 2025-11-20 09:53:01
+⏰ 実行時刻: 2025-11-20 09:54:01
+⏰ 実行時刻: 2025-11-20 09:55:03
+⏰ 実行時刻: 2025-11-20 09:56:00
+⏰ 実行時刻: 2025-11-20 09:57:01
+⏰ 実行時刻: 2025-11-20 09:58:00
+⏰ 実行時刻: 2025-11-20 09:59:00
+⏰ 実行時刻: 2025-11-20 10:00:00
+⏰ 実行時刻: 2025-11-20 10:01:00
+⏰ 実行時刻: 2025-11-20 10:02:01
+⏰ 実行時刻: 2025-11-20 10:03:01
+⏰ 実行時刻: 2025-11-20 10:04:00
+⏰ 実行時刻: 2025-11-20 10:05:00
+⏰ 実行時刻: 2025-11-20 10:06:00
+⏰ 実行時刻: 2025-11-20 10:07:00
+⏰ 実行時刻: 2025-11-20 10:08:01
+⏰ 実行時刻: 2025-11-20 10:09:01
+⏰ 実行時刻: 2025-11-20 10:10:00
+⏰ 実行時刻: 2025-11-20 10:11:01
+⏰ 実行時刻: 2025-11-20 10:12:00
+⏰ 実行時刻: 2025-11-20 10:13:01
+⏰ 実行時刻: 2025-11-20 10:14:01
+⏰ 実行時刻: 2025-11-20 10:15:01
+⏰ 実行時刻: 2025-11-20 10:16:01
+⏰ 実行時刻: 2025-11-20 10:17:00
+⏰ 実行時刻: 2025-11-20 10:18:01
+⏰ 実行時刻: 2025-11-20 10:19:00
+⏰ 実行時刻: 2025-11-20 10:20:00
+⏰ 実行時刻: 2025-11-20 10:21:00
+⏰ 実行時刻: 2025-11-20 10:22:00
+⏰ 実行時刻: 2025-11-20 10:23:00
+⏰ 実行時刻: 2025-11-20 10:24:00
+⏰ 実行時刻: 2025-11-20 10:25:00
+⏰ 実行時刻: 2025-11-20 10:26:00
+⏰ 実行時刻: 2025-11-20 10:27:01
+⏰ 実行時刻: 2025-11-20 10:28:01
+⏰ 実行時刻: 2025-11-20 10:29:01
+⏰ 実行時刻: 2025-11-20 10:30:01
+⏰ 実行時刻: 2025-11-20 10:31:00
+⏰ 実行時刻: 2025-11-20 10:32:01
+⏰ 実行時刻: 2025-11-20 10:33:01
+⏰ 実行時刻: 2025-11-20 10:34:01
+⏰ 実行時刻: 2025-11-20 10:35:01
+⏰ 実行時刻: 2025-11-20 10:36:01
+⏰ 実行時刻: 2025-11-20 10:37:01
+⏰ 実行時刻: 2025-11-20 10:38:01
+⏰ 実行時刻: 2025-11-20 10:39:00
+⏰ 実行時刻: 2025-11-20 10:40:01
+⏰ 実行時刻: 2025-11-20 10:41:01
+⏰ 実行時刻: 2025-11-20 10:42:01
+⏰ 実行時刻: 2025-11-20 10:43:01
+⏰ 実行時刻: 2025-11-20 10:44:02
+⏰ 実行時刻: 2025-11-20 10:45:02
+⏰ 実行時刻: 2025-11-20 10:46:03
+⏰ 実行時刻: 2025-11-20 10:47:01
+⏰ 実行時刻: 2025-11-20 10:48:01
+⏰ 実行時刻: 2025-11-20 10:49:01
+⏰ 実行時刻: 2025-11-20 10:50:01
+⏰ 実行時刻: 2025-11-20 10:51:03
+⏰ 実行時刻: 2025-11-20 10:52:01
+⏰ 実行時刻: 2025-11-20 10:53:01
+⏰ 実行時刻: 2025-11-20 10:54:01
+⏰ 実行時刻: 2025-11-20 10:55:01
+⏰ 実行時刻: 2025-11-20 10:56:01
+⏰ 実行時刻: 2025-11-20 10:57:01
+⏰ 実行時刻: 2025-11-20 10:58:01
+⏰ 実行時刻: 2025-11-20 11:06:04
+⏰ 実行時刻: 2025-11-20 11:07:01
+⏰ 実行時刻: 2025-11-20 11:08:00
+⏰ 実行時刻: 2025-11-20 11:09:01
+⏰ 実行時刻: 2025-11-20 11:10:01
+⏰ 実行時刻: 2025-11-20 11:11:00
+⏰ 実行時刻: 2025-11-20 11:12:01
+⏰ 実行時刻: 2025-11-20 11:13:01
+⏰ 実行時刻: 2025-11-20 11:14:01
+⏰ 実行時刻: 2025-11-20 11:15:01
+⏰ 実行時刻: 2025-11-20 11:16:01
+⏰ 実行時刻: 2025-11-20 11:17:01
+⏰ 実行時刻: 2025-11-20 11:18:01
+⏰ 実行時刻: 2025-11-20 11:19:01
+⏰ 実行時刻: 2025-11-20 11:20:01
+⏰ 実行時刻: 2025-11-20 11:21:01
+⏰ 実行時刻: 2025-11-20 11:22:01
+⏰ 実行時刻: 2025-11-20 11:23:00
+⏰ 実行時刻: 2025-11-20 11:24:01
+⏰ 実行時刻: 2025-11-20 11:25:00
+⏰ 実行時刻: 2025-11-20 11:26:00
+⏰ 実行時刻: 2025-11-20 11:27:01
+⏰ 実行時刻: 2025-11-20 11:28:01
+⏰ 実行時刻: 2025-11-20 11:29:01
+⏰ 実行時刻: 2025-11-20 11:30:00
+⏰ 実行時刻: 2025-11-20 11:31:01
+⏰ 実行時刻: 2025-11-20 11:32:01
+⏰ 実行時刻: 2025-11-20 11:33:03
+⏰ 実行時刻: 2025-11-20 11:34:02
+⏰ 実行時刻: 2025-11-20 11:35:01

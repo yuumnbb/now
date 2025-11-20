@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-LINE_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
-LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET")
+LINE_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN","rRApr7CV5vvRaVCVnCTunj+we0vLcoTqzyD0e5iERgBc4ueCZhGLW4xQ1TJ1SyjsFdv+T/4xopoo5ddKFFhoSEwwvc9fTlq47B6bsA0xrge6kmiB2k4zcRTh4ZoozBbZ9BDT27GIm+odmtWs7DGkTwdB04t89/1O/w1cDnyilFU=")
+LINE_SECRET = os.getenv("LINE_CHANNEL_SECRET","a606b2cf13d9b45d8909e558b8a2f6e9")
 db_config = {
     'host': os.getenv('DB_HOST'),
     'database': os.getenv('DB_NAME'),
@@ -82,7 +82,7 @@ def main():
             "でも大丈夫です。失敗も成長の一部です🌱\n"
             "もう一度AIの『回復プログラム』で再スタートしてみませんか？\n\n"
             "▶ 回復プログラムはこちら：\n"
-            "https://あなたのアプリURL/recovery"
+            "https://studyhabits-gbevh2bgdygjgtag.japaneast-01.azurewebsites.net"
         )
         send_line_message(line_user_id, message)
 

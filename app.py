@@ -24,10 +24,10 @@ LINE_LOGIN_CHANNEL_SECRET = os.getenv("LINE_LOGIN_CHANNEL_SECRET")
 # 🚨 Azure環境でのHTTPSを想定し、デフォルトをHTTPSに設定
 LINE_REDIRECT_URI = os.getenv("LINE_REDIRECT_URI", "https://studyhabits-gbevh2bgdygjgtag.japaneast-01.azurewebsites.net/line/callback")
 
-
 # Gemini APIの設定
 import google.generativeai as genai
-genai.configure(api_key="AIzaSyARwdaBw94QJprFI2IcTfOClwI15a0fKZs")
+API =os.getenv("API")
+genai.configure(api_key=API)
 
 app = Flask(__name__)
 # ⚠️ 本番環境ではより強力な鍵を使用してください
