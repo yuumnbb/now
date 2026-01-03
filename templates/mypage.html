@@ -104,7 +104,7 @@
     {% else %}
       <p>設定がまだ登録されていません。</p>
     {% endif %}
-  
+    <a href="{{ url_for('view_recovery_report', username=user.username) }}" class="btn btn-report">✨ AI診断レポートを見る</a>
     <div style="text-align:center; margin: 20px 0;">
       <button id="show-tutorial" class="btn">アプリの使い方を見る</button>
     </div>
