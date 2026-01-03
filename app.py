@@ -944,13 +944,14 @@ def generate_gemini_analysis(user_id, goal, weekly_target):
 分析後、学習習慣を失敗する原因と対策の例を2件ずつ記載して。原因と対策は対応させて、学習目標に対応する専門性も意識して。
 
 条件：
-学習習慣に失敗してしまった人のデータという面を考慮して。
+学習習慣支援アプリを使用していて学習習慣に失敗してしまった人のデータという面を考慮して。
 自分の失敗した原因と解決案を導き出してあげる手助けです。
-Atomic Habitsとレジリエンスの観点を意識して答えて。
+Atomic Habitsと失敗学とレジリエンスの観点を意識して答えて。
 AtomicHabitsはきっかけ、欲求、反応、報酬のサイクルでポイントとしては、小さく行動していくこと、回数を増やしていくこと。
 レジリエンスは・ポジティブな感情 ・内的資源や外的資源の活用 ・自尊感情及び自己効力感が重要。 
 この理論を知らない人が見るので、専門用語は伏せて答えて。
 学習時間に関して5分以上は短くないので「学習時間が短い」という表現は禁止。
+原因と対策は対応させて、学習目標に対応する専門性も意識して。
 """
     model = genai.GenerativeModel("gemini-2.5-flash-lite")
     response = model.generate_content(prompt)
@@ -1024,6 +1025,40 @@ def line_webhook():
     print(f"Received LINE Webhook: {body}")
 
     return jsonify({"status": "ok"})
+@app.route('/recovery/report')
+def view_recovery_report():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    search_username = request.args.get('username')
+    report = None
+
+    if search_username:
+        conn = psycopg2.connect(**db_config)
+        cursor = conn.cursor(cursor_factory=DictCursor)
+        
+        # ユーザー名に紐づく最新の回復記録を取得
+        cursor.execute('''
+            SELECT 
+                u.username, u.goal, u.small_action,
+                r.created_at, r.reason, r.improvement, r.ai_feedback, r.re_analysis
+            FROM re r
+            JOIN users u ON r.user_id = u.id
+            WHERE u.username = %s
+            ORDER BY r.created_at DESC
+            LIMIT 1
+        ''', (search_username,))
+        
+        result = cursor.fetchone()
+        if result:
+            report = dict(result)
+        
+        conn.close()
+
+    return render_template('recovery_report.html', 
+                           report=report, 
+                           search_username=search_username)
+
 
 
 # ログアウト
