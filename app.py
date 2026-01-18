@@ -932,38 +932,44 @@ def recovery():
         # モード1: 3つの質問回答後のAI提案生成
         if mode == 'propose':
             try:
+                # 学習分析（suggested_result）もここで生成して返すように修正
+                # これにより、表示された内容をそのまま保存に回せるようにする
                 proposal = generate_recovery_proposal(
                     data.get('q1'), data.get('q2'), data.get('q3'), 
                     goal, small_action
                 )
-                return jsonify({'proposal': proposal})
+                analysis = generate_gemini_analysis(user_id, goal, weekly_target)
+                return jsonify({'proposal': proposal, 'analysis': analysis})
             except Exception as e:
                 print(f"Proposal Error: {e}")
                 return jsonify({'error': 'AI提案の生成に失敗しました'}), 500
 
-        # モード2: ユーザーの入力内容をDBに保存し、最終アドバイスを返す
+        # モード2: ユーザーの入力内容をDBに保存
         elif mode == 'save':
             reason = data.get('reason', '').strip()
             improvement = data.get('improvement', '').strip()
+            # フロントエンドで表示されていた分析結果を受け取る（内容の不一致を防ぐ）
+            detailed_analysis = data.get('analysis', '').strip()
             is_shared = bool(data.get('is_shared', False))
 
             if not reason or not improvement:
                 return jsonify({'error': '原因と対策を入力してください。'}), 400
 
             try:
-                # 1. 診断結果を含めた詳細な「原因」テキストを作成
+                # 診断結果をまとめる
                 full_reason_for_db = (
                     f"【診断】状況:{data.get('q1')}, アンカー:{data.get('q2')}, 負担感:{data.get('q3')}\n"
                     f"【ユーザー記述】{reason}"
                 )
                 
-                # 2. 最終アドバイス生成
+                # 最終アドバイス生成
                 advice = generate_feedback_advice(reason, improvement)
                 
-                # 3. 詳細な分析（レポート用）もバックグラウンドで生成
-                detailed_analysis = generate_gemini_analysis(user_id, goal, weekly_target)
+                # 分析結果が送られてきていない場合のみ再生成（基本は送られてくる想定）
+                if not detailed_analysis or "失敗しました" in detailed_analysis:
+                    detailed_analysis = generate_gemini_analysis(user_id, goal, weekly_target)
 
-                # 4. データベースへの保存
+                # データベースへの保存
                 conn = psycopg2.connect(**db_config)
                 cursor = conn.cursor()
                 cursor.execute('''
@@ -1030,38 +1036,64 @@ def line_webhook():
     print(f"Received LINE Webhook: {body}")
 
     return jsonify({"status": "ok"})
+
+# --- 回復レポート表示（履歴対応） ---
 @app.route('/recovery/report')
 def view_recovery_report():
     if 'user' not in session:
         return redirect(url_for('login'))
 
     search_username = request.args.get('username')
+    selected_re_id = request.args.get('re_id') # 特定の履歴ID
     report = None
+    history = []
 
     if search_username:
         conn = psycopg2.connect(**db_config)
         cursor = conn.cursor(cursor_factory=DictCursor)
         
-        # ユーザー名に紐づく最新の回復記録を取得
+        # 1. まず、そのユーザーの全履歴リストを取得
         cursor.execute('''
-            SELECT 
-                u.username, u.goal, u.small_action,
-                r.created_at, r.reason, r.improvement, r.ai_feedback, r.re_analysis
+            SELECT r.id, r.created_at
             FROM re r
             JOIN users u ON r.user_id = u.id
             WHERE u.username = %s
             ORDER BY r.created_at DESC
-            LIMIT 1
         ''', (search_username,))
-        
-        result = cursor.fetchone()
-        if result:
-            report = dict(result)
+        history = cursor.fetchall()
+
+        # 2. 表示する特定のレポート詳細を取得
+        if history:
+            if selected_re_id:
+                # IDが指定されている場合はそのIDの記録
+                cursor.execute('''
+                    SELECT 
+                        u.username, u.goal, u.small_action,
+                        r.id, r.created_at, r.reason, r.improvement, r.ai_feedback, r.re_analysis
+                    FROM re r
+                    JOIN users u ON r.user_id = u.id
+                    WHERE r.id = %s AND u.username = %s
+                ''', (selected_re_id, search_username))
+            else:
+                # 指定がない場合は最新（historyの最初）の記録
+                cursor.execute('''
+                    SELECT 
+                        u.username, u.goal, u.small_action,
+                        r.id, r.created_at, r.reason, r.improvement, r.ai_feedback, r.re_analysis
+                    FROM re r
+                    JOIN users u ON r.user_id = u.id
+                    WHERE r.id = %s
+                ''', (history[0]['id'],))
+            
+            result = cursor.fetchone()
+            if result:
+                report = dict(result)
         
         conn.close()
 
     return render_template('recovery_report.html', 
                            report=report, 
+                           history=history,
                            search_username=search_username)
 
 
