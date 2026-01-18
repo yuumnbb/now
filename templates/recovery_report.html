@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>回復プログラム - 個別レポート</title>
+  <title>回復プログラム - 診断レポート履歴</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
   <style>
     :root {
@@ -20,40 +20,80 @@
       font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
       color: var(--text-main);
       line-height: 1.6;
+      margin: 0;
+      padding: 0;
     }
 
-    .report-container {
-      max-width: 800px;
+    .report-layout {
+      display: flex;
+      max-width: 1200px;
       margin: 40px auto;
-      padding: 20px;
+      gap: 30px;
+      padding: 0 20px;
     }
 
-    .search-section {
+    /* 履歴サイドバー */
+    .history-sidebar {
+      width: 250px;
+      flex-shrink: 0;
+    }
+
+    .history-card {
       background: var(--card-bg);
-      padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .history-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      color: var(--primary-color);
       display: flex;
-      gap: 10px;
+      align-items: center;
+      gap: 8px;
     }
 
-    .search-section input {
-      flex-grow: 1;
-      padding: 12px;
-      border: 1px solid #ddd;
+    .history-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      margin-bottom: 8px;
+    }
+
+    .history-link {
+      display: block;
+      padding: 10px 12px;
+      text-decoration: none;
+      color: var(--text-main);
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      border: 1px solid transparent;
     }
 
-    .search-section button {
+    .history-link:hover {
+      background-color: #f0f7ff;
+      color: var(--primary-color);
+    }
+
+    .history-link.active {
       background-color: var(--primary-color);
       color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
       font-weight: bold;
+    }
+
+    /* メインレポートエリア */
+    .main-report {
+      flex-grow: 1;
     }
 
     .report-card {
@@ -61,7 +101,6 @@
       border-radius: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       overflow: hidden;
-      margin-bottom: 30px;
     }
 
     .report-header {
@@ -70,32 +109,33 @@
       padding: 30px;
     }
 
-    .report-header h2 { margin: 0; font-size: 24px; }
-    .report-header p { margin: 5px 0 0 0; opacity: 0.9; }
+    .report-header h2 { margin: 0; font-size: 1.5rem; }
+    .report-header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9rem; }
 
-    .content-section {
-      padding: 30px;
-    }
+    .content-section { padding: 30px; }
 
     .section-title {
-      font-size: 18px;
+      font-size: 1.1rem;
       font-weight: bold;
       color: var(--primary-color);
       border-left: 4px solid var(--primary-color);
-      padding-left: 10px;
+      padding-left: 12px;
       margin-bottom: 15px;
-      margin-top: 25px;
+      margin-top: 30px;
     }
+    .section-title:first-child { margin-top: 0; }
 
     .ai-box {
       background-color: #f0f7ff;
       border: 1px solid #d0e3ff;
       padding: 20px;
       border-radius: 10px;
-      white-space: pre-wrap; /* 改行を反映 */
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.7;
     }
 
-    .user-content {
+    .user-content-box {
       background-color: #fafafa;
       padding: 15px;
       border-radius: 8px;
@@ -103,96 +143,133 @@
       margin-bottom: 20px;
     }
 
-    .meta-info {
+    .meta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
-    .info-item label {
+    .meta-item label {
       display: block;
-      font-size: 12px;
+      font-size: 0.75rem;
       color: var(--text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .info-item span {
-      font-weight: bold;
-      font-size: 16px;
+    .meta-item span { font-weight: bold; font-size: 1rem; }
+
+    .search-form {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
     }
 
-    .no-data {
-      text-align: center;
-      padding: 50px;
-      background: white;
-      border-radius: 12px;
+    .search-form input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 20px;
-      color: var(--primary-color);
-      text-decoration: none;
+    .search-form button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0 15px;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
-    @media (max-width: 600px) {
-      .meta-info { grid-template-columns: 1fr; }
+    @media (max-width: 850px) {
+      .report-layout { flex-direction: column; }
+      .history-sidebar { width: 100%; }
+      .history-card { position: static; }
+      .meta-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="report-container">
-    <h1>回復プログラム・診断レポート</h1>
-
-    <!-- ユーザー名検索 -->
-    <form action="{{ url_for('view_recovery_report') }}" method="get" class="search-section">
-      <input type="text" name="username" placeholder="ユーザー名を入力してください..." value="{{ search_username or '' }}">
+  <div style="max-width: 1200px; margin: 20px auto; padding: 0 20px;">
+    <h1>回復プログラム 診断アーカイブ</h1>
+    
+    <form action="{{ url_for('view_recovery_report') }}" method="get" class="search-form">
+      <input type="text" name="username" placeholder="ユーザー名で検索..." value="{{ search_username }}">
       <button type="submit">表示</button>
     </form>
+  </div>
 
-    {% if report %}
-    <div class="report-card">
-      <div class="report-header">
-        <h2>{{ report.username }} さんのレポート</h2>
-        <p>最終実行日: {{ report.created_at.strftime('%Y年%m月%d日 %H:%M') }}</p>
+  <div class="report-layout">
+    <!-- サイドバー: 履歴一覧 -->
+    <aside class="history-sidebar">
+      <div class="history-card">
+        <div class="history-title">📅 過去の診断履歴</div>
+        <ul class="history-list">
+          {% for h in history %}
+          <li class="history-item">
+            <a href="{{ url_for('view_recovery_report', username=search_username, re_id=h.id) }}" 
+               class="history-link {% if report and report.id == h.id %}active{% endif %}">
+              {{ h.created_at.strftime('%Y/%m/%d %H:%M') }}
+            </a>
+          </li>
+          {% else %}
+          <li style="font-size: 0.8rem; color: #999; text-align: center; padding: 20px;">履歴がありません</li>
+          {% endfor %}
+        </ul>
       </div>
+    </aside>
 
-      <div class="content-section">
-        <div class="meta-info">
-          <div class="info-item">
-            <label>学習目標</label>
-            <span>{{ report.goal or '未設定' }}</span>
-          </div>
-          <div class="info-item">
-            <label>小さな行動</label>
-            <span>{{ report.small_action or '未設定' }}</span>
-          </div>
+    <!-- メイン: レポート詳細 -->
+    <main class="main-report">
+      {% if report %}
+      <div class="report-card">
+        <div class="report-header">
+          <h2>{{ report.username }} さんのレポート</h2>
+          <p>診断日時: {{ report.created_at.strftime('%Y年%m月%d日 %H:%M') }}</p>
         </div>
 
-        <div class="section-title">ユーザーの振り返り</div>
-        <div class="user-content">
-          <strong>原因:</strong><br>
-          {{ report.reason }}
-          <br><br>
-          <strong>対策:</strong><br>
-          {{ report.improvement }}
+        <div class="content-section">
+          <div class="meta-grid">
+            <div class="meta-item">
+              <label>学習目標</label>
+              <span>{{ report.goal or '未設定' }}</span>
+            </div>
+            <div class="meta-item">
+              <label>小さな行動</label>
+              <span>{{ report.small_action or '未設定' }}</span>
+            </div>
+          </div>
+
+          <div class="section-title">あなたの振り返り</div>
+          <div class="user-content-box">
+            <div style="margin-bottom: 10px;">
+              <strong>💭 原因の自己分析:</strong><br>
+              {{ report.reason }}
+            </div>
+            <div>
+              <strong>🚀 決めた対策:</strong><br>
+              {{ report.improvement }}
+            </div>
+          </div>
+
+          <div class="section-title">✨ AIによる分析 (Analysis)</div>
+          <div class="ai-box">{{ report.re_analysis or '分析データがありません。' }}</div>
+
+          <div class="section-title">💡 AIからの最終アドバイス (Feedback)</div>
+          <div class="ai-box">{{ report.ai_feedback or 'フィードバックデータがありません。' }}</div>
+          
+          <div style="margin-top: 30px; text-align: center;">
+            <a href="{{ url_for('mypage') }}" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">← マイページへ戻る</a>
+          </div>
         </div>
-
-        <div class="section-title">✨ AIによる分析 (Analysis)</div>
-        <div class="ai-box">{{ report.re_analysis or '分析データがありません' }}</div>
-
-        <div class="section-title">💡 AIからのアドバイス (Feedback)</div>
-        <div class="ai-box">{{ report.ai_feedback or 'フィードバックデータがありません' }}</div>
       </div>
-    </div>
-    {% elif search_username %}
-    <div class="no-data">
-      <p>ユーザー「{{ search_username }}」の回復記録が見つかりませんでした。</p>
-    </div>
-    {% endif %}
-
-    <a href="{{ url_for('mypage') }}" class="back-link">← マイページへ戻る</a>
+      {% else %}
+      <div class="report-card" style="padding: 50px; text-align: center;">
+        <p style="color: #999;">表示するレポートを選択してください。</p>
+      </div>
+      {% endif %}
+    </main>
   </div>
 </body>
 </html>
