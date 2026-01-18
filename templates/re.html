@@ -2,137 +2,325 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>回復プログラム</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回復プログラム - 再スタート診断</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
   <style>
+    :root {
+      --primary-color: #4a90e2;
+      --bg-color: #f4f7f6;
+      --card-bg: #ffffff;
+      --text-main: #333;
+      --accent-color: #2ecc71;
+      --warning-color: #f39c12;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
+
     .container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      font-family: "Arial", sans-serif;
+      width: 100%;
+      max-width: 650px;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
-    h1 {
-      text-align: center;
-    }
+    .step { display: none; }
+    .step.active { display: block; animation: fadeIn 0.4s ease-out; }
 
-    textarea {
-      width: 95%;
-      height: 100px;
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
+    h1 { text-align: center; color: var(--primary-color); margin-bottom: 30px; }
+    h2 { color: var(--primary-color); margin-bottom: 20px; font-size: 1.3rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 10px; }
+    p { color: #666; line-height: 1.6; margin-bottom: 25px; }
+
+    .option-list { display: grid; gap: 12px; margin: 20px 0; }
+    .option-item {
+      padding: 18px 20px;
+      border: 2px solid #eee;
+      border-radius: 12px;
       cursor: pointer;
+      transition: all 0.2s;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .option-item:hover { border-color: var(--primary-color); background-color: #f0f7ff; }
+    .option-item.selected { border-color: var(--primary-color); background-color: var(--primary-color); color: white; }
+
+    .ai-proposal-container {
+      background-color: #fdfaf0;
+      border-left: 5px solid var(--warning-color);
+      padding: 25px;
+      border-radius: 10px;
+      margin: 20px 0;
     }
 
-    p {
-      line-height: 1.8;
+    .ai-proposal-content {
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
     }
 
-    .message {
-      color: green;
+    label { display: block; font-weight: bold; margin: 25px 0 8px; color: var(--primary-color); }
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+      resize: none;
+      background-color: #fafafa;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background-color: #fff;
+    }
+
+    .btn-group { display: flex; justify-content: space-between; margin-top: 30px; }
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-next { background-color: var(--primary-color); color: white; }
+    .btn-prev { background-color: #eee; color: #666; }
+
+    #loading { text-align: center; display: none; padding: 50px 0; }
+    .spinner {
+      border: 4px solid rgba(0,0,0,0.1);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border-left-color: var(--primary-color);
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .final-advice-box {
+      background-color: #e8f5e9;
+      border: 1px solid #c8e6c9;
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .checkbox-group {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #666;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>回復プログラム</h1>
-    <p>
-      お久しぶりです。再ログインするあなたはとても素晴らしいです。
-      失敗は成長の糧になります。失敗から学ぶことで学習習慣を身につけていきましょう。
-      回復プログラムではAIによるあなたの学習分析と提案を行います。
-      それをもとに自分なりに失敗した原因と対策を導き出しましょう。
-    </p>
-    {% if suggested_result %}
-      <div style="background: #fffaf0; border-left: 6px solid #f4a300; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
-        <h3 style="margin-top: 0; color: #b36b00;">📊 AIによる学習記録の分析</h3>
-        <div style="line-height: 1.8; font-size: 16px; color: #333;">
-          {{
-            suggested_result
-            | regex_replace('\\*\\*(.*?)\\*\\*', '\\1', ignorecase=False)  
-            | regex_replace('(.+?):', '<strong style="font-size: 17px;">\\1:</strong><br>', ignorecase=False)
-            | replace('\n', '<br>')
-            | safe
-          }}
-        </div>
-      </div>
-    {% endif %}
 
+<div class="container">
+  <h1>回復プログラム</h1>
 
-    {% if message %}
-      <p class="message">{{ message }}</p>
-    {% endif %}
-
-    <form id="recovery-form">
-      <h3 style="margin-top: 0; color: #b36b00;">分析を参考にして自分なりの失敗の原因と対策を考えてみよう</h3>
-      <label for="reason">失敗の原因</label>
-      <textarea id="reason" name="reason" required>{{ reason }}</textarea>
-
-      <label for="improvement">失敗しないための方法</label>
-      <textarea id="improvement" name="improvement" required>{{ improvement }}</textarea>
-      <label>
-        <input type="checkbox" id="is_shared" name="is_shared">
-        レジリエンス画面でみんなに共有する
-      </label><br>
-      <button type="submit">保存</button>
-    </form>
-    <div id="advice-box" style="display:none; margin-top: 30px;">
-      <div style="background: #f0f8ff; border-left: 6px solid #007acc; padding: 20px; border-radius: 8px;">
-        <h3 style="margin-top: 0; color: #0057a0;">💡 AIからのアドバイス</h3>
-        <p id="advice-text" style="line-height: 1.8; font-size: 16px; color: #333;"></p>
-        <p>初期設定（アンカー、小さな行動）も見直してみましょう</p>
-        <form action="{{ url_for('mypage') }}" style="margin-top: 20px;">
-          <button type="submit" style="padding: 10px 20px; background-color: #007acc; color: white; border: none; border-radius: 5px; font-size: 16px;">完了</button>
-        </form>
-      </div>
+  <!-- Step 1: 状況診断 -->
+  <div class="step active" id="step1">
+    <h2>Q1. 学習が止まった状況は？</h2>
+    <p>再開のための第一歩です。当てはまるものを選んでください。</p>
+    <div class="option-list">
+      <div class="option-item" onclick="select('q1', '記録忘れ（学習はしたが入力のみ忘れた）')">📝 記録を忘れただけ</div>
+      <div class="option-item" onclick="select('q1', '不可抗力（急用・体調不良等でできなかった）')">🌪️ 不可抗力による中断</div>
+      <div class="option-item" onclick="select('q1', '学習忘れ（学習すること自体を忘れていた）')">❓ 学習すること自体を忘れた</div>
+    </div>
+    <div class="btn-group">
+      <div></div>
+      <button class="btn btn-next" onclick="go(2)">次へ進む</button>
     </div>
   </div>
-  <script>
-  document.getElementById('recovery-form').addEventListener('submit', function(e) {
-    e.preventDefault();
 
-    const reason = document.getElementById('reason').value.trim();
-    const improvement = document.getElementById('improvement').value.trim();
-    const is_shared = document.getElementById('is_shared').checked;
+  <!-- Step 2: アンカーの診断 -->
+  <div class="step" id="step2">
+    <h2>Q2. きっかけ（アンカー）の状態は？</h2>
+    <p>習慣の引き金がうまく機能していたか確認しましょう。</p>
+    <div class="option-list">
+      <div class="option-item" onclick="select('q2', 'アンカー自体を忘れていた')">きっかけ自体を忘れていた</div>
+      <div class="option-item" onclick="select('q2', 'きっかけは行ったが学習に移れなかった')">きっかけはしたが次に進めなかった</div>
+      <div class="option-item" onclick="select('q2', '特に問題なかった')">特に問題なくきっかけは行えた</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-prev" onclick="go(1)">戻る</button>
+      <button class="btn btn-next" onclick="go(3)">次へ進む</button>
+    </div>
+  </div>
 
-    fetch("/recovery", {
-      method: "POST",
-      headers: {
-       "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        reason: reason,
-        improvement: improvement,
-        is_shared: is_shared
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.error) {
-        alert(data.error);
+  <!-- Step 3: 負担感の診断 -->
+  <div class="step" id="step3">
+    <h2>Q3. 今の「小さな行動」の負担感は？</h2>
+    <p>目標の高さが今の自分に合っているか診断します。</p>
+    <div class="option-list">
+      <div class="option-item" onclick="select('q3', '正直、今の設定でも少し面倒に感じる')">今の設定でも少し面倒に感じる</div>
+      <div class="option-item" onclick="select('q3', '内容は簡単だが時間が作れなかった')">内容は簡単だが時間がなかった</div>
+      <div class="option-item" onclick="select('q3', '今のままで適切だと思う')">今のままで適切だと思う</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-prev" onclick="go(2)">戻る</button>
+      <button class="btn btn-next" onclick="getProposal()">AIの提案を受ける</button>
+    </div>
+  </div>
+
+  <!-- Step 4: AIの提案とユーザーの最終入力 -->
+  <div class="step" id="step4">
+    <h2>AIによる分析と再開への提案</h2>
+    <div class="ai-proposal-container">
+      <div id="aiProposalText" class="ai-proposal-content">分析中...</div>
+    </div>
+    
+    <p>AIの提案を参考に、今回の失敗を成長に変えるための計画を立てましょう。</p>
+    
+    <label for="reason">今回の本当の原因は何だったと思いますか？</label>
+    <textarea id="reason" placeholder="例：仕事の疲れを考慮せず、夜に難しい内容を設定しすぎていた。"></textarea>
+
+    <label for="improvement">明日からどのように改善しますか？</label>
+    <textarea id="improvement" placeholder="例：疲れている時は『本を開くだけ』にハードルを下げる。リマインダーを10分早める。"></textarea>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="is_shared" checked>
+      <label for="is_shared" style="display:inline; margin:0; font-weight:normal; color:#666;">この振り返りをみんなに共有して励まし合う</label>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-prev" onclick="go(3)">戻る</button>
+      <button class="btn btn-next" onclick="saveFinal()">最終診断を保存する</button>
+    </div>
+  </div>
+
+  <!-- Step 5: 完了と最終アドバイス -->
+  <div class="step" id="step5">
+    <h2>再スタートの準備ができました！</h2>
+    <div id="finalAdviceContent" class="final-advice-box"></div>
+    <p style="margin-top: 25px; font-size: 0.9rem; text-align: center;">
+      「小さな行動」から、また一歩ずつ始めていきましょう。
+    </p>
+    <div class="btn-group">
+      <div></div>
+      <button class="btn btn-next" onclick="location.href='/mypage'">マイページへ戻る</button>
+    </div>
+  </div>
+
+  <!-- ローディング表示 -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <p id="loadingText">AIがあなたのデータを分析しています...</p>
+  </div>
+</div>
+
+<script>
+  let answers = { q1: '', q2: '', q3: '' };
+
+  // 選択肢の管理
+  function select(q, val) {
+    answers[q] = val;
+    const items = event.currentTarget.parentElement.querySelectorAll('.option-item');
+    items.forEach(i => i.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+  }
+
+  // ステップ移動
+  function go(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // 1. AIからの提案（分析と2〜3案）を取得
+  async function getProposal() {
+    if(!answers.q1 || !answers.q2 || !answers.q3) {
+      alert("全ての質問に回答してください。");
+      return;
+    }
+
+    document.getElementById('step3').classList.remove('active');
+    document.getElementById('loading').style.display = 'block';
+
+    try {
+      const res = await fetch('/recovery', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ mode: 'propose', ...answers })
+      });
+      const data = await res.json();
+      
+      document.getElementById('aiProposalText').innerText = data.proposal;
+      document.getElementById('loading').style.display = 'none';
+      go(4);
+    } catch (err) {
+      alert("通信エラーが発生しました。");
+      document.getElementById('loading').style.display = 'none';
+      go(3);
+    }
+  }
+
+  // 2. ユーザーの入力を保存し、最終アドバイスを表示
+  async function saveFinal() {
+    const r = document.getElementById('reason').value.trim();
+    const i = document.getElementById('improvement').value.trim();
+    
+    if(!r || !i) {
+      alert("原因と対策を記入してください。");
+      return;
+    }
+
+    document.getElementById('step4').classList.remove('active');
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('loadingText').innerText = "最終的なアドバイスを生成中...";
+
+    try {
+      const res = await fetch('/recovery', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ 
+          mode: 'save', 
+          reason: r, 
+          improvement: i,
+          is_shared: document.getElementById('is_shared').checked,
+          ...answers 
+        })
+      });
+      const data = await res.json();
+      
+      if(data.success) {
+        document.getElementById('finalAdviceContent').innerHTML = 
+          "<strong>✨ AIからの最終メッセージ:</strong><br><br>" + 
+          data.advice.replace(/\n/g, "<br>");
+        document.getElementById('loading').style.display = 'none';
+        go(5);
       } else {
-        document.getElementById('advice-text').innerHTML = data.advice.replace(/\n/g, "<br>");
-        document.getElementById('advice-box').style.display = 'block';
+        throw new Error();
       }
-    })
-    .catch(err => {
-      alert("通信エラーが発生しました");
-      console.error(err);
-    });
-  });
-  </script>
+    } catch (err) {
+      alert("データの保存に失敗しました。");
+      document.getElementById('loading').style.display = 'none';
+      go(4);
+    }
+  }
+</script>
+
 </body>
 </html>
