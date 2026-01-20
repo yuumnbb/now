@@ -26098,3 +26098,878 @@ Traceback (most recent call last):
 psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
 	Is the server running on that host and accepting TCP/IP connections?
 
+⏰ 実行時刻: 2026-01-18 17:01:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-18 17:02:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-18 17:03:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-18 17:04:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-18 17:05:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-18 17:06:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-19 08:03:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2026-01-19 16:58:01
+[200] {"sentMessages":[{"id":"597232279030858308","quoteToken":"fLajIJBaumEmvdWqeJ1D-HnYTuPuamJrrDjkKb8sBMJkRdC9AUbvIbySlzRfLSI1y1XjldK6Fjqrz6qd7nkQ8eGrZ1AXhP7QAYbD3GgNQYMWKSTlnpnmcL4mxUlRtNiXdHJvTwfrJNLpI1WgJ8_EKQ"}]}
+🔁 再開リマインド送信 → よしだだよ さん
+[200] {"sentMessages":[{"id":"597232279164813421","quoteToken":"x9rMOSufdZ6rQvI87Eb9iybAclCrUgV9uFJdDW3rcI_ma5uFSci_k9aWxeeRuJGWo0Y26iGWEyTnFZrSRxtn2RVKLgpmAuo9juJC4MDRUKVWAgoT3yerzDQyk1OZydMaJlkKo4pJbjTXDO0KE47-wQ"}]}
+🔁 再開リマインド送信 → 本間結伎 さん
+[200] {"sentMessages":[{"id":"597232279601021255","quoteToken":"gc5CiIt_-yrttAoW7uU9ukcoWXh04xuG2lvYp7eTY39JgG27gpjxVXfukZxC6ji8cBtoU-IYD_GzznPKc6BOVp1dK_ljIe3b9BaSrAKyhO3ieOpEQ_60ZIDXodV04wfxeTACLrB7odmKRsd9KH8YTw"}]}
+🔁 再開リマインド送信 → ミヤザキ さん
+[200] {"sentMessages":[{"id":"597232279752278123","quoteToken":"hCWs58YEpzHGbKWV96S3zafsVirCSTYX7jXnMc6t24j1J0i4CYvw806CrQx5iLz2z-z4FGHRuKKk44cpThMlWRcJaacSMDe9xDvvvhh2TL_7C2A6IsE0xvjg7SWZs8fHHHH72_tBfLtX7bS5dWqoEA"}]}
+🔁 再開リマインド送信 → ttt さん
+[200] {"sentMessages":[{"id":"597232280322179298","quoteToken":"VK7bwlIQIpKBMvjL8EdUNesKuHpJVKRvBc1DDdMA40SVci7DgrZovvcVzSnl7G6BgDKIswHM8g6srHIKlqEupqh71LpEESD75SO9fffVG05hPX8-Y0FFDqFNZLfvnAuTRSlQo3wrAPQNZXur2fjlvQ"}]}
+🔁 再開リマインド送信 → m さん
+⏰ 実行時刻: 2026-01-19 16:59:01
+⏰ 実行時刻: 2026-01-19 17:00:01
+⏰ 実行時刻: 2026-01-19 17:01:01
+⏰ 実行時刻: 2026-01-19 17:02:01
+⏰ 実行時刻: 2026-01-19 17:03:01
+⏰ 実行時刻: 2026-01-19 17:04:01
+⏰ 実行時刻: 2026-01-19 17:05:01
+⏰ 実行時刻: 2026-01-19 17:06:00
+⏰ 実行時刻: 2026-01-19 17:07:00
+⏰ 実行時刻: 2026-01-19 17:08:00
+⏰ 実行時刻: 2026-01-19 17:09:04
+⏰ 実行時刻: 2026-01-19 17:10:01
+⏰ 実行時刻: 2026-01-19 17:11:01
+⏰ 実行時刻: 2026-01-19 17:12:00
+⏰ 実行時刻: 2026-01-19 17:13:00
+⏰ 実行時刻: 2026-01-19 17:14:00
+⏰ 実行時刻: 2026-01-19 17:15:01
+⏰ 実行時刻: 2026-01-19 17:16:01
+⏰ 実行時刻: 2026-01-19 17:17:01
+⏰ 実行時刻: 2026-01-19 17:18:01
+⏰ 実行時刻: 2026-01-19 17:19:01
+⏰ 実行時刻: 2026-01-19 17:20:00
+⏰ 実行時刻: 2026-01-19 17:21:00
+⏰ 実行時刻: 2026-01-19 17:22:00
+⏰ 実行時刻: 2026-01-19 17:23:01
+⏰ 実行時刻: 2026-01-19 17:24:00
+⏰ 実行時刻: 2026-01-19 17:25:00
+⏰ 実行時刻: 2026-01-19 17:26:01
+⏰ 実行時刻: 2026-01-19 17:27:01
+⏰ 実行時刻: 2026-01-19 17:28:01
+⏰ 実行時刻: 2026-01-19 17:29:01
+⏰ 実行時刻: 2026-01-19 17:30:01
+⏰ 実行時刻: 2026-01-19 17:31:01
+⏰ 実行時刻: 2026-01-19 17:32:01
+⏰ 実行時刻: 2026-01-19 17:33:00
+⏰ 実行時刻: 2026-01-19 17:34:00
+⏰ 実行時刻: 2026-01-19 17:35:00
+⏰ 実行時刻: 2026-01-19 17:36:02
+⏰ 実行時刻: 2026-01-19 17:39:39
+⏰ 実行時刻: 2026-01-19 17:43:49
+⏰ 実行時刻: 2026-01-19 17:44:03
+⏰ 実行時刻: 2026-01-19 17:48:50
+⏰ 実行時刻: 2026-01-19 17:52:49
+⏰ 実行時刻: 2026-01-19 17:53:14
+⏰ 実行時刻: 2026-01-19 17:57:53
+⏰ 実行時刻: 2026-01-19 17:58:04
+⏰ 実行時刻: 2026-01-19 18:02:48
+⏰ 実行時刻: 2026-01-19 18:06:49
+⏰ 実行時刻: 2026-01-19 18:07:04
+⏰ 実行時刻: 2026-01-19 18:08:01
+⏰ 実行時刻: 2026-01-19 18:11:29
+⏰ 実行時刻: 2026-01-19 18:12:14
+⏰ 実行時刻: 2026-01-19 18:13:01
+⏰ 実行時刻: 2026-01-19 18:16:38
+⏰ 実行時刻: 2026-01-19 18:17:01
+⏰ 実行時刻: 2026-01-19 18:18:01
+⏰ 実行時刻: 2026-01-19 18:19:02
+⏰ 実行時刻: 2026-01-19 18:23:28
+⏰ 実行時刻: 2026-01-19 18:24:03
+⏰ 実行時刻: 2026-01-19 18:28:48
+⏰ 実行時刻: 2026-01-19 18:32:47
+⏰ 実行時刻: 2026-01-19 18:33:03
+⏰ 実行時刻: 2026-01-19 18:37:51
+⏰ 実行時刻: 2026-01-19 18:38:02
+⏰ 実行時刻: 2026-01-19 18:39:00
+⏰ 実行時刻: 2026-01-19 18:40:01
+⏰ 実行時刻: 2026-01-19 18:41:01
+⏰ 実行時刻: 2026-01-19 18:42:00
+⏰ 実行時刻: 2026-01-19 18:43:01
+⏰ 実行時刻: 2026-01-19 18:44:01
+⏰ 実行時刻: 2026-01-19 18:45:01
+⏰ 実行時刻: 2026-01-19 18:49:56
+⏰ 実行時刻: 2026-01-19 18:50:03
+⏰ 実行時刻: 2026-01-19 18:54:39
+⏰ 実行時刻: 2026-01-19 18:58:47
+⏰ 実行時刻: 2026-01-19 18:59:03
+⏰ 実行時刻: 2026-01-19 19:03:50
+⏰ 実行時刻: 2026-01-19 19:04:01
+⏰ 実行時刻: 2026-01-19 19:12:34
+⏰ 実行時刻: 2026-01-19 19:13:03
+⏰ 実行時刻: 2026-01-19 19:17:48
+⏰ 実行時刻: 2026-01-19 19:21:47
+⏰ 実行時刻: 2026-01-19 19:22:03
+⏰ 実行時刻: 2026-01-19 19:26:49
+⏰ 実行時刻: 2026-01-19 19:27:03
+⏰ 実行時刻: 2026-01-19 19:31:48
+⏰ 実行時刻: 2026-01-19 19:35:07
+⏰ 実行時刻: 2026-01-19 19:36:01
+⏰ 実行時刻: 2026-01-19 19:37:01
+⏰ 実行時刻: 2026-01-19 19:38:01
+⏰ 実行時刻: 2026-01-19 19:39:01
+⏰ 実行時刻: 2026-01-19 19:40:01
+⏰ 実行時刻: 2026-01-19 19:41:01
+⏰ 実行時刻: 2026-01-19 19:42:00
+⏰ 実行時刻: 2026-01-19 19:43:01
+⏰ 実行時刻: 2026-01-19 19:44:01
+⏰ 実行時刻: 2026-01-19 19:45:01
+⏰ 実行時刻: 2026-01-19 19:46:00
+⏰ 実行時刻: 2026-01-19 19:47:00
+⏰ 実行時刻: 2026-01-19 19:48:01
+⏰ 実行時刻: 2026-01-19 19:49:01
+⏰ 実行時刻: 2026-01-19 19:50:01
+⏰ 実行時刻: 2026-01-19 19:51:01
+⏰ 実行時刻: 2026-01-19 19:52:01
+⏰ 実行時刻: 2026-01-19 19:53:01
+⏰ 実行時刻: 2026-01-19 19:54:01
+⏰ 実行時刻: 2026-01-19 19:55:01
+⏰ 実行時刻: 2026-01-19 19:56:01
+⏰ 実行時刻: 2026-01-19 19:57:00
+⏰ 実行時刻: 2026-01-19 19:58:01
+⏰ 実行時刻: 2026-01-19 19:59:01
+⏰ 実行時刻: 2026-01-19 20:00:01
+⏰ 実行時刻: 2026-01-19 20:01:01
+⏰ 実行時刻: 2026-01-19 20:06:02
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2026-01-19 20:06:03
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not translate host name "myapp-postgres12345.postgres.database.azure.com" to address: nodename nor servname provided, or not known
+
+⏰ 実行時刻: 2026-01-20 11:31:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:32:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:33:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:34:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:35:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:36:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:37:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:38:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:39:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:40:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:41:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:42:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:43:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:44:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:45:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:46:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:47:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:48:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:49:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:50:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:51:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:52:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:53:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:54:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:55:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:56:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:57:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:58:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 11:59:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:00:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:01:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:02:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:03:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:04:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:05:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:06:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:07:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:08:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:09:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:10:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:11:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:12:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:13:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:14:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:15:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:16:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:17:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:18:00
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+⏰ 実行時刻: 2026-01-20 12:19:01
+Traceback (most recent call last):
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 98, in <module>
+    main()
+  File "/Users/gg/Desktop/Yusuke2/line_scheduler.py", line 39, in main
+    conn = psycopg2.connect(**db_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gg/.pyenv/versions/3.12.0/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "myapp-postgres12345.postgres.database.azure.com" (130.33.75.124), port 5432 failed: Operation timed out
+	Is the server running on that host and accepting TCP/IP connections?
+

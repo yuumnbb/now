@@ -807,109 +807,109 @@ def analysis():
                            period=period,
                            offset=offset)
 
-# --- 1. AIによる初期提案生成 (質問回答直後のステップ用) ---
-def generate_recovery_proposal(q1, q2, q3, goal, small_action):
-    """3つの質問回答に基づいた初期分析と具体的な再開案の提案を行う"""
-    prompt = f"""
-あなたは習慣化コーチです。学習習慣が途切れたユーザーに対し、診断結果に基づいた分析と提案を行ってください。
-
-【ユーザーの現在の設定】
-・学習目的: {goal}
-・現在の「小さな行動」: {small_action}
-
-【診断結果】
-1. 状況のパターン: {q1}
-2. アンカー（きっかけ）の状態: {q2}
-3. 行動の負担感（ハードル）: {q3}
-
-上記に基づき、以下の2点を回答してください。
-1. 分析：習慣化理論（Atomic Habits）に基づき、なぜ今回つまずいたのかを100文字程度で優しく解説。
-2. 具体的な提案：明日から再開するための「さらにハードルを下げた行動」や「環境の整え方」を2〜3案、具体的に提示してください。
-
-条件：
-専門用語（アンカー、トリガー、Atomic Habitsなど）は使わず、ユーザーの自尊心を高める励ましのトーンで回答してください。
-"""
-    model = genai.GenerativeModel("gemini-2.5-flash-lite")
-    response = model.generate_content(prompt)
-    return response.text.strip()
-
-# --- 2. ユーザーの入力に対する最終アドバイス生成 ---
-def generate_feedback_advice(reason, improvement):
-    """ユーザーが自分で考えた原因と対策に対して、さらに背中を押すアドバイスを生成"""
-    prompt = f"""
-原因：{reason}
-対策：{improvement}
-
-こちらはユーザーがAIの提案を受けて、自分なりに導き出した原因と対策です。
-この内容を肯定しつつ、実行可能性を高めるための短いアドバイスを添えてください。
-最後には「応援しています！」といったメッセージで締めてください。
-"""
-    model = genai.GenerativeModel("gemini-2.5-flash-lite")
-    response = model.generate_content(prompt)
-    return response.text.strip()
-
-# --- 3. 詳細な学習記録分析 (レポート保存用) ---
-def generate_gemini_analysis(user_id, goal, weekly_target):
-    """過去の全学習記録を分析して、深い洞察を提供する（レポート画面で使用）"""
+def get_user_stats(user_id):
+    """プロンプトに注入するためのユーザー学習統計を取得する"""
     conn = psycopg2.connect(**db_config)
     cursor = conn.cursor(cursor_factory=DictCursor)
-
+    
+    # 全記録取得
     cursor.execute('''
-        SELECT study_date, study_time, category_id
-        FROM record
-        WHERE user_id = %s
-        ORDER BY study_date
+        SELECT study_date, study_time, category_id 
+        FROM record WHERE user_id = %s ORDER BY study_date DESC
     ''', (user_id,))
     records = cursor.fetchall()
     
+    # カテゴリ名マップ
     cursor.execute('SELECT id, category_name FROM study_categories WHERE user_id = %s', (user_id,))
     category_map = {row['id']: row['category_name'] for row in cursor.fetchall()}
-
-    days = set()
-    total_time = 0
-    record_text_list = []
     
-    for r in records:
-        days.add(r['study_date'])
-        total_time += r['study_time']
-        category_name = category_map.get(r['category_id'], '未分類')
-        record_text_list.append(f"{r['study_date'].strftime('%m/%d')} {category_name}")
+    if not records:
+        conn.close()
+        return None
 
-    actual_days = len(days)
-    avg_time = round(total_time / actual_days) if actual_days else 0
-
-    # 継続日数計算
-    first_study_date = records[0]['study_date'] if records else None
-    latest_study_date = records[-1]['study_date'] if records else None
-    cursor.execute('SELECT MAX(created_at::date) FROM re WHERE user_id = %s', (user_id,))
-    latest_recovery_date = cursor.fetchone()[0]
+    # 基本集計
+    unique_days = sorted(list(set(r['study_date'] for r in records)))
+    total_time = sum(r['study_time'] for r in records)
+    avg_time = round(total_time / len(unique_days)) if unique_days else 0
     
-    continuity_days = 0
-    if first_study_date and latest_study_date:
-        start_date = first_study_date
-        if latest_recovery_date and latest_recovery_date > first_study_date:
-            if latest_recovery_date < latest_study_date:
-                start_date = latest_recovery_date
-        continuity_days = (latest_study_date - start_date).days + 1
+    # 週平均日数の計算（直近4週間）
+    last_date = unique_days[-1]
+    four_weeks_ago = last_date - timedelta(weeks=4)
+    recent_days = [d for d in unique_days if d >= four_weeks_ago]
+    avg_days_per_week = round(len(recent_days) / 4, 1)
 
-    record_text = ', '.join(record_text_list[-10:])
+    # 直近の学習内容テキスト
+    recent_texts = []
+    for r in records[:10]:
+        cat = category_map.get(r['category_id'], '未分類')
+        recent_texts.append(f"{r['study_date'].strftime('%m/%d')}({cat}:{r['study_time']}分)")
+    
+    # 継続日数 (簡易ロジック)
+    streak = 0
+    today = date.today()
+    if unique_days:
+        streak = (unique_days[-1] - unique_days[0]).days + 1
+
     conn.close()
-    
-    if not record_text:
-        return "学習記録が不足しているため、深い分析はスキップされました。"
+    return {
+        'avg_days': avg_days_per_week,
+        'recent_records': ", ".join(recent_texts),
+        'avg_time': avg_time,
+        'streak': streak
+    }
 
+# --- 1. 初期診断後の「分析と提案」プロンプト生成 ---
+def generate_recovery_proposal(q1, q2, q3, goal, anchor, small_action, weekly_target, stats):
+    """
+    Q1の重要性を最優先し、アンカーや小さな行動を含む詳細データに基づいた分析(200字)と提案(400字)を生成する。
+    """
     prompt = f"""
-学習記録をもとに分析してください。
-・学習目的: {goal}
-・週の目標日数: {weekly_target}日
-・過去の学習日数: {actual_days}日
-・直近の学習内容: {record_text}
-・平均学習時間: {avg_time}分
-・継続日数: {continuity_days}日
+あなたは習慣化とレジリエンスの専門コーチです。学習が中断したユーザーに対し、以下のデータに基づき助言してください。
 
-これらを踏まえ、ユーザーの学習傾向と、今後挫折しないための長期的なアドバイスを提示してください。
+【ユーザーデータ】
+・学習目的：{goal}
+・現在のアンカー（きっかけ）：{anchor}
+・現在の小さな行動：{small_action}
+・週の目標日数：{weekly_target}日
+・実際の週平均日数：{stats['avg_days'] if stats else '不明'}日
+・直近の学習内容：{stats['recent_records'] if stats else 'データなし'}
+・学習日の平均時間：{stats['avg_time'] if stats else '不明'}分
+・今回の継続日数：{stats['streak'] if stats else '不明'}日
+
+【診断回答】
+Q1.中断のパターン：{q1}
+Q2.きっかけの状態：{q2}
+Q3.行動の負担感：{q3}
+
+【指示】
+以下の2項目を、指定文字数で回答してください。
+
+1. 分析（約200文字）：
+Q1（{q1}）の内容を起点に、習慣化のサイクル（きっかけ・欲求・反応・報酬）のどこが崩れたか分析してください。
+設定されているアンカー「{anchor}」と小さな行動「{small_action}」が、実際のつまずきにどう影響しているか考察してください。
+過去のデータと比較し、今回のつまずきが一時的なものか傾向かを優しく伝えてください。
+
+2. 具体的な提案（約400文字）：
+Q1の原因を解決し、明日から即再開できる具体的なプランを2案提示してください。
+「{goal}」の専門性を意識し、アンカーの修正や、小さな行動のさらなる分解、教材の配置、多忙時の緊急用ミニマムプランなどを含めてください。
+
+【条件】
+・5分以上の学習を「短い」と表現することは厳禁。
+・理論用語（自己効力感、内的資源等）は伏せ、日常語で話すこと。
+・失敗を「データ」として捉え、再起動を称賛するトーン。
 """
-    model = genai.GenerativeModel("gemini-2.5-flash-lite")
+    model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
+    response = model.generate_content(prompt)
+    return response.text.strip()
+
+# --- 2. 最終アドバイス生成 ---
+def generate_feedback_advice(reason, improvement):
+    prompt = f"""
+原因：{reason}
+対策：{improvement}
+ユーザーが自分で導き出した上記の内容を肯定し、実行可能性を高めるための短いアドバイスと、再スタートを祝うメッセージを簡潔に生成してください。
+"""
+    model = genai.GenerativeModel("gemini-2.5-flash-preview-09-2025")
     response = model.generate_content(prompt)
     return response.text.strip()
 
@@ -922,69 +922,53 @@ def recovery():
     user = session['user']
     user_id = user['id']
     goal = user.get('goal') or "学習目標"
+    anchor = user.get('anchor') or "アンカー"
     small_action = user.get('small_action') or "小さな行動"
     weekly_target = user.get('weekly_target', 3)
 
     if request.method == 'POST':
         data = request.get_json()
-        mode = data.get('mode') # 'propose' (AI提案) または 'save' (最終保存)
+        mode = data.get('mode')
 
-        # モード1: 3つの質問回答後のAI提案生成
+        # モード1: 診断直後のAI提案
         if mode == 'propose':
             try:
-                # 学習分析（suggested_result）もここで生成して返すように修正
-                # これにより、表示された内容をそのまま保存に回せるようにする
+                stats = get_user_stats(user_id)
                 proposal = generate_recovery_proposal(
                     data.get('q1'), data.get('q2'), data.get('q3'), 
-                    goal, small_action
+                    goal, anchor, small_action, weekly_target, stats
                 )
-                analysis = generate_gemini_analysis(user_id, goal, weekly_target)
+                # 詳細レポート用の分析も併せて生成
+                analysis = proposal 
                 return jsonify({'proposal': proposal, 'analysis': analysis})
             except Exception as e:
                 print(f"Proposal Error: {e}")
-                return jsonify({'error': 'AI提案の生成に失敗しました'}), 500
+                return jsonify({'error': 'AI分析の生成に失敗しました。'}), 500
 
-        # モード2: ユーザーの入力内容をDBに保存
+        # モード2: ユーザー入力後の最終保存
         elif mode == 'save':
             reason = data.get('reason', '').strip()
             improvement = data.get('improvement', '').strip()
-            # フロントエンドで表示されていた分析結果を受け取る（内容の不一致を防ぐ）
             detailed_analysis = data.get('analysis', '').strip()
             is_shared = bool(data.get('is_shared', False))
 
-            if not reason or not improvement:
-                return jsonify({'error': '原因と対策を入力してください。'}), 400
-
             try:
-                # 診断結果をまとめる
-                full_reason_for_db = (
-                    f"【診断】状況:{data.get('q1')}, アンカー:{data.get('q2')}, 負担感:{data.get('q3')}\n"
-                    f"【ユーザー記述】{reason}"
-                )
-                
-                # 最終アドバイス生成
+                full_reason = f"【診断】状況:{data.get('q1')}, アンカー:{data.get('q2')}, 負担感:{data.get('q3')}\n【詳細】{reason}"
                 advice = generate_feedback_advice(reason, improvement)
-                
-                # 分析結果が送られてきていない場合のみ再生成（基本は送られてくる想定）
-                if not detailed_analysis or "失敗しました" in detailed_analysis:
-                    detailed_analysis = generate_gemini_analysis(user_id, goal, weekly_target)
 
-                # データベースへの保存
                 conn = psycopg2.connect(**db_config)
                 cursor = conn.cursor()
                 cursor.execute('''
                     INSERT INTO re (user_id, reason, improvement, ai_feedback, re_analysis, is_shared, created_at)
                     VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
-                ''', (user_id, full_reason_for_db, improvement, advice, detailed_analysis, is_shared))
+                ''', (user_id, full_reason, improvement, advice, detailed_analysis, is_shared))
                 conn.commit()
                 conn.close()
-
                 return jsonify({'success': True, 'advice': advice})
             except Exception as e:
-                print(f"Final Save Error: {e}")
-                return jsonify({'error': '保存中にエラーが発生しました'}), 500
+                print(f"Save Error: {e}")
+                return jsonify({'error': '保存に失敗しました。'}), 500
 
-    # GETリクエスト時
     return render_template('re.html')
 
 
